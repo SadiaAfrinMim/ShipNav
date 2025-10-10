@@ -1,0 +1,47 @@
+Date
+Reference
+Transport Mode --> sea/air(drop down along with typing, none selectable)
+Combined Transport  --> (sea-air, air-sea all combination, typing search, none selectable)
+Freight Term --> (fob, fca, cpt, cfr, exw, fas, cif, dpu, dap, ddp, ldp: all capital, none selectable,type searchable dropdown)
+Service Type --> (port door combination, type searchable, none selectable dropdown)
+Sales Type -> (pure nomination, direct sales, joint slaes, none selectable, type searchable dropdown)
+Sales Person -> (type searchable dropdown, and also custom input with typing)
+H/O Date date time with date-month-year format(show format in input box)
+Consignee (Searchable dropdown with typing)
+Consignee Bank (searchable dropdown with typing)
+Consignee Bank Branch (searchable dropdown with typing)
+Shipper (Searchable dropdown with typing)
+Shipper Bank(Searchable dropdown with typing)
+Shipper Branch(Searchable dropdown with typing)
+Agreement Type(), 
+Agreement Type No, 
+Agreement type date(Leave Agreement thing as it is)
+Commodity (Searchable dropdown with typing)
+Agent(Searchable dropdown with typing)
+C&F agent(Searchable dropdown with typing)
+Buying House (Text Field with searchable)
+First Notify (Text Field with searchable)
+Second Notify(Text Field with searchable)
+Buying House Address(Resizable Text Field with searchable)
+First Notify Address(Resizable text Field with searchable)
+Second Notify Address(Resizable text Field with searchable)
+Goods Nature(Text Field)
+Comm. invoice No(Text field)
+Comm. invoice Date(Date Filed)
+Exp no(Text field)
+Exp. Ref Date(Date Field)
+Origin Country(dropdown with searchable on type)
+Destination Country(dropdown with searchable on type)
+Receive Place(dropdown with searchable on type)
+POL(dropdown on searchable)
+POD(dropdown on searchable)
+Final Destination(dropdown on searchable)
+status(On condition is Admin, radio button{Accepted, Issued, On Review})
+Marks No(Text Field with searchable{from api})
+Goods Description(Text Field)
+Remark(Text Field)
+
+admin, user, merchant
+
+shipper Bank Branch: Full address
+Item Details booking summary: Total of cartoons, packages, pcs

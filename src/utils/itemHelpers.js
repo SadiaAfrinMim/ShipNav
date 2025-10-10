@@ -1,0 +1,16 @@
+export const makeEmptyItem = () => ({
+  key: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+  type: "",
+  pob: "",
+  style: "",
+  color: "",
+  so: "",
+  carton: 0,
+  package: "",
+  pcs: 0,
+  length: 0,
+  width: 0,
+  height: 0,
+  cbm: 0,
+  gwt: 0,
+});
