@@ -95,30 +95,7 @@ export default function AddStuffingPackage() {
   return (
     <div style={{ background: "#fff", border: "1px solid #dbeafe", borderRadius: 4 }}>
       {/* Header */}
-      <div
-        style={{
-          background: "#06b6d4",
-          color: "#fff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "8px 12px",
-          borderTopLeftRadius: 4,
-          borderTopRightRadius: 4,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <EditOutlined />
-          <strong>Add Stuffing Package</strong>
-        </div>
-        <Button
-          icon={<CloseSquareOutlined />}
-          onClick={() => navigate(-1)}
-          style={{ background: "rgba(255,255,255,0.2)", color: "#fff", border: "none" }}
-        >
-          Cancel Page
-        </Button>
-      </div>
+   
 
       <Form
         form={form}

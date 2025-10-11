@@ -26,6 +26,14 @@ import AddStuffingPlanFromLayout from "./components/ExportFolderDetails/Stuffing
 import AddStuffingPackageLayout from "./components/ExportFolderDetails/StuffingPackageList/Layout/StuffingPackageLayout.jsx";
 
 import StuffingPackageLayout from "./components/ExportFolderDetails/StuffingPackageList/Layout/StuffingPackageLayout.jsx";
+import ExportSeaShipmentAdviceLayout from "./components/ExportFolderDetails/ExportSeaShipmentAdvice/Layout/ExportSeaShipmentAdviceLayout.jsx";
+import ShipmentAdviceFormLayout from "./components/ExportFolderDetails/ExportSeaShipmentAdvice/Layout/ShipmentAdviceFormLayout .jsx";
+import BillOfLadingExportLayout from "./components/ExportFolderDetails/BillOfLadingExport/Layout/BillOfLadingExportLayout.jsx";
+import BillOfLadingExportFrom from "./components/ExportFolderDetails/BillOfLadingExport/Layout/BillOfLadingExportFrom.jsx";
+import LegMasterBillList from "./components/ExportFolderDetails/LegMasterBillList/LegMasterBillList.jsx";
+import LegMasterBillListLayout from "./components/ExportFolderDetails/LegMasterBillList/Layout/LegMasterBillListLayout.jsx";
+import AddFirstLegMasterBill from "./components/ExportFolderDetails/LegMasterBillList/AddFirstLegMasterBill.jsx";
+import AddFirstLegMasterBillLayout from "./components/ExportFolderDetails/LegMasterBillList/Layout/AddFirstLegMasterBillLayout.jsx";
 
 
 const Layout = ({ children }) => {
@@ -134,6 +142,57 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+        <Route
+          path="/export-sea/shipment-advice"
+          element={
+            <Layout>
+              <ExportSeaShipmentAdviceLayout></ExportSeaShipmentAdviceLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/export-sea/add-shipment-advice"
+          element={
+            <Layout>
+              <ShipmentAdviceFormLayout></ShipmentAdviceFormLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/export-sea/hbl"
+          element={
+            <Layout>
+              <BillOfLadingExportLayout></BillOfLadingExportLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-hbl"
+          element={
+            <Layout>
+             <BillOfLadingExportFrom></BillOfLadingExportFrom>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/mbl"
+          element={
+            <Layout>
+             <LegMasterBillListLayout></LegMasterBillListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/add-mbl"
+          element={
+            <Layout>
+             <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+
 
         <Route
           path="/dashboard"
