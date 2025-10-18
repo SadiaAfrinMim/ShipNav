@@ -30,10 +30,34 @@ import ExportSeaShipmentAdviceLayout from "./components/ExportFolderDetails/Expo
 import ShipmentAdviceFormLayout from "./components/ExportFolderDetails/ExportSeaShipmentAdvice/Layout/ShipmentAdviceFormLayout .jsx";
 import BillOfLadingExportLayout from "./components/ExportFolderDetails/BillOfLadingExport/Layout/BillOfLadingExportLayout.jsx";
 import BillOfLadingExportFrom from "./components/ExportFolderDetails/BillOfLadingExport/Layout/BillOfLadingExportFrom.jsx";
-import LegMasterBillList from "./components/ExportFolderDetails/LegMasterBillList/LegMasterBillList.jsx";
+import LegMasterBillList from "./components/ExportFolderDetails/SharedAllListFrom/SharedList/LegMasterBillList.jsx";
 import LegMasterBillListLayout from "./components/ExportFolderDetails/LegMasterBillList/Layout/LegMasterBillListLayout.jsx";
-import AddFirstLegMasterBill from "./components/ExportFolderDetails/LegMasterBillList/AddFirstLegMasterBill.jsx";
+import AddFirstLegMasterBill from "./components/ExportFolderDetails/SharedAllListFrom/SharedFrom/AddFirstLegMasterBill.jsx";
 import AddFirstLegMasterBillLayout from "./components/ExportFolderDetails/LegMasterBillList/Layout/AddFirstLegMasterBillLayout.jsx";
+import FreightInvoiceListLayout from "./components/ExportFolderDetails/FreightInvoiceList/Layout/FreightInvoiceListLayout.jsx";
+import AddDebitNoteLayout from "./components/ExportFolderDetails/DebitNoteList/Layout/AddDebitNoteLayout.jsx";
+import DebitNoteListLayout from "./components/ExportFolderDetails/DebitNoteList/Layout/DebitNoteListLayout.jsx";
+import AddFreightInvoiceLayout from "./components/ExportFolderDetails/FreightInvoiceList/Layout/AddFreightInvoiceLayout.jsx";
+import AddFreightInvoice from "./components/ExportFolderDetails/FreightInvoiceList/AddFreightInvoiceFrom.jsx";
+import AddDebitNote from "./components/ExportFolderDetails/SharedAllListFrom/SharedFrom/AddDebitNote.jsx";
+import CreditNoteListLayout from "./components/ExportFolderDetails/CreditNoteList/Layout/CreditNoteListLayout.jsx";
+import AddCreditNoteListLayout from "./components/ExportFolderDetails/CreditNoteList/Layout/AddCreditNoteListLayout.jsx";
+import PLExpSea from "./components/ExportFolderDetails/PLExpSea/PLExpSea.jsx";
+import VolumeStatementExpSea from "./components/ExportFolderDetails/VolumeStatementExpSea/VolumeStatementExpSea.jsx";
+import ExportSeaBookingLayout from "./components/ExportSeaFolderDetails/ExportSeaBooking/Layout/ExportSeaBookingLayout.jsx";
+import ExportSeaAddBooking from "./components/ExportSeaFolderDetails/ExportSeaBooking/Layout/ExportSeaAddBooking.jsx";
+import ShippingExportAirLayout from "./components/ExportSeaFolderDetails/ExportSeaShipping/Layout/ShippingExportAirLayout.jsx";
+import ShippingEXportAirAddShippingOrder from "./components/ExportSeaFolderDetails/ExportSeaShipping/Layout/ShippingEXportAirAddShippingOrder.jsx";
+import ExportAirCargoLayout from "./components/ExportSeaFolderDetails/ExportAirCargo/Layout/ExportAirCargoLayout.jsx";
+import ExportAirCargoAddLayout from "./components/ExportSeaFolderDetails/ExportAirCargo/Layout/ExportAirCargoAddLayout.jsx";
+import ExportAirMasterListLayout from "./components/ExportSeaFolderDetails/ExportAirMasterBill/Layout/ExportAirMasterListLayout.jsx";
+import ExportAirMasterAddBillLayout from "./components/ExportSeaFolderDetails/ExportAirMasterBill/Layout/ExportAirMasterAddBillLayout.jsx";
+import ExportAirAddFreightInvoiceLayout from "./components/ExportSeaFolderDetails/FreightInvoiceList/Layout/ExportAirAddFreightInvoiceLayout.jsx";
+import ArrivalNoticeListLayout from "./components/ExportSeaFolderDetails/ArrivalNoticeList/Layout/ArrivalNoticeListLayout.jsx";
+import AddArrivalNoticeLayout from "./components/ExportSeaFolderDetails/ArrivalNoticeList/Layout/AddArrivalNoticeLayout.jsx";
+import ForwardLetterListLayout from "./components/ExportSeaFolderDetails/ForwardLetterList/Layout/ForwardLetterListLayout.jsx";
+import AddForwardLetterLayout from "./components/ExportSeaFolderDetails/ForwardLetterList/Layout/AddForwardLetterLayout.jsx";
+
 
 
 const Layout = ({ children }) => {
@@ -60,7 +84,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
         <Route
-          path="/booking"
+          path="/export-sea/add-booking"
           element={
             <Layout>
               <BookingImportGlassForm />
@@ -126,15 +150,15 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/export-sea/stuffing-package"
           element={
             <Layout>
-             <StuffingPackageLayout></StuffingPackageLayout>
+              <StuffingPackageLayout></StuffingPackageLayout>
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/export-sea/add-stuffing-package"
           element={
             <Layout>
@@ -151,7 +175,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/export-sea/add-shipment-advice"
           element={
             <Layout>
@@ -160,7 +184,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/export-sea/hbl"
           element={
             <Layout>
@@ -172,7 +196,7 @@ createRoot(document.getElementById("root")).render(
           path="/export-sea/add-hbl"
           element={
             <Layout>
-             <BillOfLadingExportFrom></BillOfLadingExportFrom>
+              <BillOfLadingExportFrom></BillOfLadingExportFrom>
             </Layout>
           }
         />
@@ -180,18 +204,533 @@ createRoot(document.getElementById("root")).render(
           path="/export-sea/mbl"
           element={
             <Layout>
-             <LegMasterBillListLayout></LegMasterBillListLayout>
+              <LegMasterBillListLayout></LegMasterBillListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-mbl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/freight-invoice"
+          element={
+            <Layout>
+              <FreightInvoiceListLayout></FreightInvoiceListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-freight-invoice"
+          element={
+            <Layout>
+              <AddFreightInvoiceLayout></AddFreightInvoiceLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-freight-invoice"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/debit-note"
+          element={
+            <Layout>
+              <DebitNoteListLayout></DebitNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/credit-note"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/report/profit-loss"
+          element={
+            <Layout>
+              <PLExpSea></PLExpSea>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/report/volume"
+          element={
+            <Layout>
+              <VolumeStatementExpSea></VolumeStatementExpSea>
+            </Layout>
+          }
+        />
+
+        {/* export Air */}
+        <Route
+          path="/export-air/booking"
+          element={
+            <Layout>
+              <ExportSeaBookingLayout></ExportSeaBookingLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-booking"
+          element={
+            <Layout>
+              <ExportSeaAddBooking></ExportSeaAddBooking>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/shipping-order"
+          element={
+            <Layout>
+              <ShippingExportAirLayout></ShippingExportAirLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-shipping-order"
+          element={
+            <Layout>
+              <ShippingEXportAirAddShippingOrder></ShippingEXportAirAddShippingOrder>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/export-air/cargo-receive"
+          element={
+            <Layout>
+              <ExportAirCargoLayout></ExportAirCargoLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-cargo-receive"
+          element={
+            <Layout>
+              <ExportAirCargoAddLayout></ExportAirCargoAddLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/mawb"
+          element={
+            <Layout>
+              <ExportAirMasterListLayout></ExportAirMasterListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-mawb"
+          element={
+            <Layout>
+              <ExportAirMasterAddBillLayout></ExportAirMasterAddBillLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/export-air/freight-invoice"
+          element={
+            <Layout>
+              <FreightInvoiceListLayout></FreightInvoiceListLayout>
+            </Layout>
+          }
+        />
+
+        
+
+        <Route
+          path="/export-air/add-freight-invoice"
+          element={
+            <Layout>
+              <ExportAirAddFreightInvoiceLayout></ExportAirAddFreightInvoiceLayout>
             </Layout>
           }
         />
          <Route
-          path="/export-sea/add-mbl"
+          path="/export-air/debit-note"
           element={
             <Layout>
-             <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+              <DebitNoteListLayout></DebitNoteListLayout>
             </Layout>
           }
         />
+        <Route
+          path="/export-air/add-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/export-air/credit-note"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/report/profit-loss"
+          element={
+            <Layout>
+              <PLExpSea></PLExpSea>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/report/volume"
+          element={
+            <Layout>
+              <VolumeStatementExpSea></VolumeStatementExpSea>
+            </Layout>
+          }
+        />
+
+        {/* import Sea */}
+
+          <Route
+          path="/import-sea/booking"
+          element={
+            <Layout>
+              <ExportSeaBookingLayout></ExportSeaBookingLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/add-booking"
+          element={
+            <Layout>
+              <BookingImportGlassForm />
+              {/* <BookingForm /> */}
+            </Layout>
+          }
+        />
+          <Route
+          path="/import-sea/master-bl"
+          element={
+            <Layout>
+              <LegMasterBillListLayout></LegMasterBillListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/add-master-bl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/arrival-notice"
+          element={
+            <Layout>
+              <ArrivalNoticeListLayout></ArrivalNoticeListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/add-arrival-notice"
+          element={
+            <Layout>
+              <AddArrivalNoticeLayout></AddArrivalNoticeLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/forward-letter"
+          element={
+            <Layout>
+              <ForwardLetterListLayout></ForwardLetterListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/add-forward-letter"
+          element={
+            <Layout>
+              <AddForwardLetterLayout></AddForwardLetterLayout>
+            </Layout>
+          }
+        />
+
+
+
+
+         <Route
+          path="/import-sea/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+
+
+
+
+         <Route
+          path="/import-sea/freight-invoice"
+          element={
+            <Layout>
+              <FreightInvoiceListLayout></FreightInvoiceListLayout>
+            </Layout>
+          }
+        />
+
+        
+
+        <Route
+          path="/import-sea/add-freight-invoice"
+          element={
+            <Layout>
+              <ExportAirAddFreightInvoiceLayout></ExportAirAddFreightInvoiceLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/debit-note"
+          element={
+            <Layout>
+              <DebitNoteListLayout></DebitNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-sea/add-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/import-sea/credit-note"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-sea/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-sea/report/profit-loss"
+          element={
+            <Layout>
+              <PLExpSea></PLExpSea>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-sea/report/volume"
+          element={
+            <Layout>
+              <VolumeStatementExpSea></VolumeStatementExpSea>
+            </Layout>
+          }
+        />
+
+
+        {/* import air */}
+
+         <Route
+          path="/import-air/booking"
+          element={
+            <Layout>
+              <ExportSeaBookingLayout></ExportSeaBookingLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/add-booking"
+          element={
+            <Layout>
+              <BookingImportGlassForm />
+              {/* <BookingForm /> */}
+            </Layout>
+          }
+        />
+          <Route
+          path="/import-air/master-bl"
+          element={
+            <Layout>
+              <LegMasterBillListLayout></LegMasterBillListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/add-master-bl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/arrival-notice"
+          element={
+            <Layout>
+              <ArrivalNoticeListLayout></ArrivalNoticeListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/add-arrival-notice"
+          element={
+            <Layout>
+              <AddArrivalNoticeLayout></AddArrivalNoticeLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/forward-letter"
+          element={
+            <Layout>
+              <ForwardLetterListLayout></ForwardLetterListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/add-forward-letter"
+          element={
+            <Layout>
+              <AddForwardLetterLayout></AddForwardLetterLayout>
+            </Layout>
+          }
+        />
+
+
+
+
+         <Route
+          path="/import-air/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+
+
+
+
+         <Route
+          path="/import-air/freight-invoice"
+          element={
+            <Layout>
+              <FreightInvoiceListLayout></FreightInvoiceListLayout>
+            </Layout>
+          }
+        />
+
+        
+
+        <Route
+          path="/import-air/add-freight-invoice"
+          element={
+            <Layout>
+              <ExportAirAddFreightInvoiceLayout></ExportAirAddFreightInvoiceLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/debit-note"
+          element={
+            <Layout>
+              <DebitNoteListLayout></DebitNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/add-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/import-air/credit-note"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/report/profit-loss"
+          element={
+            <Layout>
+              <PLExpSea></PLExpSea>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/report/volume"
+          element={
+            <Layout>
+              <VolumeStatementExpSea></VolumeStatementExpSea>
+            </Layout>
+          }
+        />
+
+
 
 
         <Route

@@ -1,8 +1,8 @@
 import { Layout } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 
-import CargoReceiveList from '../CargoReceiveList';
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import CargoReceiveList from '../../SharedAllListFrom/SharedList/CargoReceiveList';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 
 
 

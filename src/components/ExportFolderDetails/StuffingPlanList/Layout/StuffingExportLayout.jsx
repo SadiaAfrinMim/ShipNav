@@ -1,5 +1,5 @@
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 
 import StuffingPlanList from '../StuffingPlanList';
 
@@ -16,7 +16,7 @@ const StuffingExportLayout = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderTittleFrom></HeaderTittleFrom>
-       <StuffingPlanList></StuffingPlanList>
+        <StuffingPlanList></StuffingPlanList>
 
 
       </div>

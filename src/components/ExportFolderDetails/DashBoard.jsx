@@ -15,20 +15,31 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 /**
- * ShipNav Dashboard — Minimalistic Drill‑Down (Ant Design)
+ * ShipNav Dashboard — Minimalistic Drill-Down (Ant Design)
  *
  * What changed:
  * - Clean, minimal **category cards** grid.
  * - Click a category → **Drawer** opens with all inner cards (Operations, Accounts, Reports).
- * - Keyboard‑friendly + responsive. Tiny search inside the Drawer.
+ * - Keyboard-friendly + responsive. Tiny search inside the Drawer.
  * - Pure AntD, no custom scrolling magic; crisp, focused UI.
  */
 
 const { Title, Text } = Typography;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Data model
-// ─────────────────────────────────────────────────────────────────────────────
+/* ────────────────────────────────────────────────────────────────────────────
+   THEME (Only colors)
+   ──────────────────────────────────────────────────────────────────────────── */
+const PRIMARY = "#00b4ff";
+const PRIMARY_DARK = "#0ea5e9";
+const ACCENT = "#22d3ee";
+const BG_GRADIENT = `linear-gradient(180deg, #f6fbff 0%, #f9feff 35%, #f5fbff 100%)`;
+const CARD_BORDER = "#e6f0f8";
+const CARD_SHADOW = "0 6px 24px rgba(0, 180, 255, 0.08)";
+const TEXT_DARK = "#0f172a";
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Data model
+   ──────────────────────────────────────────────────────────────────────────── */
 const CATEGORIES = [
   {
     key: "export-sea",
@@ -156,13 +167,13 @@ const CATEGORIES = [
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// UI bits
-// ─────────────────────────────────────────────────────────────────────────────
+/* ────────────────────────────────────────────────────────────────────────────
+   UI bits
+   ──────────────────────────────────────────────────────────────────────────── */
 const shellCardStyle = {
   borderRadius: 14,
-  border: "1px solid #eef2f7",
-  boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
+  border: `1px solid ${CARD_BORDER}`,
+  boxShadow: CARD_SHADOW,
   background: "#fff",
 };
 
@@ -178,15 +189,28 @@ const CategoryTile = ({ title, count, onClick }) => (
       justifyContent: "space-between",
       padding: 16,
       cursor: "pointer",
+      // color-only change ↓
+      background: `linear-gradient(145deg, ${PRIMARY}10, #ffffff 55%, ${ACCENT}08)`,
+      borderColor: `${PRIMARY}33`,
     }}
     bodyStyle={{ width: "100%", padding: 0 }}
   >
     <Space align="center" style={{ width: "100%", justifyContent: "space-between" }}>
       <div>
-        <Title level={4} style={{ margin: 0, letterSpacing: 0.3 }}>{title}</Title>
+        <Title
+          level={4}
+          style={{
+            margin: 0,
+            letterSpacing: 0.3,
+            color: TEXT_DARK,
+            textShadow: "0 1px 0 rgba(255,255,255,0.6)",
+          }}
+        >
+          {title}
+        </Title>
         <Text type="secondary" style={{ fontSize: 12 }}>{count} quick actions</Text>
       </div>
-      <ArrowRightOutlined />
+      <ArrowRightOutlined style={{ color: PRIMARY }} />
     </Space>
   </Card>
 );
@@ -204,22 +228,32 @@ const ItemCard = ({ icon, label, link }) => (
         justifyContent: "center",
         textAlign: "center",
         transition: "transform .15s ease",
+        // color-only tweak ↓
+        borderColor: `${PRIMARY}22`,
       }}
       bodyStyle={{ padding: 12 }}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-2px)";
+        e.currentTarget.style.background = `${PRIMARY}08`;
+        e.currentTarget.style.borderColor = `${PRIMARY}55`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "none";
+        e.currentTarget.style.background = "#fff";
+        e.currentTarget.style.borderColor = `${PRIMARY}22`;
+      }}
     >
       <Space direction="vertical" align="center" size={6}>
-        <span style={{ fontSize: 20, lineHeight: 1 }}>{icon}</span>
-        <Text style={{ fontWeight: 600, color: "#0f172a" }}>{label}</Text>
+        <span style={{ fontSize: 20, lineHeight: 1, color: PRIMARY }}>{icon}</span>
+        <Text style={{ fontWeight: 600, color: TEXT_DARK }}>{label}</Text>
       </Space>
     </Card>
   </Link>
 );
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Main
-// ─────────────────────────────────────────────────────────────────────────────
+/* ────────────────────────────────────────────────────────────────────────────
+   Main
+   ──────────────────────────────────────────────────────────────────────────── */
 const DashBoard = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
@@ -246,10 +280,21 @@ const DashBoard = () => {
   }, [active, query]);
 
   return (
-    <div style={{ minHeight: "100vh", padding: 24, background: "#fafcff" }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: 24,
+        // color-only change ↓
+        background: BG_GRADIENT,
+      }}
+    >
       <Space direction="vertical" size={6} style={{ display: "block", marginBottom: 8 }}>
-        <Title level={3} style={{ margin: 0 }}>ShipNav</Title>
-        <Text type="secondary">Quick modules · Export/Import · Sea/Air</Text>
+        <Title level={3} style={{ margin: 0, color: PRIMARY }}>
+          ShipNav
+        </Title>
+        <Text type="secondary" style={{ color: PRIMARY_DARK }}>
+          Quick modules · Export/Import · Sea/Air
+        </Text>
       </Space>
 
       <Row gutter={[16, 16]}>
@@ -264,18 +309,18 @@ const DashBoard = () => {
         ))}
       </Row>
 
-      {/* Drill‑down Drawer */}
+      {/* Drill-down Drawer */}
       <Drawer
         open={open}
         onClose={closeCategory}
         width={Math.min(720, typeof window !== "undefined" ? window.innerWidth - 64 : 720)}
         title={
           <Space>
-            <ArrowLeftOutlined onClick={closeCategory} style={{ cursor: "pointer" }} />
-            <span>{active?.title}</span>
+            <ArrowLeftOutlined onClick={closeCategory} style={{ cursor: "pointer", color: PRIMARY }} />
+            <span style={{ color: PRIMARY }}>{active?.title}</span>
           </Space>
         }
-        bodyStyle={{ paddingBottom: 24 }}
+        bodyStyle={{ paddingBottom: 24, background: "#fbfeff" }} // subtle tint
       >
         <Space direction="vertical" size={16} style={{ width: "100%" }}>
           <Input.Search
@@ -283,6 +328,11 @@ const DashBoard = () => {
             placeholder="Search actions in this module..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            style={{
+              // color-only tweak ↓
+              borderColor: `${PRIMARY}44`,
+              boxShadow: "0 0 0 2px rgba(0,180,255,0.08)",
+            }}
           />
 
           {filteredGroups.length === 0 && (
@@ -292,10 +342,10 @@ const DashBoard = () => {
           {filteredGroups.map((group) => (
             <div key={group.title}>
               <Space style={{ width: "100%", justifyContent: "space-between" }}>
-                <Title level={5} style={{ margin: 0 }}>{group.title}</Title>
+                <Title level={5} style={{ margin: 0, color: PRIMARY }}>{group.title}</Title>
                 <Text type="secondary">{group.items.length}</Text>
               </Space>
-              <Divider style={{ margin: "8px 0 16px" }} />
+              <Divider style={{ margin: "8px 0 16px", borderColor: `${PRIMARY}22` }} />
               <Row gutter={[12, 12]}>
                 {group.items.map((it) => (
                   <Col key={it.label} xs={12} sm={8} md={8} lg={6}>

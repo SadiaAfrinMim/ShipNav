@@ -1,5 +1,5 @@
 
-import HeaderAddFromTitle from '../../../HeaderTitle/HeaderAddFromTitle';
+import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
 
 import AddStuffingPlanFrom from '../AddStuffingPlanFrom';
 
@@ -26,4 +26,4 @@ const AddStuffingPlanFromLayout = () => {
   );
 };
 
-export default  AddStuffingPlanFromLayout;
+export default AddStuffingPlanFromLayout;

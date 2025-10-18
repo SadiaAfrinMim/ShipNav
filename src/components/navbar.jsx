@@ -32,6 +32,7 @@ import {
   DownOutlined,
   RightOutlined
 } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom'; // ⬅️ added
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -39,29 +40,49 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 
 const MindBlowingNavbar = () => {
+  const navigate = useNavigate(); // ⬅️ added
   const [darkMode, setDarkMode] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [current, setCurrent] = useState('dashboard');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   const [openSubMenuKeys, setOpenSubMenuKeys] = useState([]);
 
-  // Menu configuration array - easily modifiable
+  // ⬅️ ROUTE MAP: সব কী-এর জন্য route path
+  const routeMap = {
+    // top-level
+    dashboard: '/dashboard',
+    projects: '/projects',
+    analytics: '/analytics',
+    team: '/team',
+    store: '/store',
+    services: '/services',
+
+    // team submenu
+    'team:1': '/team/option-1',
+    'team:2': '/team/option-2',
+    'team:3': '/team/option-3',
+
+    // services submenu
+    'service:1': '/services/web-development',
+    'service:2': '/services/mobile-apps',
+    'service:3': '/services/cloud',
+
+    // nested cloud submenu
+    'cloud:1': '/services/cloud/aws',
+    'cloud:2': '/services/cloud/azure',
+    'cloud:3': '/services/cloud/google-cloud',
+
+    // user dropdown
+    profile: '/profile',
+    settings: '/settings',
+    logout: '/logout'
+  };
+
+  // Menu configuration array
   const menuConfig = [
-    {
-      key: 'dashboard',
-      label: 'Dashboard',
-      icon: <DashboardOutlined />,
-    },
-    {
-      key: 'projects',
-      label: 'Projects',
-      icon: <AppstoreOutlined />,
-    },
-    {
-      key: 'analytics',
-      label: 'Analytics',
-      icon: <BarChartOutlined />,
-    },
+    { key: 'dashboard', label: 'Dashboard', icon: <DashboardOutlined /> },
+    { key: 'projects',  label: 'Projects',  icon: <AppstoreOutlined /> },
+    { key: 'analytics', label: 'Analytics', icon: <BarChartOutlined /> },
     {
       key: 'team',
       label: 'Team',
@@ -72,14 +93,7 @@ const MindBlowingNavbar = () => {
         { key: 'team:3', label: 'Option 3' },
       ],
     },
-    {
-      key: 'store',
-      label: 'Store',
-      icon: <ShoppingCartOutlined />,
-    },
-    // Add more menu items here as needed
-    // Example with nested submenu:
-    
+    { key: 'store', label: 'Store', icon: <ShoppingCartOutlined /> },
     {
       key: 'services',
       label: 'Services',
@@ -88,7 +102,7 @@ const MindBlowingNavbar = () => {
         { key: 'service:1', label: 'Web Development' },
         { key: 'service:2', label: 'Mobile Apps' },
         { 
-          key: 'service:3', 
+          key: 'service:3',
           label: 'Cloud Solutions',
           submenu: [
             { key: 'cloud:1', label: 'AWS' },
@@ -98,15 +112,11 @@ const MindBlowingNavbar = () => {
         },
       ],
     },
-    
   ];
 
   // Handle window resize
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 992);
-    };
-    
+    const handleResize = () => setIsMobile(window.innerWidth < 992);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -118,7 +128,7 @@ const MindBlowingNavbar = () => {
     { key: 'logout', icon: <LogoutOutlined />, label: 'Logout', danger: true },
   ];
 
-  // Custom submenu title with dropdown arrow for desktop
+  // Desktop submenu title
   const CustomSubMenuTitle = ({ label, icon }) => (
     <span style={{ display: 'flex', alignItems: 'center' }}>
       {icon}
@@ -127,17 +137,24 @@ const MindBlowingNavbar = () => {
     </span>
   );
 
-  // Handle submenu open/close
-  const onOpenChange = (keys) => {
-    setOpenSubMenuKeys(keys);
+  const onOpenChange = (keys) => setOpenSubMenuKeys(keys);
+
+  // ⬅️ Menu click handler: যে কোন item এ ক্লিক করলে navigate
+  const handleMenuClick = (e, isFromDrawer = false) => {
+    const path = routeMap[e.key];
+    if (path) {
+      navigate(path);
+      setCurrent(e.key);
+      if (isFromDrawer) setDrawerVisible(false);
+    }
   };
 
-  // Recursive function to render menu items (supports nested submenus)
-  const renderMenuItems = (items, isMobileMenu = false) => {
-    return items.map(item => {
+  // Recursive menu renderer (unchanged markup; routing handled via onClick)
+  const renderMenuItems = (items, isMobileMenu = false) =>
+    items.map(item => {
       if (item.submenu) {
         return (
-          <SubMenu 
+          <SubMenu
             key={item.key}
             title={isMobileMenu ? (
               <span>
@@ -155,9 +172,9 @@ const MindBlowingNavbar = () => {
           </SubMenu>
         );
       }
-      
       return (
         <Menu.Item key={item.key} icon={isMobileMenu ? item.icon : null}>
+          {/* label shown; navigation happens via onClick at Menu level */}
           {isMobileMenu ? (
             <span>
               {item.icon}
@@ -172,7 +189,6 @@ const MindBlowingNavbar = () => {
         </Menu.Item>
       );
     });
-  };
 
   return (
     <>
@@ -198,7 +214,8 @@ const MindBlowingNavbar = () => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', marginRight: isMobile ? '8px' : '16px' }}>
+          {/* ⬅️ Logo wrapped with Link to home */}
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', marginRight: isMobile ? '8px' : '16px', textDecoration: 'none' }}>
             <RocketOutlined
               style={{
                 fontSize: isMobile ? '20px' : '28px',
@@ -237,14 +254,14 @@ const MindBlowingNavbar = () => {
             >
               SN
             </Title>
-          </div>
+          </Link>
 
           {!isMobile && (
             <Menu
               theme={darkMode ? 'dark' : 'light'}
               mode="horizontal"
               selectedKeys={[current]}
-              onClick={(e) => setCurrent(e.key)}
+              onClick={(e) => handleMenuClick(e, false)} // ⬅️ navigate on desktop
               style={{
                 background: 'transparent',
                 border: 'none',
@@ -266,10 +283,7 @@ const MindBlowingNavbar = () => {
               allowClear
               enterButton={<SearchOutlined />}
               size="middle"
-              style={{
-                width: 200,
-                marginRight: '8px'
-              }}
+              style={{ width: 200, marginRight: '8px' }}
             />
           )}
 
@@ -284,31 +298,26 @@ const MindBlowingNavbar = () => {
           {!isMobile && (
             <>
               <Badge count={5} size="small">
-                <Button
-                  type="text"
-                  icon={<BellOutlined />}
-                  shape="circle"
-                  style={{
-                    color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)',
-                  }}
-                />
+                <Button type="text" icon={<BellOutlined />} shape="circle"
+                  style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }} />
               </Badge>
 
               <Badge count={12} size="small">
-                <Button
-                  type="text"
-                  icon={<MessageOutlined />}
-                  shape="circle"
-                  style={{
-                    color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)',
-                  }}
-                />
+                <Button type="text" icon={<MessageOutlined />} shape="circle"
+                  style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }} />
               </Badge>
             </>
           )}
 
-          <Dropdown 
-            menu={{ items: userMenuItems }} 
+          {/* ⬅️ User dropdown navigates via onClick */}
+          <Dropdown
+            menu={{
+              items: userMenuItems,
+              onClick: ({ key }) => {
+                const path = routeMap[key];
+                if (path) navigate(path);
+              }
+            }}
             trigger={['click']}
             placement="bottomRight"
           >
@@ -333,17 +342,6 @@ const MindBlowingNavbar = () => {
               display: isMobile ? 'block' : 'none'
             }}
           />
-          
-          {!isMobile && (
-            <Button
-              type="text"
-              icon={<SearchOutlined />}
-              style={{
-                color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)',
-                display: 'none'
-              }}
-            />
-          )}
         </div>
       </Header>
 
@@ -351,11 +349,7 @@ const MindBlowingNavbar = () => {
         title={
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <span>Menu</span>
-            <Button 
-              type="text" 
-              icon={<CloseOutlined />} 
-              onClick={() => setDrawerVisible(false)}
-            />
+            <Button type="text" icon={<CloseOutlined />} onClick={() => setDrawerVisible(false)} />
           </div>
         }
         placement="right"
@@ -371,9 +365,7 @@ const MindBlowingNavbar = () => {
           background: 'transparent',
           borderBottom: darkMode ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.06)',
         }}
-        style={{
-          backdropFilter: 'blur(10px)',
-        }}
+        style={{ backdropFilter: 'blur(10px)' }}
         width={300}
       >
         <div style={{ padding: '16px' }}>
@@ -385,22 +377,17 @@ const MindBlowingNavbar = () => {
             style={{ width: '100%', marginBottom: '16px' }}
           />
         </div>
-        
+
         <Divider style={{ margin: 0 }} />
-        
+
+        {/* ⬅️ Mobile drawer menu navigates too */}
         <Menu
           theme={darkMode ? 'dark' : 'light'}
           mode="inline"
           selectedKeys={[current]}
           openKeys={openSubMenuKeys}
           onOpenChange={onOpenChange}
-          onClick={(e) => {
-            // Only close drawer if it's not a submenu item
-            if (!e.key.includes(':')) {
-              setCurrent(e.key);
-              setDrawerVisible(false);
-            }
-          }}
+          onClick={(e) => handleMenuClick(e, true)} // ⬅️ navigate + close drawer
           style={{
             background: 'transparent',
             border: 'none',
@@ -409,9 +396,9 @@ const MindBlowingNavbar = () => {
         >
           {renderMenuItems(menuConfig, true)}
         </Menu>
-        
+
         <Divider style={{ margin: 0 }} />
-        
+
         <div style={{ padding: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
             <span>Dark Mode</span>
@@ -423,43 +410,38 @@ const MindBlowingNavbar = () => {
               style={{ background: darkMode ? '#141414' : '#ccc' }}
             />
           </div>
-          
+
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
             <Badge count={5} size="small">
-              <Button
-                type="text"
-                icon={<BellOutlined />}
-                style={{
-                  color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)',
-                }}
-              >
+              <Button type="text" icon={<BellOutlined />}
+                style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }}>
                 Notifications
               </Button>
             </Badge>
-            
+
             <Badge count={12} size="small">
-              <Button
-                type="text"
-                icon={<MessageOutlined />}
-                style={{
-                  color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)',
-                }}
-              >
+              <Button type="text" icon={<MessageOutlined />}
+                style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }}>
                 Messages
               </Button>
             </Badge>
           </div>
-          
-          <Dropdown 
-            menu={{ items: userMenuItems }} 
+
+          <Dropdown
+            menu={{
+              items: userMenuItems,
+              onClick: ({ key }) => {
+                const path = routeMap[key];
+                if (path) {
+                  navigate(path);
+                  setDrawerVisible(false);
+                }
+              }
+            }}
             trigger={['click']}
             placement="topRight"
           >
-            <Button 
-              type="text" 
-              icon={<UserOutlined />} 
-              style={{ width: '100%', textAlign: 'left' }}
-            >
+            <Button type="text" icon={<UserOutlined />} style={{ width: '100%', textAlign: 'left' }}>
               Profile
             </Button>
           </Dropdown>
@@ -467,83 +449,15 @@ const MindBlowingNavbar = () => {
       </Drawer>
 
       <style jsx global>{`
-        /* Style for the dropdown arrow in submenu */
-        .ant-menu-submenu-title .anticon-down {
-          font-size: 10px !important;
-          margin-left: 6px;
-          transition: transform 0.3s;
-        }
-        
-        .ant-menu-submenu-open .ant-menu-submenu-title .anticon-down {
-          transform: rotate(180deg);
-        }
-        
-        /* Remove the default arrow from mobile submenus */
-        .ant-menu-inline .ant-menu-submenu-arrow {
-          display: none !important;
-        }
-        
-        /* Custom expand icon for mobile submenus */
-        .ant-menu-submenu-expand-icon {
-          position: absolute !important;
-          right: 16px !important;
-          top: 50% !important;
-          transform: translateY(-50%) !important;
-        }
-        
-        /* Custom styles for dark mode submenu */
-        .dark-submenu {
-          background: linear-gradient(135deg, rgba(16, 20, 30, 0.98) 0%, rgba(25, 30, 45, 0.98) 100%) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .light-submenu {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 250, 0.98) 100%) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-        
-        /* Medium devices (tablets, 768px and up) */
-        @media (max-width: 991px) {
-          .ant-layout-header {
-            padding: 0 12px !important;
-          }
-          
-          .ant-menu-horizontal {
-            display: none !important;
-          }
-          
-          .ant-switch {
-            transform: scale(0.8);
-          }
-          
-          .ant-input-search {
-            width: 180px !important;
-          }
-        }
-        
-        /* Small devices (landscape phones, 576px and up) */
-        @media (max-width: 767px) {
-          .ant-input-search {
-            display: none !important;
-          }
-          
-          .ant-badge {
-            display: none !important;
-          }
-        }
-        
-        /* Extra small devices (portrait phones, less than 576px) */
-        @media (max-width: 575px) {
-          .ant-layout-header {
-            padding: 0 8px !important;
-          }
-          
-          .ant-avatar {
-            display: none !important;
-          }
-        }
+        .ant-menu-submenu-title .anticon-down { font-size: 10px !important; margin-left: 6px; transition: transform 0.3s; }
+        .ant-menu-submenu-open .ant-menu-submenu-title .anticon-down { transform: rotate(180deg); }
+        .ant-menu-inline .ant-menu-submenu-arrow { display: none !important; }
+        .ant-menu-submenu-expand-icon { position: absolute !important; right: 16px !important; top: 50% !important; transform: translateY(-50%) !important; }
+        .dark-submenu { background: linear-gradient(135deg, rgba(16, 20, 30, 0.98) 0%, rgba(25, 30, 45, 0.98) 100%) !important; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .light-submenu { background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 250, 0.98) 100%) !important; backdrop-filter: blur(10px); border: 1px solid rgba(0, 0, 0, 0.06); }
+        @media (max-width: 991px) { .ant-layout-header { padding: 0 12px !important; } .ant-menu-horizontal { display: none !important; } .ant-switch { transform: scale(0.8); } .ant-input-search { width: 180px !important; } }
+        @media (max-width: 767px) { .ant-input-search { display: none !important; } .ant-badge { display: none !important; } }
+        @media (max-width: 575px) { .ant-layout-header { padding: 0 8px !important; } .ant-avatar { display: none !important; } }
       `}</style>
     </>
   );

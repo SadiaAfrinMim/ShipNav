@@ -1,8 +1,8 @@
 
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 
-import AddShippingOrder from '../AddShippingOrder';
+import AddShippingOrder from '../../SharedAllListFrom/SharedFrom/AddShippingOrder';
 
 
 

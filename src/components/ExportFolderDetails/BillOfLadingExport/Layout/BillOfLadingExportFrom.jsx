@@ -1,11 +1,11 @@
 import React from 'react';
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 
 import BillOfLadingForm from '../BillOfLadingForm';
 
 const BillOfLadingExportFrom = () => {
-    return (
-         <div className='p-4 '>
+  return (
+    <div className='p-4 '>
 
 
 
@@ -15,7 +15,7 @@ const BillOfLadingExportFrom = () => {
 
       </div>
     </div>
-    );
+  );
 };
 
 export default BillOfLadingExportFrom;

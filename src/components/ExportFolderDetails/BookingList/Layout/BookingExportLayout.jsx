@@ -1,6 +1,6 @@
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
-import BookingList from '../BookingList';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
+import BookingList from '../../SharedAllListFrom/SharedList/BookingList';
 
 
 

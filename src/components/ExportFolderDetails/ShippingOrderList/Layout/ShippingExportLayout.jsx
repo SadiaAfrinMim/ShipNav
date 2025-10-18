@@ -1,6 +1,6 @@
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
-import ShippingOrderList from './../ShippingOrderList';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
+import ShippingOrderList from '../../SharedAllListFrom/SharedList/ShippingOrderList';
 
 const ShippingExportLayout = () => {
   return (

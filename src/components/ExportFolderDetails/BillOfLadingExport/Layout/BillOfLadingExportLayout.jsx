@@ -1,5 +1,5 @@
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 import BillOfLadingExport from '../BillOfLadingExport';
 
 

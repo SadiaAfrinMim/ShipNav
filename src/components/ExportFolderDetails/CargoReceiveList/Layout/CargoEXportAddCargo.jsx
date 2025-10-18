@@ -1,9 +1,7 @@
 
 
-
-
-import AddCargoReceive from '../AddCargoReceive';
-import HeaderAddFromTitle from '../../../HeaderTitle/HeaderAddFromTitle';
+import AddCargoReceive from '../../SharedAllListFrom/SharedFrom/AddCargoReceive';
+import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
 
 const CargoEXportAddCargo = () => {
   return (

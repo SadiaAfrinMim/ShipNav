@@ -1,5 +1,5 @@
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 import ExportSeaShipmentAdvice from '../ExportSeaShipmentAdvice';
 
 
@@ -9,7 +9,7 @@ import ExportSeaShipmentAdvice from '../ExportSeaShipmentAdvice';
 
 
 
-const ExportSeaShipmentAdviceLayout= () => {
+const ExportSeaShipmentAdviceLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -17,7 +17,7 @@ const ExportSeaShipmentAdviceLayout= () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderTittleFrom></HeaderTittleFrom>
-       <ExportSeaShipmentAdvice></ExportSeaShipmentAdvice>
+        <ExportSeaShipmentAdvice></ExportSeaShipmentAdvice>
 
 
       </div>

@@ -1,13 +1,13 @@
 
-import HeaderAddFromTitle from '../../../HeaderTitle/HeaderAddFromTitle';
-import AddFirstLegMasterBill from '../AddFirstLegMasterBill';
+import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
+import AddFirstLegMasterBill from '../../SharedAllListFrom/SharedFrom/AddFirstLegMasterBill';
 
 
 
 
 
 
-const AddFirstLegMasterBillLayout= () => {
+const AddFirstLegMasterBillLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -15,7 +15,7 @@ const AddFirstLegMasterBillLayout= () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderAddFromTitle></HeaderAddFromTitle>
-       <AddFirstLegMasterBill></AddFirstLegMasterBill>
+        <AddFirstLegMasterBill></AddFirstLegMasterBill>
 
 
       </div>
@@ -23,4 +23,4 @@ const AddFirstLegMasterBillLayout= () => {
   );
 };
 
-export default AddFirstLegMasterBillLayout ;
+export default AddFirstLegMasterBillLayout;

@@ -1,5 +1,5 @@
 
-import HeaderAddFromTitle from '../../../HeaderTitle/HeaderAddFromTitle';
+import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
 
 
 import ShipmentAdviceForm from '../ShipmentAdviceForm';
@@ -14,7 +14,7 @@ const ShipmentAdviceFormLayout = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderAddFromTitle></HeaderAddFromTitle>
-       <ShipmentAdviceForm></ShipmentAdviceForm>
+        <ShipmentAdviceForm></ShipmentAdviceForm>
 
 
       </div>
@@ -22,4 +22,4 @@ const ShipmentAdviceFormLayout = () => {
   );
 };
 
-export default ShipmentAdviceFormLayout ;
+export default ShipmentAdviceFormLayout;
