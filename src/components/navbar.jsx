@@ -1,466 +1,455 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
-  Layout,
-  Menu,
-  Button,
-  Dropdown,
-  Avatar,
-  Input,
-  Badge,
-  Drawer,
-  Switch,
-  Typography,
-  Divider
-} from 'antd';
+  Layout, Menu, Button, Dropdown, Avatar, Input, Badge, Drawer, Typography, Divider
+} from "antd";
 import {
-  SearchOutlined,
-  BellOutlined,
-  MessageOutlined,
-  UserOutlined,
-  SettingOutlined,
-  LogoutOutlined,
-  MoonOutlined,
-  SunOutlined,
-  MenuOutlined,
-  DashboardOutlined,
-  ShoppingCartOutlined,
-  TeamOutlined,
-  BarChartOutlined,
-  AppstoreOutlined,
-  RocketOutlined,
-  CloseOutlined,
-  DownOutlined,
-  RightOutlined
-} from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom'; // ⬅️ added
+  SearchOutlined, BellOutlined, MessageOutlined, UserOutlined, SettingOutlined,
+  LogoutOutlined, MenuOutlined, BarChartOutlined, ShoppingCartOutlined,
+  CloseOutlined, DownOutlined, RightOutlined, GlobalOutlined, CloudOutlined,
+  ToolOutlined, AuditOutlined, FileTextOutlined, DollarOutlined, BookOutlined,
+  InboxOutlined, FileDoneOutlined, AppstoreOutlined, RocketOutlined
+} from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Header } = Layout;
 const { Title } = Typography;
 const { Search } = Input;
 const { SubMenu } = Menu;
 
-const MindBlowingNavbar = () => {
-  const navigate = useNavigate(); // ⬅️ added
-  const [darkMode, setDarkMode] = useState(false);
+/* ---------------- BLUE + WHITE ONLY ---------------- */
+const C = {
+  headerStart: "#0D47A1",
+  headerMid:   "#1565C0",
+  headerEnd:   "#1E88E5",
+  white: "#FFFFFF",
+  whiteDim: "rgba(255,255,255,.92)",
+  hoverFilm: "rgba(255,255,255,.14)",
+  active: "#90CAF9",               // pale blue for underline (still blue)
+  popBg: "linear-gradient(180deg,#FFFFFF 0%,#F7FAFF 100%)",
+  popBorder: "#E1ECFF",
+  popHover: "#F3F8FF",
+  searchBg: "rgba(255,255,255,.18)",
+  searchBorder: "rgba(255,255,255,.30)",
+};
+
+/* ---------------- ROUTES (unchanged) ---------------- */
+const routeMap = {
+  "/": "/",
+  "exp-sea:booking": "/export-sea/booking",
+  "exp-sea:shipping-order": "/export-sea/shipping-order",
+  "exp-sea:cargo-receive": "/export-sea/cargo-receive",
+  "exp-sea:stuffing-plan": "/export-sea/stuffing-plan",
+  "exp-sea:stuffing-package": "/export-sea/stuffing-package",
+  "exp-sea:shipment-advice": "/export-sea/shipment-advice",
+  "exp-sea:hbl": "/export-sea/hbl",
+  "exp-sea:mbl": "/export-sea/mbl",
+  "exp-sea:freight-invoice": "/export-sea/freight-invoice",
+  "exp-sea:debit-note": "/export-sea/debit-note",
+  "exp-sea:credit-note": "/export-sea/credit-note",
+  "exp-sea:report:pl": "/export-sea/report/profit-loss",
+  "exp-sea:report:volume": "/export-sea/report/volume",
+
+  "exp-air:booking": "/export-air/booking",
+  "exp-air:shipping-order": "/export-air/shipping-order",
+  "exp-air:cargo-receive": "/export-air/cargo-receive",
+  "exp-air:mawb": "/export-air/mawb",
+  "exp-air:freight-invoice": "/export-air/freight-invoice",
+  "exp-air:debit-note": "/export-air/debit-note",
+  "exp-air:credit-note": "/export-air/credit-note",
+  "exp-air:report:pl": "/export-air/report/profit-loss",
+  "exp-air:report:volume": "/export-air/report/volume",
+
+  "imp-sea:booking": "/import-sea/booking",
+  "imp-sea:master-bl": "/import-sea/master-bl",
+  "imp-sea:arrival-notice": "/import-sea/arrival-notice",
+  "imp-sea:forward-letter": "/import-sea/forward-letter",
+  "imp-sea:freight-invoice": "/import-sea/freight-invoice",
+  "imp-sea:debit-note": "/import-sea/debit-note",
+  "imp-sea:credit-note": "/import-sea/credit-note",
+  "imp-sea:report:pl": "/import-sea/report/profit-loss",
+  "imp-sea:report:volume": "/import-sea/report/volume",
+
+  "imp-air:booking": "/import-air/booking",
+  "imp-air:master-bl": "/import-air/master-bl",
+  "imp-air:request-letter": "/import-air/request-letter",
+  "imp-air:forward-letter": "/import-air/forward-letter",
+  "imp-air:freight-invoice": "/import-air/freight-invoice",
+  "imp-air:debit-note": "/import-air/debit-note",
+  "imp-air:credit-note": "/import-air/credit-note",
+  "imp-air:report:pl": "/import-air/report/profit-loss",
+  "imp-air:report:volume": "/import-air/report/volume",
+
+  profile: "/profile",
+  settings: "/settings",
+  logout: "/logout",
+};
+
+/* --------------- MENU GROUPS (unchanged items) --------------- */
+const seaExportMenu = {
+  key: "export-sea",
+  label: "EXPORT SEA",
+  icon: <GlobalOutlined />,
+  submenu: [
+    { key: "exp-sea:booking", label: "Booking", icon: <BookOutlined /> },
+    { key: "exp-sea:shipping-order", label: "Shipping Order", icon: <FileDoneOutlined /> },
+    { key: "exp-sea:cargo-receive", label: "Cargo Receive", icon: <InboxOutlined /> },
+    { key: "exp-sea:stuffing", label: "Cargo Stuffing", icon: <AppstoreOutlined />, submenu: [
+      { key: "exp-sea:stuffing-plan", label: "Stuffing Plan" },
+      { key: "exp-sea:stuffing-package", label: "Stuffing Package" },
+    ]},
+    { key: "exp-sea:shipment-advice", label: "Shipment Advice", icon: <FileTextOutlined /> },
+    { key: "exp-sea:hbl", label: "HBL", icon: <FileTextOutlined /> },
+    { key: "exp-sea:mbl", label: "MBL", icon: <FileTextOutlined /> },
+    { key: "exp-sea:accounts", label: "Accounting", icon: <DollarOutlined />, submenu: [
+      { key: "exp-sea:freight-invoice", label: "Freight Invoice" },
+      { key: "exp-sea:debit-note", label: "Debit Note" },
+      { key: "exp-sea:credit-note", label: "Credit Note" },
+    ]},
+    { key: "exp-sea:reports", label: "Reports", icon: <BarChartOutlined />, submenu: [
+      { key: "exp-sea:report:pl", label: "Profit & Loss" },
+      { key: "exp-sea:report:volume", label: "Volume" },
+    ]},
+  ],
+};
+
+const airExportMenu = {
+  key: "export-air",
+  label: "EXPORT AIR",
+  icon: <CloudOutlined />,
+  submenu: [
+    { key: "exp-air:booking", label: "Booking" },
+    { key: "exp-air:shipping-order", label: "Shipping Order" },
+    { key: "exp-air:cargo-receive", label: "Cargo Receive" },
+    { key: "exp-air:mawb", label: "MAWB" },
+    { key: "exp-air:accounts", label: "Accounting", submenu: [
+      { key: "exp-air:freight-invoice", label: "Freight Invoice" },
+      { key: "exp-air:debit-note", label: "Debit Note" },
+      { key: "exp-air:credit-note", label: "Credit Note" },
+    ]},
+    { key: "exp-air:report:pl", label: "Profit & Loss" },
+    { key: "exp-air:report:volume", label: "Volume" },
+  ],
+};
+
+const seaImportMenu = {
+  key: "import-sea",
+  label: "IMPORT SEA",
+  icon: <GlobalOutlined />,
+  submenu: [
+    { key: "imp-sea:booking", label: "Booking" },
+    { key: "imp-sea:master-bl", label: "Master BL" },
+    { key: "imp-sea:arrival-notice", label: "Arrival Notice" },
+    { key: "imp-sea:forward-letter", label: "Forward Letter" },
+    { key: "imp-sea:accounts", label: "Accounting", submenu: [
+      { key: "imp-sea:freight-invoice", label: "Freight Invoice" },
+      { key: "imp-sea:debit-note", label: "Debit Note" },
+      { key: "imp-sea:credit-note", label: "Credit Note" },
+    ]},
+    { key: "imp-sea:report:pl", label: "Profit & Loss" },
+    { key: "imp-sea:report:volume", label: "Volume" },
+  ],
+};
+
+const airImportMenu = {
+  key: "import-air",
+  label: "IMPORT AIR",
+  icon: <CloudOutlined />,
+  submenu: [
+    { key: "imp-air:booking", label: "Booking" },
+    { key: "imp-air:master-bl", label: "Master BL" },
+    { key: "imp-air:request-letter", label: "Request Letter" },
+    { key: "imp-air:forward-letter", label: "Forward Letter" },
+    { key: "imp-air:accounts", label: "Accounting", submenu: [
+      { key: "imp-air:freight-invoice", label: "Freight Invoice" },
+      { key: "imp-air:debit-note", label: "Debit Note" },
+      { key: "imp-air:credit-note", label: "Credit Note" },
+    ]},
+    { key: "imp-air:report:pl", label: "Profit & Loss" },
+    { key: "imp-air:report:volume", label: "Volume" },
+  ],
+};
+
+const rightMenus = [
+  { key: "accounts", label: "ACCOUNTS", icon: <DollarOutlined />, submenu: [
+    { key: "acc:ledger", label: "Ledger" },
+    { key: "acc:voucher", label: "Vouchers" },
+  ]},
+  { key: "orders", label: "ORDERS", icon: <ShoppingCartOutlined />, submenu: [
+    { key: "ord:po", label: "Purchase Orders" },
+    { key: "ord:so", label: "Sales Orders" },
+  ]},
+  { key: "reports", label: "REPORTS", icon: <BarChartOutlined />, submenu: [
+    { key: "rep:kpi", label: "KPIs" },
+    { key: "rep:ops", label: "Operations" },
+  ]},
+  { key: "essential", label: "ESSENTIAL", icon: <ToolOutlined />, submenu: [
+    { key: "ess:masters", label: "Masters" },
+    { key: "ess:utilities", label: "Utilities" },
+  ]},
+  { key: "settings", label: "SETTINGS", icon: <SettingOutlined />, submenu: [
+    { key: "set:users", label: "Users & Roles" },
+    { key: "set:preferences", label: "Preferences" },
+  ]},
+  { key: "admin", label: "ADMIN", icon: <AuditOutlined />, submenu: [
+    { key: "adm:logs", label: "Audit Logs" },
+    { key: "adm:backup", label: "Backup" },
+  ]},
+];
+
+/* -------------------- NAVBAR -------------------- */
+export default function ShipNavbar() {
+  const navigate = useNavigate();
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [current, setCurrent] = useState('dashboard');
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  const [current, setCurrent] = useState("/");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
   const [openSubMenuKeys, setOpenSubMenuKeys] = useState([]);
 
-  // ⬅️ ROUTE MAP: সব কী-এর জন্য route path
-  const routeMap = {
-    // top-level
-    dashboard: '/dashboard',
-    projects: '/projects',
-    analytics: '/analytics',
-    team: '/team',
-    store: '/store',
-    services: '/services',
-
-    // team submenu
-    'team:1': '/team/option-1',
-    'team:2': '/team/option-2',
-    'team:3': '/team/option-3',
-
-    // services submenu
-    'service:1': '/services/web-development',
-    'service:2': '/services/mobile-apps',
-    'service:3': '/services/cloud',
-
-    // nested cloud submenu
-    'cloud:1': '/services/cloud/aws',
-    'cloud:2': '/services/cloud/azure',
-    'cloud:3': '/services/cloud/google-cloud',
-
-    // user dropdown
-    profile: '/profile',
-    settings: '/settings',
-    logout: '/logout'
-  };
-
-  // Menu configuration array
-  const menuConfig = [
-    { key: 'dashboard', label: 'Dashboard', icon: <DashboardOutlined /> },
-    { key: 'projects',  label: 'Projects',  icon: <AppstoreOutlined /> },
-    { key: 'analytics', label: 'Analytics', icon: <BarChartOutlined /> },
-    {
-      key: 'team',
-      label: 'Team',
-      icon: <TeamOutlined />,
-      submenu: [
-        { key: 'team:1', label: 'Option 1' },
-        { key: 'team:2', label: 'Option 2' },
-        { key: 'team:3', label: 'Option 3' },
-      ],
-    },
-    { key: 'store', label: 'Store', icon: <ShoppingCartOutlined /> },
-    {
-      key: 'services',
-      label: 'Services',
-      icon: <SettingOutlined />,
-      submenu: [
-        { key: 'service:1', label: 'Web Development' },
-        { key: 'service:2', label: 'Mobile Apps' },
-        { 
-          key: 'service:3',
-          label: 'Cloud Solutions',
-          submenu: [
-            { key: 'cloud:1', label: 'AWS' },
-            { key: 'cloud:2', label: 'Azure' },
-            { key: 'cloud:3', label: 'Google Cloud' },
-          ]
-        },
-      ],
-    },
-  ];
-
-  // Handle window resize
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 992);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const onResize = () => setIsMobile(window.innerWidth < 1200);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const userMenuItems = [
-    { key: 'profile', icon: <UserOutlined />, label: 'Profile' },
-    { key: 'settings', icon: <SettingOutlined />, label: 'Settings' },
-    { type: 'divider' },
-    { key: 'logout', icon: <LogoutOutlined />, label: 'Logout', danger: true },
+    { key: "profile", icon: <UserOutlined />, label: "Profile" },
+    { key: "settings", icon: <SettingOutlined />, label: "Settings" },
+    { type: "divider" },
+    { key: "logout", icon: <LogoutOutlined />, label: "Logout", danger: true },
   ];
 
-  // Desktop submenu title
-  const CustomSubMenuTitle = ({ label, icon }) => (
-    <span style={{ display: 'flex', alignItems: 'center' }}>
+  const CustomSubTitle = ({ label, icon }) => (
+    <span style={{ display: "flex", alignItems: "center", color: C.whiteDim }}>
       {icon}
-      <span style={{ marginLeft: '8px' }}>{label}</span>
-      <DownOutlined style={{ fontSize: '10px', marginLeft: '6px', transition: 'transform 0.3s' }} />
+      <span style={{ marginLeft: 6 }}>{label}</span>
+      <DownOutlined style={{ fontSize: 10, marginLeft: 6 }} />
     </span>
   );
 
-  const onOpenChange = (keys) => setOpenSubMenuKeys(keys);
-
-  // ⬅️ Menu click handler: যে কোন item এ ক্লিক করলে navigate
-  const handleMenuClick = (e, isFromDrawer = false) => {
-    const path = routeMap[e.key];
+  const go = (key, closeDrawer = false) => {
+    const path = routeMap[key] || key;
     if (path) {
       navigate(path);
-      setCurrent(e.key);
-      if (isFromDrawer) setDrawerVisible(false);
+      setCurrent(key);
+      if (closeDrawer) setDrawerVisible(false);
     }
   };
 
-  // Recursive menu renderer (unchanged markup; routing handled via onClick)
-  const renderMenuItems = (items, isMobileMenu = false) =>
-    items.map(item => {
-      if (item.submenu) {
-        return (
-          <SubMenu
-            key={item.key}
-            title={isMobileMenu ? (
-              <span>
-                {item.icon}
-                <span style={{ marginLeft: '8px' }}>{item.label}</span>
+  const render = (items, mobile = false) =>
+    items.map((m) =>
+      m.submenu ? (
+        <SubMenu
+          key={m.key}
+          title={
+            mobile ? (
+              <span style={{ display: "flex", alignItems: "center" }}>
+                {m.icon}
+                <span style={{ marginLeft: 6 }}>{m.label}</span>
               </span>
             ) : (
-              <CustomSubMenuTitle label={item.label} icon={item.icon} />
-            )}
-            icon={isMobileMenu ? item.icon : null}
-            expandIcon={isMobileMenu && openSubMenuKeys.includes(item.key) ? <DownOutlined /> : <RightOutlined />}
-            popupClassName={darkMode ? 'dark-submenu' : 'light-submenu'}
-          >
-            {renderMenuItems(item.submenu, isMobileMenu)}
-          </SubMenu>
-        );
-      }
-      return (
-        <Menu.Item key={item.key} icon={isMobileMenu ? item.icon : null}>
-          {/* label shown; navigation happens via onClick at Menu level */}
-          {isMobileMenu ? (
-            <span>
-              {item.icon}
-              <span style={{ marginLeft: '8px' }}>{item.label}</span>
+              <CustomSubTitle label={m.label} icon={m.icon} />
+            )
+          }
+          icon={mobile ? m.icon : null}
+          expandIcon={mobile && openSubMenuKeys.includes(m.key) ? <DownOutlined /> : <RightOutlined />}
+        >
+          {render(m.submenu, mobile)}
+        </SubMenu>
+      ) : (
+        <Menu.Item key={m.key} icon={mobile ? m.icon : null}>
+          {mobile ? (
+            <span style={{ display: "flex", alignItems: "center" }}>
+              {m.icon}
+              <span style={{ marginLeft: 6 }}>{m.label}</span>
             </span>
           ) : (
-            <>
-              {item.icon}
-              <span style={{ marginLeft: '8px' }}>{item.label}</span>
-            </>
+            m.label
           )}
         </Menu.Item>
-      );
-    });
+      )
+    );
 
   return (
     <>
       <Header
         style={{
-          background: darkMode
-            ? 'linear-gradient(135deg, rgba(16, 20, 30, 0.95) 0%, rgba(25, 30, 45, 0.95) 100%)'
-            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.95) 100%)',
-          backdropFilter: 'blur(10px)',
-          borderBottom: darkMode ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.06)',
-          padding: '0 16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'sticky',
+          background: `linear-gradient(90deg, ${C.headerStart}, ${C.headerMid} 45%, ${C.headerEnd})`,
+          padding: "0 12px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: 56,
+          position: "sticky",
           top: 0,
           zIndex: 1000,
-          boxShadow: darkMode
-            ? '0 4px 20px rgba(0, 0, 0, 0.2)'
-            : '0 4px 20px rgba(0, 0, 0, 0.08)',
-          height: '64px',
-          minWidth: '320px'
+          boxShadow: "0 6px 18px rgba(21,101,192,.28)",
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-          {/* ⬅️ Logo wrapped with Link to home */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', marginRight: isMobile ? '8px' : '16px', textDecoration: 'none' }}>
-            <RocketOutlined
-              style={{
-                fontSize: isMobile ? '20px' : '28px',
-                marginRight: '8px',
-                background: 'linear-gradient(135deg, #1890ff, #722ed1)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                flexShrink: 0
-              }}
-            />
+        {/* Brand: ShipNav (blue/white only) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, flex: 1 }}>
+          <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+            <RocketOutlined style={{ color: C.white, fontSize: 18, marginRight: 8 }} />
             <Title
-              level={isMobile ? 5 : 3}
+              level={4}
               style={{
+                color: C.white,
                 margin: 0,
-                background: 'linear-gradient(135deg, #1890ff, #722ed1)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                fontWeight: 700,
-                whiteSpace: 'nowrap',
-                display: isMobile ? 'none' : 'block'
+                fontWeight: 800,
+                letterSpacing: 0.6,
               }}
             >
               ShipNav
-            </Title>
-            <Title
-              level={5}
-              style={{
-                margin: 0,
-                background: 'linear-gradient(135deg, #1890ff, #722ed1)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                fontWeight: 700,
-                whiteSpace: 'nowrap',
-                display: !isMobile ? 'none' : 'block'
-              }}
-            >
-              SN
             </Title>
           </Link>
 
           {!isMobile && (
             <Menu
-              theme={darkMode ? 'dark' : 'light'}
               mode="horizontal"
+              theme="dark"
               selectedKeys={[current]}
-              onClick={(e) => handleMenuClick(e, false)} // ⬅️ navigate on desktop
+              onClick={(e) => go(e.key)}
               style={{
-                background: 'transparent',
-                border: 'none',
-                marginLeft: '16px',
-                fontWeight: 500,
+                background: "transparent",
+                border: "none",
+                marginLeft: 10,
                 flex: 1,
-                minWidth: 0
+                minWidth: 0,
+                textTransform: "uppercase",
+                letterSpacing: ".02em",
+                fontWeight: 600,
               }}
             >
-              {renderMenuItems(menuConfig)}
+              {render([seaExportMenu, airExportMenu, seaImportMenu, airImportMenu])}
+              {render(rightMenus)}
             </Menu>
           )}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+        {/* Tools (blue/white only) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           {!isMobile && (
             <Search
-              placeholder="Search..."
+              placeholder="Search…"
               allowClear
               enterButton={<SearchOutlined />}
               size="middle"
-              style={{ width: 200, marginRight: '8px' }}
+              style={{ width: 230, borderRadius: 10 }}
+              className="sn-search"
             />
           )}
 
-          <Switch
-            checked={darkMode}
-            onChange={setDarkMode}
-            checkedChildren={<MoonOutlined />}
-            unCheckedChildren={<SunOutlined />}
-            style={{ background: darkMode ? '#141414' : '#ccc' }}
-          />
+          <Badge count={4} size="small">
+            <Button type="text" icon={<BellOutlined />} style={{ color: C.white }} />
+          </Badge>
+          <Badge count={8} size="small">
+            <Button type="text" icon={<MessageOutlined />} style={{ color: C.white }} />
+          </Badge>
 
-          {!isMobile && (
-            <>
-              <Badge count={5} size="small">
-                <Button type="text" icon={<BellOutlined />} shape="circle"
-                  style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }} />
-              </Badge>
-
-              <Badge count={12} size="small">
-                <Button type="text" icon={<MessageOutlined />} shape="circle"
-                  style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }} />
-              </Badge>
-            </>
-          )}
-
-          {/* ⬅️ User dropdown navigates via onClick */}
           <Dropdown
-            menu={{
-              items: userMenuItems,
-              onClick: ({ key }) => {
-                const path = routeMap[key];
-                if (path) navigate(path);
-              }
-            }}
-            trigger={['click']}
+            menu={{ items: userMenuItems, onClick: ({ key }) => go(key) }}
+            trigger={["click"]}
             placement="bottomRight"
+            overlayClassName="sn-dropdown"
           >
-            <Avatar
-              size={isMobile ? 'small' : 'default'}
-              icon={<UserOutlined />}
-              src="https://xsgames.co/randomusers/avatar.php?g=pixel"
-              style={{
-                cursor: 'pointer',
-                border: '2px solid #1890ff',
-                display: isMobile ? 'none' : 'block'
-              }}
-            />
+            <Avatar size="small" icon={<UserOutlined />} style={{ cursor: "pointer", border: "2px solid #fff" }} />
           </Dropdown>
 
           <Button
             type="text"
             icon={<MenuOutlined />}
             onClick={() => setDrawerVisible(true)}
-            style={{
-              color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)',
-              display: isMobile ? 'block' : 'none'
-            }}
+            style={{ color: C.white, display: isMobile ? "block" : "none" }}
           />
         </div>
       </Header>
 
+      {/* Drawer (mobile) */}
       <Drawer
         title={
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span>Menu</span>
             <Button type="text" icon={<CloseOutlined />} onClick={() => setDrawerVisible(false)} />
           </div>
         }
         placement="right"
-        onClose={() => setDrawerVisible(false)}
         open={drawerVisible}
-        bodyStyle={{
-          padding: 0,
-          background: darkMode
-            ? 'linear-gradient(135deg, rgba(16, 20, 30, 0.98) 0%, rgba(25, 30, 45, 0.98) 100%)'
-            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 250, 0.98) 100%)',
-        }}
-        headerStyle={{
-          background: 'transparent',
-          borderBottom: darkMode ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.06)',
-        }}
-        style={{ backdropFilter: 'blur(10px)' }}
-        width={300}
+        onClose={() => setDrawerVisible(false)}
+        width={320}
+        bodyStyle={{ padding: 0 }}
       >
-        <div style={{ padding: '16px' }}>
-          <Search
-            placeholder="Search..."
-            allowClear
-            enterButton={<SearchOutlined />}
-            size="middle"
-            style={{ width: '100%', marginBottom: '16px' }}
-          />
+        <div style={{ padding: 12 }}>
+          <Search placeholder="Search…" allowClear enterButton={<SearchOutlined />} />
         </div>
-
         <Divider style={{ margin: 0 }} />
-
-        {/* ⬅️ Mobile drawer menu navigates too */}
         <Menu
-          theme={darkMode ? 'dark' : 'light'}
           mode="inline"
           selectedKeys={[current]}
           openKeys={openSubMenuKeys}
-          onOpenChange={onOpenChange}
-          onClick={(e) => handleMenuClick(e, true)} // ⬅️ navigate + close drawer
-          style={{
-            background: 'transparent',
-            border: 'none',
-            padding: '8px 0',
-          }}
+          onOpenChange={setOpenSubMenuKeys}
+          onClick={(e) => go(e.key, true)}
+          style={{ border: "none" }}
         >
-          {renderMenuItems(menuConfig, true)}
+          {render([seaExportMenu, airExportMenu, seaImportMenu, airImportMenu, ...rightMenus], true)}
         </Menu>
-
-        <Divider style={{ margin: 0 }} />
-
-        <div style={{ padding: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <span>Dark Mode</span>
-            <Switch
-              checked={darkMode}
-              onChange={setDarkMode}
-              checkedChildren={<MoonOutlined />}
-              unCheckedChildren={<SunOutlined />}
-              style={{ background: darkMode ? '#141414' : '#ccc' }}
-            />
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <Badge count={5} size="small">
-              <Button type="text" icon={<BellOutlined />}
-                style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }}>
-                Notifications
-              </Button>
-            </Badge>
-
-            <Badge count={12} size="small">
-              <Button type="text" icon={<MessageOutlined />}
-                style={{ color: darkMode ? '#fff' : 'rgba(0, 0, 0, 0.65)' }}>
-                Messages
-              </Button>
-            </Badge>
-          </div>
-
-          <Dropdown
-            menu={{
-              items: userMenuItems,
-              onClick: ({ key }) => {
-                const path = routeMap[key];
-                if (path) {
-                  navigate(path);
-                  setDrawerVisible(false);
-                }
-              }
-            }}
-            trigger={['click']}
-            placement="topRight"
-          >
-            <Button type="text" icon={<UserOutlined />} style={{ width: '100%', textAlign: 'left' }}>
-              Profile
-            </Button>
-          </Dropdown>
-        </div>
       </Drawer>
 
+      {/* Blue/White Polish */}
       <style jsx global>{`
-        .ant-menu-submenu-title .anticon-down { font-size: 10px !important; margin-left: 6px; transition: transform 0.3s; }
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
+          color: ${C.whiteDim};
+        }
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover,
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu:hover {
+          background: ${C.hoverFilm};
+          border-radius: 10px;
+        }
+
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item-selected::after,
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu-selected::after {
+          border-bottom: 2px solid ${C.active};
+        }
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item-selected,
+        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu-selected {
+          color: ${C.white};
+        }
+
+        .ant-menu-submenu-popup,
+        .sn-dropdown .ant-dropdown-menu {
+          background: ${C.popBg};
+          border: 1px solid ${C.popBorder};
+          box-shadow: 0 14px 30px rgba(13, 71, 161, 0.15);
+          border-radius: 12px;
+          overflow: hidden;
+        }
+        .ant-menu-submenu-popup .ant-menu,
+        .sn-dropdown .ant-dropdown-menu { background: transparent; }
+        .ant-menu-submenu-popup .ant-menu-item,
+        .ant-menu-submenu-popup .ant-menu-submenu-title,
+        .sn-dropdown .ant-dropdown-menu-item {
+          transition: background .18s ease, padding-left .18s ease;
+        }
+        .ant-menu-submenu-popup .ant-menu-item:hover,
+        .ant-menu-submenu-popup .ant-menu-submenu-title:hover,
+        .sn-dropdown .ant-dropdown-menu-item:hover {
+          background: ${C.popHover};
+          padding-left: 8px;
+        }
+
+        .sn-search .ant-input-affix-wrapper,
+        .sn-search .ant-input {
+          background: ${C.searchBg} !important;
+          border-color: ${C.searchBorder} !important;
+          color: ${C.white};
+        }
+        .sn-search .ant-btn { border-color: transparent; }
+
+        .ant-menu-submenu-title .anticon-down { font-size: 10px; margin-left: 6px; }
         .ant-menu-submenu-open .ant-menu-submenu-title .anticon-down { transform: rotate(180deg); }
-        .ant-menu-inline .ant-menu-submenu-arrow { display: none !important; }
-        .ant-menu-submenu-expand-icon { position: absolute !important; right: 16px !important; top: 50% !important; transform: translateY(-50%) !important; }
-        .dark-submenu { background: linear-gradient(135deg, rgba(16, 20, 30, 0.98) 0%, rgba(25, 30, 45, 0.98) 100%) !important; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .light-submenu { background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 250, 0.98) 100%) !important; backdrop-filter: blur(10px); border: 1px solid rgba(0, 0, 0, 0.06); }
-        @media (max-width: 991px) { .ant-layout-header { padding: 0 12px !important; } .ant-menu-horizontal { display: none !important; } .ant-switch { transform: scale(0.8); } .ant-input-search { width: 180px !important; } }
-        @media (max-width: 767px) { .ant-input-search { display: none !important; } .ant-badge { display: none !important; } }
-        @media (max-width: 575px) { .ant-layout-header { padding: 0 8px !important; } .ant-avatar { display: none !important; } }
+
+        @media (max-width: 1199px) {
+          .ant-menu-horizontal { display: none !important; }
+        }
       `}</style>
     </>
   );
-};
-
-export default MindBlowingNavbar;
+}
