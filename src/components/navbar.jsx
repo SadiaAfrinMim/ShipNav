@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Layout, Menu, Button, Dropdown, Avatar, Input, Badge, Drawer, Typography, Divider
 } from "antd";
@@ -7,7 +7,9 @@ import {
   LogoutOutlined, MenuOutlined, BarChartOutlined, ShoppingCartOutlined,
   CloseOutlined, DownOutlined, RightOutlined, GlobalOutlined, CloudOutlined,
   ToolOutlined, AuditOutlined, FileTextOutlined, DollarOutlined, BookOutlined,
-  InboxOutlined, FileDoneOutlined, AppstoreOutlined, RocketOutlined
+  InboxOutlined, FileDoneOutlined, AppstoreOutlined, RocketOutlined, KeyOutlined,
+  ApartmentOutlined, ClusterOutlined, SafetyCertificateOutlined, ApiOutlined,
+  DatabaseOutlined, BranchesOutlined, HomeOutlined, BuildOutlined, MailOutlined
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,25 +18,26 @@ const { Title } = Typography;
 const { Search } = Input;
 const { SubMenu } = Menu;
 
-/* ---------------- BLUE + WHITE ONLY ---------------- */
+/* ---------- Soft Blue / White Palette ---------- */
 const C = {
-  headerStart: "#0D47A1",
-  headerMid:   "#1565C0",
-  headerEnd:   "#1E88E5",
-  white: "#FFFFFF",
-  whiteDim: "rgba(255,255,255,.92)",
-  hoverFilm: "rgba(255,255,255,.14)",
-  active: "#90CAF9",               // pale blue for underline (still blue)
+  headerBg: "#F5FAFF",         // soft background
+  headerBorder: "#DDEBFF",     // subtle bottom border
+  text: "#0D47A1",             // deep blue text
+  textMute: "#3468B5",         // softer blue text
+  linkHover: "rgba(13,71,161,.08)",
+  active: "#64B5F6",
   popBg: "linear-gradient(180deg,#FFFFFF 0%,#F7FAFF 100%)",
   popBorder: "#E1ECFF",
-  popHover: "#F3F8FF",
-  searchBg: "rgba(255,255,255,.18)",
-  searchBorder: "rgba(255,255,255,.30)",
+  popHover: "#F1F6FF",
+  searchBg: "#FFFFFF",
+  searchBorder: "#DDEBFF",
 };
 
-/* ---------------- ROUTES (unchanged) ---------------- */
+/* ---------- Routes (add/replace with your real routes) ---------- */
 const routeMap = {
   "/": "/",
+
+  // Export Sea
   "exp-sea:booking": "/export-sea/booking",
   "exp-sea:shipping-order": "/export-sea/shipping-order",
   "exp-sea:cargo-receive": "/export-sea/cargo-receive",
@@ -49,6 +52,7 @@ const routeMap = {
   "exp-sea:report:pl": "/export-sea/report/profit-loss",
   "exp-sea:report:volume": "/export-sea/report/volume",
 
+  // Export Air
   "exp-air:booking": "/export-air/booking",
   "exp-air:shipping-order": "/export-air/shipping-order",
   "exp-air:cargo-receive": "/export-air/cargo-receive",
@@ -59,6 +63,7 @@ const routeMap = {
   "exp-air:report:pl": "/export-air/report/profit-loss",
   "exp-air:report:volume": "/export-air/report/volume",
 
+  // Import Sea
   "imp-sea:booking": "/import-sea/booking",
   "imp-sea:master-bl": "/import-sea/master-bl",
   "imp-sea:arrival-notice": "/import-sea/arrival-notice",
@@ -69,6 +74,7 @@ const routeMap = {
   "imp-sea:report:pl": "/import-sea/report/profit-loss",
   "imp-sea:report:volume": "/import-sea/report/volume",
 
+  // Import Air
   "imp-air:booking": "/import-air/booking",
   "imp-air:master-bl": "/import-air/master-bl",
   "imp-air:request-letter": "/import-air/request-letter",
@@ -79,12 +85,44 @@ const routeMap = {
   "imp-air:report:pl": "/import-air/report/profit-loss",
   "imp-air:report:volume": "/import-air/report/volume",
 
+  // ACCOUNTS / ORDERS / REPORTS / ESSENTIAL / SETTINGS (examples)
+  "acc:ledger": "/accounts/ledger",
+  "acc:voucher": "/accounts/vouchers",
+  "ord:po": "/orders/purchase",
+  "ord:so": "/orders/sales",
+  "rep:kpi": "/reports/kpis",
+  "rep:ops": "/reports/operations",
+  "ess:masters": "/essential/masters",
+  "ess:utilities": "/essential/utilities",
+  "set:users": "/settings/users",
+  "set:preferences": "/settings/preferences",
+
+  // ADMIN (rich)
+  "admin:users": "/admin/users",
+  "admin:roles": "/admin/roles",
+  "admin:permissions": "/admin/permissions",
+  "admin:companies": "/admin/companies",
+  "admin:branches": "/admin/branches",
+  "admin:departments": "/admin/departments",
+  "admin:audit-logs": "/admin/audit-logs",
+  "admin:activity": "/admin/activity",
+  "admin:login-history": "/admin/login-history",
+  "admin:backups": "/admin/backups",
+  "admin:db-tools": "/admin/db-tools",
+  "admin:api-keys": "/admin/api-keys",
+  "admin:webhooks": "/admin/webhooks",
+  "admin:preferences": "/admin/preferences",
+  "admin:numbering": "/admin/numbering",
+  "admin:email": "/admin/email",
+  "admin:sms": "/admin/sms",
+  "admin:i18n": "/admin/translations",
+
   profile: "/profile",
   settings: "/settings",
   logout: "/logout",
 };
 
-/* --------------- MENU GROUPS (unchanged items) --------------- */
+/* ---------- Menu Groups (same as before, ADMIN expanded) ---------- */
 const seaExportMenu = {
   key: "export-sea",
   label: "EXPORT SEA",
@@ -169,6 +207,7 @@ const airImportMenu = {
   ],
 };
 
+/* Right side (kept) */
 const rightMenus = [
   { key: "accounts", label: "ACCOUNTS", icon: <DollarOutlined />, submenu: [
     { key: "acc:ledger", label: "Ledger" },
@@ -190,13 +229,47 @@ const rightMenus = [
     { key: "set:users", label: "Users & Roles" },
     { key: "set:preferences", label: "Preferences" },
   ]},
-  { key: "admin", label: "ADMIN", icon: <AuditOutlined />, submenu: [
-    { key: "adm:logs", label: "Audit Logs" },
-    { key: "adm:backup", label: "Backup" },
-  ]},
+
+  /* ---------- ADMIN (rich & organized) ---------- */
+  {
+    key: "admin",
+    label: "ADMIN",
+    icon: <AuditOutlined />,
+    submenu: [
+      // User Management
+      { key: "admin:users", label: "Users", icon: <UserOutlined /> },
+      { key: "admin:roles", label: "Roles", icon: <SafetyCertificateOutlined /> },
+      { key: "admin:permissions", label: "Permissions", icon: <KeyOutlined /> },
+
+      // Organization
+      { key: "admin:companies", label: "Companies", icon: <HomeOutlined /> },
+      { key: "admin:branches", label: "Branches", icon: <BranchesOutlined /> },
+      { key: "admin:departments", label: "Departments", icon: <ApartmentOutlined /> },
+
+      // Security & Monitoring
+      { key: "admin:audit-logs", label: "Audit Logs", icon: <AuditOutlined /> },
+      { key: "admin:activity", label: "Activity Monitor", icon: <ClusterOutlined /> },
+      { key: "admin:login-history", label: "Login History", icon: <SafetyCertificateOutlined /> },
+
+      // Maintenance
+      { key: "admin:backups", label: "Backups", icon: <DatabaseOutlined /> },
+      { key: "admin:db-tools", label: "Database Tools", icon: <BuildOutlined /> },
+
+      // Integrations
+      { key: "admin:api-keys", label: "API Keys", icon: <ApiOutlined /> },
+      { key: "admin:webhooks", label: "Webhooks", icon: <ApiOutlined /> },
+
+      // System Settings
+      { key: "admin:preferences", label: "System Preferences", icon: <SettingOutlined /> },
+      { key: "admin:numbering", label: "Document Numbering", icon: <FileTextOutlined /> },
+      { key: "admin:email", label: "Email Settings", icon: <MailOutlined /> },
+      { key: "admin:sms", label: "SMS Settings", icon: <MessageOutlined /> },
+      { key: "admin:i18n", label: "Translations", icon: <GlobalOutlined /> },
+    ],
+  },
 ];
 
-/* -------------------- NAVBAR -------------------- */
+/* ---------------- NAVBAR ---------------- */
 export default function ShipNavbar() {
   const navigate = useNavigate();
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -218,7 +291,7 @@ export default function ShipNavbar() {
   ];
 
   const CustomSubTitle = ({ label, icon }) => (
-    <span style={{ display: "flex", alignItems: "center", color: C.whiteDim }}>
+    <span style={{ display: "flex", alignItems: "center", color: C.textMute }}>
       {icon}
       <span style={{ marginLeft: 6 }}>{label}</span>
       <DownOutlined style={{ fontSize: 10, marginLeft: 6 }} />
@@ -270,97 +343,58 @@ export default function ShipNavbar() {
 
   return (
     <>
-      <Header
-        style={{
-          background: `linear-gradient(90deg, ${C.headerStart}, ${C.headerMid} 45%, ${C.headerEnd})`,
-          padding: "0 12px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 56,
-          position: "sticky",
-          top: 0,
-          zIndex: 1000,
-          boxShadow: "0 6px 18px rgba(21,101,192,.28)",
-        }}
-      >
-        {/* Brand: ShipNav (blue/white only) */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, flex: 1 }}>
-          <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <RocketOutlined style={{ color: C.white, fontSize: 18, marginRight: 8 }} />
-            <Title
-              level={4}
-              style={{
-                color: C.white,
-                margin: 0,
-                fontWeight: 800,
-                letterSpacing: 0.6,
-              }}
-            >
-              ShipNav
-            </Title>
-          </Link>
+      {/* FULL WIDTH WRAPPER */}
+      <div className="w-full">
+        <Header
+          style={{
+            background: C.headerBg,                               // soft color (no dark gradient)
+            height: 60,
+            padding: 0,
+            position: "sticky",
+            top: 0,
+            zIndex: 1000,
+            borderBottom: `1px solid ${C.headerBorder}`,          // subtle separator
+          }}
+        >
+          <div className="w-full flex items-center justify-between px-3 lg:px-4">
+            {/* Brand + mega menu */}
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <Link to="/" className="flex items-center no-underline">
+                <RocketOutlined style={{ color: C.text, fontSize: 18, marginRight: 8 }} />
+                <Title level={4} style={{ color: C.text, margin: 0, fontWeight: 800, letterSpacing: 0.6 }}>
+                  ShipNav
+                </Title>
+              </Link>
 
-          {!isMobile && (
-            <Menu
-              mode="horizontal"
-              theme="dark"
-              selectedKeys={[current]}
-              onClick={(e) => go(e.key)}
-              style={{
-                background: "transparent",
-                border: "none",
-                marginLeft: 10,
-                flex: 1,
-                minWidth: 0,
-                textTransform: "uppercase",
-                letterSpacing: ".02em",
-                fontWeight: 600,
-              }}
-            >
-              {render([seaExportMenu, airExportMenu, seaImportMenu, airImportMenu])}
-              {render(rightMenus)}
-            </Menu>
-          )}
-        </div>
+              {!isMobile && (
+                <Menu
+                  mode="horizontal"
+                  selectedKeys={[current]}
+                  onClick={(e) => go(e.key)}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    marginLeft: 10,
+                    flex: 1,
+                    minWidth: 0,
+                    textTransform: "uppercase",
+                    letterSpacing: ".02em",
+                    fontWeight: 600,
+                    color: C.textMute,
+                  }}
+                >
+                  {/* Left groups */}
+                  {render([seaExportMenu, airExportMenu, seaImportMenu, airImportMenu])}
+                  {/* Right groups (includes ADMIN enriched) */}
+                  {render(rightMenus)}
+                </Menu>
+              )}
+            </div>
 
-        {/* Tools (blue/white only) */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          {!isMobile && (
-            <Search
-              placeholder="Search…"
-              allowClear
-              enterButton={<SearchOutlined />}
-              size="middle"
-              style={{ width: 230, borderRadius: 10 }}
-              className="sn-search"
-            />
-          )}
-
-          <Badge count={4} size="small">
-            <Button type="text" icon={<BellOutlined />} style={{ color: C.white }} />
-          </Badge>
-          <Badge count={8} size="small">
-            <Button type="text" icon={<MessageOutlined />} style={{ color: C.white }} />
-          </Badge>
-
-          <Dropdown
-            menu={{ items: userMenuItems, onClick: ({ key }) => go(key) }}
-            trigger={["click"]}
-            placement="bottomRight"
-            overlayClassName="sn-dropdown"
-          >
-            <Avatar size="small" icon={<UserOutlined />} style={{ cursor: "pointer", border: "2px solid #fff" }} />
-          </Dropdown>
-
-          <Button
-            type="text"
-            icon={<MenuOutlined />}
-            onClick={() => setDrawerVisible(true)}
-            style={{ color: C.white, display: isMobile ? "block" : "none" }}
-          />
-        </div>
-      </Header>
+            
+          </div>
+        </Header>
+      </div>
 
       {/* Drawer (mobile) */}
       <Drawer
@@ -392,32 +426,32 @@ export default function ShipNavbar() {
         </Menu>
       </Drawer>
 
-      {/* Blue/White Polish */}
+      {/* Soft theme polish */}
       <style jsx global>{`
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
-          color: ${C.whiteDim};
+        .ant-menu-horizontal > .ant-menu-item,
+        .ant-menu-horizontal > .ant-menu-submenu {
+          color: ${C.textMute};
         }
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover,
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu:hover {
-          background: ${C.hoverFilm};
+        .ant-menu-horizontal > .ant-menu-item:hover,
+        .ant-menu-horizontal > .ant-menu-submenu:hover {
+          background: ${C.linkHover};
           border-radius: 10px;
         }
-
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item-selected::after,
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu-selected::after {
+        .ant-menu-horizontal > .ant-menu-item-selected::after,
+        .ant-menu-horizontal > .ant-menu-submenu-selected::after {
           border-bottom: 2px solid ${C.active};
         }
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-item-selected,
-        .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu-selected {
-          color: ${C.white};
+        .ant-menu-horizontal > .ant-menu-item-selected,
+        .ant-menu-horizontal > .ant-menu-submenu-selected {
+          color: ${C.text};
         }
 
+        /* White dropdowns */
         .ant-menu-submenu-popup,
         .sn-dropdown .ant-dropdown-menu {
           background: ${C.popBg};
           border: 1px solid ${C.popBorder};
-          box-shadow: 0 14px 30px rgba(13, 71, 161, 0.15);
+          box-shadow: 0 14px 30px rgba(13, 71, 161, 0.12);
           border-radius: 12px;
           overflow: hidden;
         }
@@ -435,13 +469,14 @@ export default function ShipNavbar() {
           padding-left: 8px;
         }
 
+        /* Search field */
         .sn-search .ant-input-affix-wrapper,
         .sn-search .ant-input {
           background: ${C.searchBg} !important;
           border-color: ${C.searchBorder} !important;
-          color: ${C.white};
+          color: ${C.text};
         }
-        .sn-search .ant-btn { border-color: transparent; }
+        .sn-search .ant-btn { border-color: transparent; color: ${C.text}; }
 
         .ant-menu-submenu-title .anticon-down { font-size: 10px; margin-left: 6px; }
         .ant-menu-submenu-open .ant-menu-submenu-title .anticon-down { transform: rotate(180deg); }

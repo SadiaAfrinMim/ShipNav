@@ -62,7 +62,7 @@ import AddForwardLetterLayout from "./components/ExportSeaFolderDetails/ForwardL
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div >
       <MindBlowingNavbar />
       {children}
     </div>
