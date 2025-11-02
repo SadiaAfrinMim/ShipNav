@@ -86,8 +86,18 @@ const routeMap = {
   "imp-air:report:volume": "/import-air/report/volume",
 
   // ACCOUNTS / ORDERS / REPORTS / ESSENTIAL / SETTINGS (examples)
-  "acc:ledger": "/accounts/ledger",
-  "acc:voucher": "/accounts/vouchers",
+  "acc:receive-voucher": "/accounts/receive-voucher",
+"acc:receive-journal": "/accounts/receive-journal",
+"acc:payment-voucher": "/accounts/payment-voucher",
+"acc:payment-journal": "/accounts/payment-journal",
+"acc:journal-voucher": "/accounts/journal-voucher",
+"acc:contra-voucher": "/accounts/contra-voucher",
+"acc:customer-receipt": "/accounts/customer-receipt",
+"acc:supplier-payment": "/accounts/supplier-payment",
+"acc:setting-account-head": "/accounts/setting/account-head",
+"acc:setting-voucher-type": "/accounts/setting/voucher-type",
+"acc:setting-cost-center": "/accounts/setting/cost-center",
+
   "ord:po": "/orders/purchase",
   "ord:so": "/orders/sales",
   "rep:kpi": "/reports/kpis",
@@ -209,14 +219,55 @@ const airImportMenu = {
 
 /* Right side (kept) */
 const rightMenus = [
-  { key: "accounts", label: "ACCOUNTS", icon: <DollarOutlined />, submenu: [
-    { key: "acc:ledger", label: "Ledger" },
-    { key: "acc:voucher", label: "Vouchers" },
-  ]},
-  { key: "orders", label: "ORDERS", icon: <ShoppingCartOutlined />, submenu: [
-    { key: "ord:po", label: "Purchase Orders" },
-    { key: "ord:so", label: "Sales Orders" },
-  ]},
+  {
+  key: "accounts",
+  label: "ACCOUNTS",
+  icon: <DollarOutlined />,
+  submenu: [
+    { key: "acc:receive-voucher", label: "Receive Voucher", path: "/accounts/receive-voucher" },
+    { key: "acc:receive-journal", label: "Receive Journal", path: "/accounts/receive-journal" },
+    { key: "acc:payment-voucher", label: "Payment Voucher", path: "/accounts/payment-voucher" },
+    { key: "acc:payment-journal", label: "Payment Journal", path: "/accounts/payment-journal" },
+    { key: "acc:journal-voucher", label: "Journal Voucher", path: "/accounts/journal-voucher" },
+    { key: "acc:contra-voucher", label: "Contra Voucher", path: "/accounts/contra-voucher" },
+    { key: "acc:customer-receipt", label: "Customer Receipt", path: "/accounts/customer-receipt" },
+    { key: "acc:supplier-payment", label: "Supplier Payment", path: "/accounts/supplier-payment" },
+    {
+      key: "acc:setting",
+      label: "Setting",
+      icon: <SettingOutlined />,
+      submenu: [
+        { key: "acc:setting-account-head", label: "Account Head", path: "/accounts/setting/account-head" },
+        { key: "acc:setting-voucher-type", label: "Voucher Type", path: "/accounts/setting/voucher-type" },
+        { key: "acc:setting-cost-center", label: "Cost Center", path: "/accounts/setting/cost-center" },
+      ],
+    },
+  ],
+},
+
+  {
+  key: "orders",
+  label: "ORDERS",
+  icon: <ShoppingCartOutlined />,
+  submenu: [
+    { key: "ord:sale-order", label: "Sale Order", path: "/orders/sale-order" },
+    { key: "ord:sale-return", label: "Sale Return", path: "/orders/sale-return" },
+    { key: "ord:purchase-order", label: "Purchase Order", path: "/orders/purchase-order" },
+    { key: "ord:purchase-return", label: "Purchase Return", path: "/orders/purchase-return" },
+    { key: "ord:adjustments", label: "Adjustments", path: "/orders/adjustments" },
+    {
+      key: "ord:setting",
+      label: "Setting",
+      icon: <SettingOutlined />,
+      submenu: [
+        { key: "ord:setting-order-type", label: "Order Type", path: "/orders/setting/order-type" },
+        { key: "ord:setting-return-type", label: "Return Type", path: "/orders/setting/return-type" },
+        { key: "ord:setting-supplier", label: "Supplier Setup", path: "/orders/setting/supplier" },
+      ],
+    },
+  ],
+},
+
   { key: "reports", label: "REPORTS", icon: <BarChartOutlined />, submenu: [
     { key: "rep:kpi", label: "KPIs" },
     { key: "rep:ops", label: "Operations" },
