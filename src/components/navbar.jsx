@@ -46,6 +46,7 @@ const { Title } = Typography;
 const { Search } = Input;
 const { SubMenu } = Menu;
 
+/* ---------- Soft Blue / White Palette ---------- */
 const C = {
   headerBg: "#F5FAFF",
   headerBorder: "#DDEBFF",
@@ -60,7 +61,7 @@ const C = {
   searchBorder: "#DDEBFF",
 };
 
-/* only real routes */
+/* ---------- Only confirmed routes ---------- */
 const routeMap = {
   "/": "/",
 
@@ -77,14 +78,22 @@ const routeMap = {
   "exp-sea:debit-note": "/export-sea/add-debit-note",
   "exp-sea:credit-note": "/export-sea/add-credit-note",
 
+  // ✅ EXPORT SEA REPORTS
+  "exp-sea:report:pl": "/export-sea/report/profit-loss",
+  "exp-sea:report:volume": "/export-sea/report/volume",
+
   // EXPORT AIR
   "exp-air:booking": "/export-air/add-booking",
   "exp-air:shipping-order": "/export-air/add-shipping-order",
   "exp-air:cargo-receive": "/export-air/add-cargo-receive",
-  "exp-air:mawb": "/export-air/add-mawb", // 👈 tumi chaicho eta
+  "exp-air:mawb": "/export-air/add-mawb",
   "exp-air:freight-invoice": "/export-air/add-freight-invoice",
   "exp-air:debit-note": "/export-air/add-debit-note",
   "exp-air:credit-note": "/export-air/add-credit-note",
+
+  // ✅ EXPORT AIR REPORTS
+  "exp-air:report:pl": "/export-air/report/profit-loss",
+  "exp-air:report:volume": "/export-air/report/volume",
 
   // IMPORT SEA
   "imp-sea:booking": "/import-sea/add-booking",
@@ -95,6 +104,10 @@ const routeMap = {
   "imp-sea:debit-note": "/import-sea/add-debit-note",
   "imp-sea:credit-note": "/import-sea/add-credit-note",
 
+  // ✅ IMPORT SEA REPORTS
+  "imp-sea:report:pl": "/import-sea/report/profit-loss",
+  "imp-sea:report:volume": "/import-sea/report/volume",
+
   // IMPORT AIR
   "imp-air:booking": "/import-air/add-booking",
   "imp-air:master-bl": "/import-air/add-master-bl",
@@ -103,6 +116,10 @@ const routeMap = {
   "imp-air:freight-invoice": "/import-air/add-freight-invoice",
   "imp-air:debit-note": "/import-air/add-debit-note",
   "imp-air:credit-note": "/import-air/add-credit-note",
+
+  // ✅ IMPORT AIR REPORTS
+  "imp-air:report:pl": "/import-air/report/profit-loss",
+  "imp-air:report:volume": "/import-air/report/volume",
 
   // ACCOUNTS
   "acc:receive-voucher": "/accounts/add-receive-voucher",
@@ -157,15 +174,89 @@ const routeMap = {
   "admin:email": "/admin/email",
   "admin:sms": "/admin/sms",
   "admin:i18n": "/admin/translations",
-
-  profile: "/profile",
-  settings: "/settings",
-  logout: "/logout",
 };
 
-const NAV_KEYS = new Set(Object.keys(routeMap));
+/* --------- auto builder: jodi routeMap e na thake --------- */
+const autoBuildPath = (key) => {
+  const parts = key.split(":");
+  const root = parts[0];
 
-/* menus */
+  const rootMap = {
+    "exp-sea": "export-sea",
+    "exp-air": "export-air",
+    "imp-sea": "import-sea",
+    "imp-air": "import-air",
+    acc: "accounts",
+    ord: "orders",
+    ess: "essential",
+    set: "settings",
+    admin: "admin",
+    rep: "reports",
+  };
+
+  // short code -> real slug
+  const reportSlugMap = {
+    pl: "profit-loss",
+    volume: "volume",
+    "cnf-pl": "cnf-profit-loss",
+    "cnf-volume": "cnf-volume",
+  };
+
+  const base = rootMap[root];
+  if (!base) return null;
+
+  /* ✅ CASE 1: central report keys like rep:exp-sea:pl */
+  if (root === "rep") {
+    const section = parts[1];  // exp-sea / exp-air / imp-sea / imp-air / fin ...
+    const reportKey = parts[2];
+
+    // export / import হলে -> তোমার format
+    const exportImportSections = ["exp-sea", "exp-air", "imp-sea", "imp-air"];
+    if (exportImportSections.includes(section)) {
+      const sectionMap = {
+        "exp-sea": "export-sea",
+        "exp-air": "export-air",
+        "imp-sea": "import-sea",
+        "imp-air": "import-air",
+      };
+      const sectionBase = sectionMap[section];
+      if (!reportKey) {
+        return `/${sectionBase}/report`;
+      }
+      const slug = reportSlugMap[reportKey] || reportKey;
+      return `/${sectionBase}/report/${slug}`;
+    }
+
+    // অন্য report (financial/inventory) আগের মতো /reports/...
+    if (!section) return "/reports";
+    if (!reportKey) return `/reports/${section}`;
+    const slug = reportSlugMap[reportKey] || reportKey;
+    return `/reports/${section}/${slug}`;
+  }
+
+  const action = parts[1];
+
+  // no action -> just go to module
+  if (!action) {
+    return `/${base}`;
+  }
+
+  // ✅ CASE 2: direct export/import report
+  // exp-sea:report:pl -> /export-sea/report/profit-loss
+  if (action === "report" || action === "reports") {
+    const reportKey = parts[2];
+    if (!reportKey) {
+      return `/${base}/report`;
+    }
+    const slug = reportSlugMap[reportKey] || reportKey;
+    return `/${base}/report/${slug}`;
+  }
+
+  // default
+  return `/${base}/add-${action}`;
+};
+
+/* ---------- Menu Groups ---------- */
 const seaExportMenu = {
   key: "export-sea",
   label: "EXPORT SEA",
@@ -201,8 +292,8 @@ const seaExportMenu = {
       label: "Reports",
       icon: <BarChartOutlined />,
       submenu: [
-        { key: "exp-sea:report:pl", label: "Profit & Loss" },   // no route, but enabled
-        { key: "exp-sea:report:volume", label: "Volume" },      // no route, but enabled
+        { key: "exp-sea:report:pl", label: "Profit & Loss" },
+        { key: "exp-sea:report:volume", label: "Volume" },
       ],
     },
   ],
@@ -216,7 +307,7 @@ const airExportMenu = {
     { key: "exp-air:booking", label: "Booking" },
     { key: "exp-air:shipping-order", label: "Shipping Order" },
     { key: "exp-air:cargo-receive", label: "Cargo Receive" },
-    { key: "exp-air:mawb", label: "MAWB" }, // real
+    { key: "exp-air:mawb", label: "MAWB" },
     {
       key: "exp-air:accounts",
       label: "Accounting",
@@ -330,7 +421,8 @@ const rightMenus = [
     label: "REPORTS",
     icon: <BarChartOutlined />,
     submenu: [
-      { key: "rep:all", label: "All Reports (Grid)" }, // real
+      { key: "rep:all", label: "All Reports (Grid)" },
+
       {
         key: "rep:financial",
         label: "Financial",
@@ -505,14 +597,14 @@ export default function ShipNavbar() {
     </span>
   );
 
-  // main click handler
+  // MAIN CLICK HANDLER
   const go = (key, closeDrawer = false) => {
-    if (!NAV_KEYS.has(key)) {
-      // route nai -> kono navigate na, but UI enabled
-      return;
+    let path = routeMap[key];
+    if (!path) {
+      path = autoBuildPath(key);
     }
-    const path = routeMap[key];
     if (!path) return;
+
     navigate(path);
     setCurrent(key);
     if (closeDrawer) setDrawerVisible(false);
@@ -545,7 +637,6 @@ export default function ShipNavbar() {
           {render(m.submenu, mobile)}
         </SubMenu>
       ) : (
-        // NOTE: no disabled here ✅
         <Menu.Item key={m.key} icon={mobile ? m.icon : null}>
           {mobile ? (
             <span style={{ display: "flex", alignItems: "center" }}>
