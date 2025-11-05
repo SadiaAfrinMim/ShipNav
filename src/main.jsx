@@ -63,6 +63,10 @@ import ReceiveVoucherListLayout from "./components/AccoutLayout/ReceiveVoucherLi
 import OrderLayout from "./components/Orders/OrderLayout.jsx";
 import ReceiveVoucherFormLayout from "./components/Orders/ReceiveVoucherFormLayout.jsx";
 import EssentialLayout from "./components/Essential/EssentialLayout.jsx";
+import BankStatementLayout from "./components/Reports/BankStatementLayout.jsx";
+import ExpenditureSummaryFilterLayout from "./components/Reports/ExpenditureSummaryFilterLayout.jsx";
+import JournalListFilterLayout from "./components/Reports/JournalListFilterLayout.jsx";
+import BalanceSheetLayout from "./components/Reports/BalanceSheetLayout.jsx";
 
 
 
@@ -968,6 +972,107 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+
+        <Route
+          path="reports/fin/bank-statement"
+          element={
+            <Layout>
+              <BankStatementLayout></BankStatementLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/fin/general-ledger"
+          element={
+            <Layout>
+              <BankStatementLayout></BankStatementLayout>
+            </Layout>
+          }
+        />
+
+     
+         <Route
+          path="/reports/fin/exp-summary"
+          element={
+            <Layout>
+              <ExpenditureSummaryFilterLayout></ExpenditureSummaryFilterLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/fin/journal-list"
+          element={
+            <Layout>
+              <JournalListFilterLayout></JournalListFilterLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/fin/trial-balance"
+          element={
+            <Layout>
+              <JournalListFilterLayout></JournalListFilterLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/reports/fin/profit-loss"
+          element={
+            <Layout>
+              <JournalListFilterLayout></JournalListFilterLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/fin/balance-sheet"
+          element={
+            <Layout>
+              <BalanceSheetLayout></BalanceSheetLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/reports/inv/stock-balance"
+          element={
+            <Layout>
+              <JournalListFilterLayout></JournalListFilterLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/inv/product-ledger"
+          element={
+            <Layout>
+              <BankStatementLayout></BankStatementLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/reports/inv/product-pl"
+          element={
+            <Layout>
+              <BankStatementLayout></BankStatementLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/reports/inv/adj-register"
+          element={
+            <Layout>
+              <BankStatementLayout></BankStatementLayout>
+            </Layout>
+          }
+        />
+        
+        
+        
 
 
 
