@@ -57,6 +57,12 @@ import ArrivalNoticeListLayout from "./components/ExportSeaFolderDetails/Arrival
 import AddArrivalNoticeLayout from "./components/ExportSeaFolderDetails/ArrivalNoticeList/Layout/AddArrivalNoticeLayout.jsx";
 import ForwardLetterListLayout from "./components/ExportSeaFolderDetails/ForwardLetterList/Layout/ForwardLetterListLayout.jsx";
 import AddForwardLetterLayout from "./components/ExportSeaFolderDetails/ForwardLetterList/Layout/AddForwardLetterLayout.jsx";
+import PaymentVoucherForm from "./components/SharedAllListFrom/SharedFrom/Accounts/PaymentVoucherFormAccount.jsx";
+import AccountLayout from "./components/AccoutLayout/AccountLayout.jsx";
+import ReceiveVoucherListLayout from "./components/AccoutLayout/ReceiveVoucherListLayout.jsx";
+import OrderLayout from "./components/Orders/OrderLayout.jsx";
+import ReceiveVoucherFormLayout from "./components/Orders/ReceiveVoucherFormLayout.jsx";
+import EssentialLayout from "./components/Essential/EssentialLayout.jsx";
 
 
 
@@ -729,6 +735,249 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+         <Route
+          path="/accounts/receive-voucher"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/accounts/receive-voucher"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/accounts/receive-journal"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-receive-journal"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/accounts/payment-voucher"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-payment-voucher"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/payment-journal"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-payment-journal"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/accounts/journal-voucher"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-journal-voucher"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/accounts/contra-voucher"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-contra-voucher"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/accounts/customer-receipt"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-customer-receipt"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/accounts/supplier-payment"
+          element={
+            <Layout>
+              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/accounts/add-supplier-payment"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/orders/sale-order"
+          element={
+            <Layout>
+              <OrderLayout></OrderLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/orders/add-sale-order"
+          element={
+            <Layout>
+              <ReceiveVoucherFormLayout></ReceiveVoucherFormLayout>
+            </Layout>
+          }
+        />
+
+
+         <Route
+          path="/orders/sale-return"
+          element={
+            <Layout>
+              <OrderLayout></OrderLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/orders/add-sale-return"
+          element={
+            <Layout>
+              <ReceiveVoucherFormLayout></ReceiveVoucherFormLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/orders/purchase-order"
+          element={
+            <Layout>
+              <OrderLayout></OrderLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/orders/add-purchase-order"
+          element={
+            <Layout>
+              <ReceiveVoucherFormLayout></ReceiveVoucherFormLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/orders/purchase-return"
+          element={
+            <Layout>
+              <OrderLayout></OrderLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/orders/add-purchase-return"
+          element={
+            <Layout>
+              <ReceiveVoucherFormLayout></ReceiveVoucherFormLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/orders/adjustments"
+          element={
+            <Layout>
+              <OrderLayout></OrderLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/orders/add-adjustments"
+          element={
+            <Layout>
+              <ReceiveVoucherFormLayout></ReceiveVoucherFormLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/essential/masters"
+          element={
+            <Layout>
+              <EssentialLayout></EssentialLayout>
+            </Layout>
+          }
+        />
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -121,15 +121,15 @@ const routeMap = {
   "imp-air:report:pl": "/import-air/report/profit-loss",
   "imp-air:report:volume": "/import-air/report/volume",
 
-  // ACCOUNTS
-  "acc:receive-voucher": "/accounts/add-receive-voucher",
-  "acc:receive-journal": "/accounts/add-receive-journal",
-  "acc:payment-voucher": "/accounts/add-payment-voucher",
-  "acc:payment-journal": "/accounts/add-payment-journal",
-  "acc:journal-voucher": "/accounts/add-journal-voucher",
-  "acc:contra-voucher": "/accounts/add-contra-voucher",
-  "acc:customer-receipt": "/accounts/add-customer-receipt",
-  "acc:supplier-payment": "/accounts/add-supplier-payment",
+  // ACCOUNTS (🔁 here we removed /add-)
+  "acc:receive-voucher": "/accounts/receive-voucher",
+  "acc:receive-journal": "/accounts/receive-journal",
+  "acc:payment-voucher": "/accounts/payment-voucher",
+  "acc:payment-journal": "/accounts/payment-journal",
+  "acc:journal-voucher": "/accounts/journal-voucher",
+  "acc:contra-voucher": "/accounts/contra-voucher",
+  "acc:customer-receipt": "/accounts/customer-receipt",
+  "acc:supplier-payment": "/accounts/supplier-payment",
   "acc:setting-account-head": "/accounts/setting/account-head",
   "acc:setting-voucher-type": "/accounts/setting/voucher-type",
   "acc:setting-cost-center": "/accounts/setting/cost-center",
@@ -207,10 +207,9 @@ const autoBuildPath = (key) => {
 
   /* ✅ CASE 1: central report keys like rep:exp-sea:pl */
   if (root === "rep") {
-    const section = parts[1];  // exp-sea / exp-air / imp-sea / imp-air / fin ...
+    const section = parts[1];
     const reportKey = parts[2];
 
-    // export / import হলে -> তোমার format
     const exportImportSections = ["exp-sea", "exp-air", "imp-sea", "imp-air"];
     if (exportImportSections.includes(section)) {
       const sectionMap = {
@@ -227,7 +226,6 @@ const autoBuildPath = (key) => {
       return `/${sectionBase}/report/${slug}`;
     }
 
-    // অন্য report (financial/inventory) আগের মতো /reports/...
     if (!section) return "/reports";
     if (!reportKey) return `/reports/${section}`;
     const slug = reportSlugMap[reportKey] || reportKey;
@@ -241,8 +239,13 @@ const autoBuildPath = (key) => {
     return `/${base}`;
   }
 
+  // ✅ accounts ke normal route korte
+  if (root === "acc") {
+    // acc:receive-voucher -> /accounts/receive-voucher
+    return `/${base}/${action}`;
+  }
+
   // ✅ CASE 2: direct export/import report
-  // exp-sea:report:pl -> /export-sea/report/profit-loss
   if (action === "report" || action === "reports") {
     const reportKey = parts[2];
     if (!reportKey) {
@@ -252,7 +255,7 @@ const autoBuildPath = (key) => {
     return `/${base}/report/${slug}`;
   }
 
-  // default
+  // default (other modules still use add-)
   return `/${base}/add-${action}`;
 };
 
@@ -422,7 +425,6 @@ const rightMenus = [
     icon: <BarChartOutlined />,
     submenu: [
       { key: "rep:all", label: "All Reports (Grid)" },
-
       {
         key: "rep:financial",
         label: "Financial",
