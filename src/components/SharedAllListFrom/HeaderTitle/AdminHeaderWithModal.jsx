@@ -14,6 +14,7 @@ import AddRecalculationModal from "../Modal/AddRecalculationModal";
 import AddHeaderTemplateModal from "../Modal/AddHeaderTemplateModal";
 import AddSystemPrefixModal from "../Modal/AddSystemPrefixModal";
 import AddUserModal from "../Modal/AddUserModal";
+import AddGroupModal from "../Modal/AddGroupModal";
 
 // 🧩 JSON-based route → title & label mapping
 const adminRouteConfig = {
@@ -66,7 +67,7 @@ const generateTitle = (path) => {
   return `${formatted} List`;
 };
 
-const AdminHeaderWithModal = ({ onCreateBusiness, onCreateBranch,onCreateRecalculation,onCreateTemplate,onCreateSystemPrefix ,onCreateUser}) => {
+const AdminHeaderWithModal = ({ onCreateBusiness, onCreateBranch,onCreateRecalculation,onCreateTemplate,onCreateSystemPrefix ,onCreateUser,onCreateUserGroups}) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -86,7 +87,7 @@ const AdminHeaderWithModal = ({ onCreateBusiness, onCreateBranch,onCreateRecalcu
     // এখন business আর branch দুইটারই modal খুলব
     if (
       currentPath === "/admin/business" ||
-      currentPath === "/admin/branch"|| currentPath === "/admin/recalculation"|| currentPath === "/admin/template"||currentPath === "/admin/system-prefix"||currentPath === "/admin/users"
+      currentPath === "/admin/branch"|| currentPath === "/admin/recalculation"|| currentPath === "/admin/template"||currentPath === "/admin/system-prefix"||currentPath === "/admin/users"||currentPath === "/admin/user-groups"
     ) {
       setOpen(true);
     }
@@ -116,6 +117,9 @@ const AdminHeaderWithModal = ({ onCreateBusiness, onCreateBranch,onCreateRecalcu
       }
        else if (currentPath === "/admin/users" && onCreateBranch) {
         await onCreateUser(values);
+      }
+      else if (currentPath === "/admin/user-groups" && onCreateBranch) {
+        await onCreateUserGroups(values);
       }
 
 
@@ -233,6 +237,14 @@ const AdminHeaderWithModal = ({ onCreateBusiness, onCreateBranch,onCreateRecalcu
       )}
        {currentPath === "/admin/users" && (
         <AddUserModal
+          open={open}
+          onCancel={handleCancelModal}
+          onSubmit={handleSubmit}
+          confirmLoading={confirmLoading}
+        />
+      )}
+      {currentPath === "/admin/user-groups" && (
+        <AddGroupModal
           open={open}
           onCancel={handleCancelModal}
           onSubmit={handleSubmit}

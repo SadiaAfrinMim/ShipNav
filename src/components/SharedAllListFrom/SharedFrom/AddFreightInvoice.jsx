@@ -210,33 +210,7 @@ export default function AddFreightInvoice() {
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh", padding: 10 }}>
-      {/* top teal title bar */}
-      <div
-        style={{
-          background: C.teal,
-          color: "#fff",
-          height: 38,
-          borderRadius: 3,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 10px",
-          fontWeight: 600,
-        }}
-      >
-        <Space>
-          <BorderOutlined />
-          <span>Add Freight Invoice</span>
-        </Space>
-        <div style={{ marginLeft: "auto" }}>
-          <Button
-            icon={<CloseOutlined />}
-            size="small"
-            style={{ color: "#fff", borderColor: "#fff", background: "transparent" }}
-          >
-            Cancel Page
-          </Button>
-        </div>
-      </div>
+      
 
       {/* outer framed card */}
       <Card

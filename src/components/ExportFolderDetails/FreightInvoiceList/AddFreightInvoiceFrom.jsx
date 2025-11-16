@@ -70,27 +70,7 @@ export default function AddFreightInvoice() {
           border: "1px solid #00b8c6",
         }}
       >
-        {/* Header Strip */}
-        <div
-          style={{
-            background: "#00b8c6",
-            color: "#fff",
-            padding: "6px 12px",
-            fontWeight: 600,
-            borderRadius: 3,
-            marginBottom: 10,
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <span>🧾 Add Freight Invoice</span>
-          <Space>
-            <Button size="small">Cancel Page</Button>
-            <Button size="small" type="primary">
-              Submit
-            </Button>
-          </Space>
-        </div>
+       
 
         <Form
           form={form}

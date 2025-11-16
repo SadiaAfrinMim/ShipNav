@@ -116,57 +116,14 @@ export default function FreightInvoiceList() {
 
   return (
     <div style={{ background: "#f3f6f7", minHeight: "100vh", padding: 12 }}>
-      {/* Top teal bar */}
-      <div
-        style={{
-          background: teal,
-          color: "#fff",
-          borderRadius: 3,
-          height: 40,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 10px",
-          fontWeight: 600,
-        }}
-      >
-        <Space size={8}>
-          <span
-            style={{
-              display: "inline-block",
-              width: 10,
-              height: 10,
-              border: "2px solid #fff",
-              transform: "rotate(45deg)",
-            }}
-          />
-          <span>Freight Invoice List</span>
-        </Space>
-
-        <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-          <Button size="small" icon={<ReloadOutlined />} onClick={onRefresh}>
-            Refresh
-          </Button>
-          <Button size="small" onClick={onReset}>
-            Reset
-          </Button>
-          <Button
-            size="small"
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={onAdd}
-            style={{ background: "#1b8fff", borderColor: "#1b8fff" }}
-          >
-            Add Freight Invoice
-          </Button>
-        </div>
-      </div>
+    
+    
 
       {/* Filter card */}
       <Card
         style={{
           marginTop: 8,
-          border: `2px solid ${cyanLine}`,
-          borderRadius: 3,
+          
         }}
         bodyStyle={{ padding: 12 }}
       >

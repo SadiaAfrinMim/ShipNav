@@ -38,6 +38,7 @@ import {
   MailOutlined,
   UserOutlined,
   SettingOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -151,9 +152,44 @@ const routeMap = {
   "ess:masters": "/essential/masters",
   "ess:utilities": "/essential/utilities",
 
-  // settings
-  "set:users": "/settings/users",
-  "set:preferences": "/settings/preferences",
+  /* ---------- SETTINGS ROUTES (clean) ---------- */
+
+  // main entries
+  "set:party": "/settings/party",
+  "set:inventory": "/settings/inventory",
+  "set:gh-agent": "/settings/gh-agent",
+  "set:container": "/settings/container",
+  "set:fdr-vsl": "/settings/fdr-vsl",
+  "set:mtr-vsl": "/settings/mtr-vsl",
+  "set:mode": "/settings/mode",
+  "set:banking": "/settings/banking",
+  "set:trade": "/settings/trade",
+  "set:tos": "/settings/tos",
+  "set:commodity": "/settings/commodity",
+  "set:mawb": "/settings/mawb",
+  "set:port": "/settings/port",
+  "set:currency": "/settings/currency",
+  "set:country": "/settings/country",
+
+  // banking children (optional)
+  "set:banking-lc": "/settings/banking/lc",
+  "set:banking-tt": "/settings/banking/tt",
+
+  // party children
+  "set:party-shipper": "/settings/party/shipper",
+  "set:party-consignee": "/settings/party/consignee",
+  "set:party-agent": "/settings/party/agent",
+  "set:party-cnf-agent": "/settings/party/cnf-agent",
+  "set:party-carrier": "/settings/party/carrier",
+  "set:party-3rd-party": "/settings/party/3rd-party",
+  "set:party-cfs": "/settings/party/cfs",
+  "set:party-customer": "/settings/party/customer",
+  "set:party-supplier": "/settings/party/supplier",
+  "set:party-employee": "/settings/party/employee",
+  "set:party-management": "/settings/party/management",
+  "set:party-others": "/settings/party/others",
+  "set:party-department": "/settings/party/department",
+  "set:party-designation": "/settings/party/designation",
 
   // admin
   "admin:business": "/admin/business",
@@ -532,11 +568,45 @@ const rightMenus = [
     label: "SETTINGS",
     icon: <SettingOutlined />,
     submenu: [
-      { key: "set:users", label: "Users & Roles" },
-      { key: "set:preferences", label: "Preferences" },
+      {
+        key: "set:party",
+        label: "Party",
+        icon: <PlusOutlined />,
+        submenu: [
+          { key: "set:party-shipper", label: "Shipper", icon: <UserOutlined /> },
+          { key: "set:party-consignee", label: "Consignee", icon: <UserOutlined /> },
+          { key: "set:party-agent", label: "Agent", icon: <UserOutlined /> },
+          { key: "set:party-cnf-agent", label: "C&F Agent", icon: <UserOutlined /> },
+          { key: "set:party-carrier", label: "Carrier", icon: <UserOutlined /> },
+          { key: "set:party-3rd-party", label: "3rd Party", icon: <UserOutlined /> },
+          { key: "set:party-cfs", label: "CFS", icon: <UserOutlined /> },
+          { key: "set:party-customer", label: "Customer", icon: <UserOutlined /> },
+          { key: "set:party-supplier", label: "Supplier", icon: <UserOutlined /> },
+          { key: "set:party-employee", label: "Employee", icon: <UserOutlined /> },
+          { key: "set:party-management", label: "Management", icon: <UserOutlined /> },
+          { key: "set:party-others", label: "Others Party", icon: <UserOutlined /> },
+          { key: "set:party-department", label: "Department", icon: <ApartmentOutlined /> },
+          { key: "set:party-designation", label: "Designation", icon: <SafetyCertificateOutlined /> },
+        ],
+      },
+
+      { key: "set:inventory", label: "Inventory", icon: <PlusOutlined /> },
+      { key: "set:gh-agent", label: "G.H. Agent", icon: <PlusOutlined /> },
+      { key: "set:container", label: "Container", icon: <PlusOutlined /> },
+      { key: "set:fdr-vsl", label: "FDR VSL", icon: <PlusOutlined /> },
+      { key: "set:mtr-vsl", label: "MTR VSL", icon: <PlusOutlined /> },
+      { key: "set:mode", label: "Mode", icon: <PlusOutlined /> },
+      { key: "set:banking", label: "Banking", icon: <PlusOutlined /> },
+      { key: "set:trade", label: "Trade", icon: <PlusOutlined /> },
+      { key: "set:tos", label: "TOS", icon: <PlusOutlined /> },
+      { key: "set:commodity", label: "Commodity", icon: <PlusOutlined /> },
+      { key: "set:mawb", label: "MAWB", icon: <PlusOutlined /> },
+      { key: "set:port", label: "Port", icon: <PlusOutlined /> },
+      { key: "set:currency", label: "Currency", icon: <PlusOutlined /> },
+      { key: "set:country", label: "Country", icon: <PlusOutlined /> },
     ],
   },
-   {
+  {
     key: "admin",
     label: "ADMIN",
     icon: <AuditOutlined />,
@@ -572,7 +642,6 @@ const rightMenus = [
       },
     ],
   },
-
 ];
 
 export default function ShipNavbar() {
@@ -693,6 +762,7 @@ export default function ShipNavbar() {
                   mode="horizontal"
                   selectedKeys={[current]}
                   onClick={(e) => go(e.key)}
+                    triggerSubMenuAction="click"
                   style={{
                     background: "transparent",
                     border: "none",
