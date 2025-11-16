@@ -156,24 +156,15 @@ const routeMap = {
   "set:preferences": "/settings/preferences",
 
   // admin
+  "admin:business": "/admin/business",
+  "admin:branch": "/admin/branch",
+  "admin:configuration": "/admin/configuration",
+  "admin:recalculation": "/admin/recalculation",
+  "admin:template": "/admin/template",
+  "admin:system-prefix": "/admin/system-prefix",
   "admin:users": "/admin/users",
-  "admin:roles": "/admin/roles",
-  "admin:permissions": "/admin/permissions",
-  "admin:companies": "/admin/companies",
-  "admin:branches": "/admin/branches",
-  "admin:departments": "/admin/departments",
-  "admin:audit-logs": "/admin/audit-logs",
-  "admin:activity": "/admin/activity",
-  "admin:login-history": "/admin/login-history",
-  "admin:backups": "/admin/backups",
-  "admin:db-tools": "/admin/db-tools",
-  "admin:api-keys": "/admin/api-keys",
-  "admin:webhooks": "/admin/webhooks",
-  "admin:preferences": "/admin/preferences",
-  "admin:numbering": "/admin/numbering",
-  "admin:email": "/admin/email",
-  "admin:sms": "/admin/sms",
-  "admin:i18n": "/admin/translations",
+  "admin:user-groups": "/admin/user-groups",
+  "admin:user-activity": "/admin/user-activity",
 };
 
 /* --------- auto builder: jodi routeMap e na thake --------- */
@@ -545,31 +536,43 @@ const rightMenus = [
       { key: "set:preferences", label: "Preferences" },
     ],
   },
-  {
+   {
     key: "admin",
     label: "ADMIN",
     icon: <AuditOutlined />,
     submenu: [
+      { key: "admin:business", label: "Business", icon: <HomeOutlined /> },
+      { key: "admin:branch", label: "Branch", icon: <BranchesOutlined /> },
+      {
+        key: "admin:configuration",
+        label: "Configuration",
+        icon: <SettingOutlined />,
+      },
+      {
+        key: "admin:recalculation",
+        label: "Recalculation",
+        icon: <BuildOutlined />,
+      },
+      { key: "admin:template", label: "Template", icon: <FileDoneOutlined /> },
+      {
+        key: "admin:system-prefix",
+        label: "System Prefix",
+        icon: <KeyOutlined />,
+      },
       { key: "admin:users", label: "Users", icon: <UserOutlined /> },
-      { key: "admin:roles", label: "Roles", icon: <SafetyCertificateOutlined /> },
-      { key: "admin:permissions", label: "Permissions", icon: <KeyOutlined /> },
-      { key: "admin:companies", label: "Companies", icon: <HomeOutlined /> },
-      { key: "admin:branches", label: "Branches", icon: <BranchesOutlined /> },
-      { key: "admin:departments", label: "Departments", icon: <ApartmentOutlined /> },
-      { key: "admin:audit-logs", label: "Audit Logs", icon: <AuditOutlined /> },
-      { key: "admin:activity", label: "Activity Monitor", icon: <ClusterOutlined /> },
-      { key: "admin:login-history", label: "Login History", icon: <SafetyCertificateOutlined /> },
-      { key: "admin:backups", label: "Backups", icon: <DatabaseOutlined /> },
-      { key: "admin:db-tools", label: "Database Tools", icon: <BuildOutlined /> },
-      { key: "admin:api-keys", label: "API Keys", icon: <ApiOutlined /> },
-      { key: "admin:webhooks", label: "Webhooks", icon: <ApiOutlined /> },
-      { key: "admin:preferences", label: "System Preferences", icon: <SettingOutlined /> },
-      { key: "admin:numbering", label: "Document Numbering", icon: <FileDoneOutlined /> },
-      { key: "admin:email", label: "Email Settings", icon: <MailOutlined /> },
-      { key: "admin:sms", label: "SMS Settings", icon: <MailOutlined /> },
-      { key: "admin:i18n", label: "Translations", icon: <GlobalOutlined /> },
+      {
+        key: "admin:user-groups",
+        label: "User Groups",
+        icon: <ClusterOutlined />,
+      },
+      {
+        key: "admin:user-activity",
+        label: "User Activity",
+        icon: <BarChartOutlined />,
+      },
     ],
   },
+
 ];
 
 export default function ShipNavbar() {

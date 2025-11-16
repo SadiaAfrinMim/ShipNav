@@ -67,6 +67,23 @@ import BankStatementLayout from "./components/Reports/BankStatementLayout.jsx";
 import ExpenditureSummaryFilterLayout from "./components/Reports/ExpenditureSummaryFilterLayout.jsx";
 import JournalListFilterLayout from "./components/Reports/JournalListFilterLayout.jsx";
 import BalanceSheetLayout from "./components/Reports/BalanceSheetLayout.jsx";
+import StockReorderPageLayout from "./components/Reports/StockReorderPageLayout.jsx";
+import PartyLedgerPageLayout from "./components/Reports/PartyLedgerPageLayout.jsx";
+import SalesPurchaseDetailsPageLayout from "./components/Reports/SalesPurchaseDetailsPageLayout.jsx";
+import SalesPurchaseSummaryPageLayout from "./components/Reports/SalesPurchaseSummaryPageLayout.jsx";
+import ProductWiseSalePageLayout from "./components/SharedAllListFrom/Reports/ProductWiseSalePageLayout.jsx";
+import CreditNotePageLayout from "./components/Reports/CreditNotePageLayout.jsx";
+import CnfProfitLossImpSeaPage from "./components/ExportFolderDetails/CnfProfitLossImpSeaPage.jsx/CnfProfitLossImpSeaPage.jsx";
+import CnfVolumeStatementImpSeaPage from "./components/ExportFolderDetails/CnfVolumeStatementImpSeaPage/CnfVolumeStatementImpSeaPage.jsx";
+import BusinessListLayout from "./components/Admin/BusinessListLayout.jsx";
+import GeneralLedgerSetup from "./components/Admin/GeneralLedgerSetup.jsx";
+import RecalculationList from "./components/SharedAllListFrom/SharedList/RecalculationList.jsx";
+import RecalculationListLayout from "./components/Admin/RecalculationListLayout.jsx";
+import HeaderListLayout from "./components/Admin/HeaderListLayout.jsx";
+import SystemPrefixListLayout from "./components/Admin/SystemPrefixListLayout.jsx";
+import UserListLayout from "./components/Admin/UserListLayout.jsx";
+import GroupListLayout from "./components/Admin/GroupListLayout.jsx";
+import LogList from "./components/SharedAllListFrom/SharedList/LogList.jsx";
 
 
 
@@ -375,7 +392,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-        
+
 
         <Route
           path="/export-air/add-freight-invoice"
@@ -385,7 +402,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/export-air/debit-note"
           element={
             <Layout>
@@ -418,7 +435,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/export-air/report/profit-loss"
           element={
             <Layout>
@@ -437,7 +454,7 @@ createRoot(document.getElementById("root")).render(
 
         {/* import Sea */}
 
-          <Route
+        <Route
           path="/import-sea/booking"
           element={
             <Layout>
@@ -445,7 +462,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/add-booking"
           element={
             <Layout>
@@ -454,7 +471,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-          <Route
+        <Route
           path="/import-sea/master-bl"
           element={
             <Layout>
@@ -462,7 +479,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/add-master-bl"
           element={
             <Layout>
@@ -470,7 +487,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/arrival-notice"
           element={
             <Layout>
@@ -478,7 +495,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/add-arrival-notice"
           element={
             <Layout>
@@ -486,7 +503,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/forward-letter"
           element={
             <Layout>
@@ -494,7 +511,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/add-forward-letter"
           element={
             <Layout>
@@ -506,7 +523,7 @@ createRoot(document.getElementById("root")).render(
 
 
 
-         <Route
+        <Route
           path="/import-sea/add-credit-note"
           element={
             <Layout>
@@ -518,7 +535,7 @@ createRoot(document.getElementById("root")).render(
 
 
 
-         <Route
+        <Route
           path="/import-sea/freight-invoice"
           element={
             <Layout>
@@ -527,7 +544,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-        
+
 
         <Route
           path="/import-sea/add-freight-invoice"
@@ -537,7 +554,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-sea/debit-note"
           element={
             <Layout>
@@ -574,7 +591,7 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/report/profit-loss"
           element={
             <Layout>
-              <PLExpSea></PLExpSea>
+              <CnfProfitLossImpSeaPage></CnfProfitLossImpSeaPage>
             </Layout>
           }
         />
@@ -582,7 +599,7 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/report/volume"
           element={
             <Layout>
-              <VolumeStatementExpSea></VolumeStatementExpSea>
+              <CnfVolumeStatementImpSeaPage></CnfVolumeStatementImpSeaPage>
             </Layout>
           }
         />
@@ -590,7 +607,7 @@ createRoot(document.getElementById("root")).render(
 
         {/* import air */}
 
-         <Route
+        <Route
           path="/import-air/booking"
           element={
             <Layout>
@@ -598,7 +615,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/add-booking"
           element={
             <Layout>
@@ -607,7 +624,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-          <Route
+        <Route
           path="/import-air/master-bl"
           element={
             <Layout>
@@ -615,7 +632,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/add-master-bl"
           element={
             <Layout>
@@ -623,7 +640,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/arrival-notice"
           element={
             <Layout>
@@ -631,7 +648,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/add-arrival-notice"
           element={
             <Layout>
@@ -639,7 +656,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/forward-letter"
           element={
             <Layout>
@@ -647,7 +664,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/add-forward-letter"
           element={
             <Layout>
@@ -659,7 +676,7 @@ createRoot(document.getElementById("root")).render(
 
 
 
-         <Route
+        <Route
           path="/import-air/add-credit-note"
           element={
             <Layout>
@@ -671,7 +688,7 @@ createRoot(document.getElementById("root")).render(
 
 
 
-         <Route
+        <Route
           path="/import-air/freight-invoice"
           element={
             <Layout>
@@ -680,7 +697,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-        
+
 
         <Route
           path="/import-air/add-freight-invoice"
@@ -690,7 +707,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/import-air/debit-note"
           element={
             <Layout>
@@ -727,7 +744,7 @@ createRoot(document.getElementById("root")).render(
           path="/import-air/report/profit-loss"
           element={
             <Layout>
-              <PLExpSea></PLExpSea>
+              <CnfProfitLossImpSeaPage></CnfProfitLossImpSeaPage>
             </Layout>
           }
         />
@@ -735,11 +752,11 @@ createRoot(document.getElementById("root")).render(
           path="/import-air/report/volume"
           element={
             <Layout>
-              <VolumeStatementExpSea></VolumeStatementExpSea>
+              <CnfVolumeStatementImpSeaPage></CnfVolumeStatementImpSeaPage>
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/accounts/receive-voucher"
           element={
             <Layout>
@@ -748,7 +765,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/accounts/receive-voucher"
           element={
             <Layout>
@@ -756,7 +773,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/accounts/receive-journal"
           element={
             <Layout>
@@ -774,7 +791,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/accounts/payment-voucher"
           element={
             <Layout>
@@ -843,7 +860,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/accounts/customer-receipt"
           element={
             <Layout>
@@ -861,7 +878,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/accounts/supplier-payment"
           element={
             <Layout>
@@ -886,7 +903,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/orders/add-sale-order"
           element={
             <Layout>
@@ -896,7 +913,7 @@ createRoot(document.getElementById("root")).render(
         />
 
 
-         <Route
+        <Route
           path="/orders/sale-return"
           element={
             <Layout>
@@ -904,7 +921,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/orders/add-sale-return"
           element={
             <Layout>
@@ -921,7 +938,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/orders/add-purchase-order"
           element={
             <Layout>
@@ -938,7 +955,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/orders/add-purchase-return"
           element={
             <Layout>
@@ -955,7 +972,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/orders/add-adjustments"
           element={
             <Layout>
@@ -964,7 +981,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/essential/masters"
           element={
             <Layout>
@@ -991,8 +1008,8 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-     
-         <Route
+
+        <Route
           path="/reports/fin/exp-summary"
           element={
             <Layout>
@@ -1019,7 +1036,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/reports/fin/profit-loss"
           element={
             <Layout>
@@ -1036,7 +1053,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/reports/inv/stock-balance"
           element={
             <Layout>
@@ -1054,7 +1071,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-         <Route
+        <Route
           path="/reports/inv/product-pl"
           element={
             <Layout>
@@ -1062,7 +1079,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-         <Route
+        <Route
           path="/reports/inv/adj-register"
           element={
             <Layout>
@@ -1070,9 +1087,265 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-        
-        
-        
+
+        <Route
+          path="/reports/inv/reorder"
+          element={
+            <Layout>
+              <StockReorderPageLayout></StockReorderPageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/party/ledger"
+          element={
+            <Layout>
+              <PartyLedgerPageLayout></PartyLedgerPageLayout>
+            </Layout>
+          }
+        />
+
+        {/* party */}
+
+        <Route
+          path="/reports/party/ledger"
+          element={
+            <Layout>
+              <PartyLedgerPageLayout></PartyLedgerPageLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/reports/party/order"
+          element={
+            <Layout>
+              <PartyLedgerPageLayout></PartyLedgerPageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/party/balance"
+          element={
+            <Layout>
+              <PartyLedgerPageLayout></PartyLedgerPageLayout>
+            </Layout>
+          }
+        />
+
+        {/* sales */}
+
+        <Route
+          path="/reports/sale/details"
+          element={
+            <Layout>
+              <SalesPurchaseDetailsPageLayout></SalesPurchaseDetailsPageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/sale/summary"
+          element={
+            <Layout>
+              <SalesPurchaseSummaryPageLayout></SalesPurchaseSummaryPageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/sale/product-wise"
+          element={
+            <Layout>
+              <ProductWiseSalePageLayout></ProductWiseSalePageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/pur/party-wise"
+          element={
+            <Layout>
+              <ProductWiseSalePageLayout></ProductWiseSalePageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/sale/credit-note"
+          element={
+            <Layout>
+              <CreditNotePageLayout></CreditNotePageLayout>
+            </Layout>
+          }
+        />
+
+        {/* purchase */}
+        {/* sales */}
+
+        <Route
+          path="/reports/pur/details"
+          element={
+            <Layout>
+              <SalesPurchaseDetailsPageLayout></SalesPurchaseDetailsPageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/pur/summary"
+          element={
+            <Layout>
+              <SalesPurchaseSummaryPageLayout></SalesPurchaseSummaryPageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/pur/product-wise"
+          element={
+            <Layout>
+              <ProductWiseSalePageLayout></ProductWiseSalePageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/pur/party-wise"
+          element={
+            <Layout>
+              <ProductWiseSalePageLayout></ProductWiseSalePageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/reports/pur/debit-note"
+          element={
+            <Layout>
+              <CreditNotePageLayout></CreditNotePageLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/import-sea/report/cnf-profit-loss"
+          element={
+            <Layout>
+              <CnfProfitLossImpSeaPage></CnfProfitLossImpSeaPage>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-sea/report/cnf-volume"
+          element={
+            <Layout>
+              <CnfVolumeStatementImpSeaPage></CnfVolumeStatementImpSeaPage>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/import-air/report/cnf-profit-loss"
+          element={
+            <Layout>
+              <CnfProfitLossImpSeaPage></CnfProfitLossImpSeaPage>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/report/cnf-volume"
+          element={
+            <Layout>
+              <CnfVolumeStatementImpSeaPage></CnfVolumeStatementImpSeaPage>
+            </Layout>
+          }
+        />
+
+        {/* admin  */}
+        <Route
+          path="/admin/business"
+          element={
+            <Layout>
+              <BusinessListLayout></BusinessListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/admin/branch"
+          element={
+            <Layout>
+              <BusinessListLayout></BusinessListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/admin/configuration"
+          element={
+            <Layout>
+              <GeneralLedgerSetup></GeneralLedgerSetup>
+            </Layout>
+          }
+        />
+        <Route
+          path="/admin/recalculation"
+          element={
+            <Layout>
+              <RecalculationListLayout></RecalculationListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/admin/template"
+          element={
+            <Layout>
+              <HeaderListLayout></HeaderListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/admin/system-prefix"
+          element={
+            <Layout>
+              <SystemPrefixListLayout></SystemPrefixListLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <Layout>
+              <UserListLayout></UserListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/admin/user-groups"
+          element={
+            <Layout>
+              <GroupListLayout></GroupListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/admin/user-activity"
+          element={
+            <Layout>
+              <LogList></LogList>
+            </Layout>
+          }
+        />
+
+
+
+
+
+
+
+
 
 
 
