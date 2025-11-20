@@ -64,6 +64,7 @@ const CATEGORIES = [
           { icon: <FileTextOutlined />, label: "Freight Invoice", link: "/export-sea/freight-invoice" },
           { icon: <FileAddOutlined />, label: "Debit Note", link: "/export-sea/debit-note" },
           { icon: <FileDoneOutlined />, label: "Credit Note", link: "/export-sea/credit-note" },
+          { icon: <FileDoneOutlined />, label: "Expense Bill", link: "/export-sea/expense-bill" },
         ],
       },
       {
@@ -94,6 +95,7 @@ const CATEGORIES = [
           { icon: <FileTextOutlined />, label: "Freight Invoice", link: "/export-air/freight-invoice" },
           { icon: <FileAddOutlined />, label: "Debit Note", link: "/export-air/debit-note" },
           { icon: <FileDoneOutlined />, label: "Credit Note", link: "/export-air/credit-note" },
+          { icon: <FileDoneOutlined />, label: "Expense Bill", link: "/export-air/expense-bill" },
         ],
       },
       {
@@ -116,6 +118,7 @@ const CATEGORIES = [
           { icon: <FilePdfOutlined />, label: "Master B/L", link: "/import-sea/master-bl" },
           { icon: <FileTextOutlined />, label: "Arrival Notice", link: "/import-sea/arrival-notice" },
           { icon: <FileSearchOutlined />, label: "Forward Letter", link: "/import-sea/forward-letter" },
+          
         ],
       },
       {
@@ -124,6 +127,7 @@ const CATEGORIES = [
           { icon: <FileTextOutlined />, label: "Freight Invoice", link: "/import-sea/freight-invoice" },
           { icon: <FileAddOutlined />, label: "Debit Note", link: "/import-sea/debit-note" },
           { icon: <FileDoneOutlined />, label: "Credit Note", link: "/import-sea/credit-note" },
+           { icon: <FileDoneOutlined />, label: "Expense Bill", link: "/import-sea/expense-bill" },
         ],
       },
       {
@@ -131,6 +135,8 @@ const CATEGORIES = [
         items: [
           { icon: <FilePdfOutlined />, label: "Profit & Loss", link: "/import-sea/report/profit-loss" },
           { icon: <FileExcelOutlined />, label: "Volume", link: "/import-sea/report/volume" },
+          { icon: <FileExcelOutlined />, label: "cnf-profit-loss", link: "/import-sea/report/cnf-profit-loss" },
+          { icon: <FileExcelOutlined />, label: "cnf-volume", link: "/import-sea/report/cnf-volume" },
         ],
       },
     ],
@@ -142,6 +148,7 @@ const CATEGORIES = [
       {
         title: "Operations",
         items: [
+          
           { icon: <FileOutlined />, label: "Booking", link: "/import-air/booking" },
           { icon: <FilePdfOutlined />, label: "Master B/L", link: "/import-air/master-bl" },
           { icon: <FileTextOutlined />, label: "Request Letter", link: "/import-air/request-letter" },
@@ -154,6 +161,7 @@ const CATEGORIES = [
           { icon: <FileTextOutlined />, label: "Freight Invoice", link: "/import-air/freight-invoice" },
           { icon: <FileAddOutlined />, label: "Debit Note", link: "/import-air/debit-note" },
           { icon: <FileDoneOutlined />, label: "Credit Note", link: "/import-air/credit-note" },
+          { icon: <FileDoneOutlined />, label: "Expense Bill", link: "/import-air/expense-bill" },
         ],
       },
       {

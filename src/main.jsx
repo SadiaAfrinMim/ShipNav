@@ -84,6 +84,7 @@ import SystemPrefixListLayout from "./components/Admin/SystemPrefixListLayout.js
 import UserListLayout from "./components/Admin/UserListLayout.jsx";
 import GroupListLayout from "./components/Admin/GroupListLayout.jsx";
 import LogList from "./components/SharedAllListFrom/SharedList/LogList.jsx";
+import ShipperParty from "./components/settings/Party/ShipperParty.jsx";
 
 
 
@@ -300,6 +301,22 @@ createRoot(document.getElementById("root")).render(
           }
         />
         <Route
+          path="/export-sea/expense-bill"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/add-expense-bill"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
           path="/export-sea/report/profit-loss"
           element={
             <Layout>
@@ -428,6 +445,22 @@ createRoot(document.getElementById("root")).render(
           }
         />
         <Route
+          path="/export-air/expense-bill"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-expense-bill"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+         <Route
           path="/export-air/add-credit-note"
           element={
             <Layout>
@@ -588,6 +621,22 @@ createRoot(document.getElementById("root")).render(
           }
         />
         <Route
+          path="/import-sea/expense-bill"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-sea/add-expense-bill"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
           path="/import-sea/report/profit-loss"
           element={
             <Layout>
@@ -734,6 +783,22 @@ createRoot(document.getElementById("root")).render(
         />
         <Route
           path="/import-air/add-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/expense-bill"
+          element={
+            <Layout>
+              <CreditNoteListLayout></CreditNoteListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/import-air/add-expense-bill"
           element={
             <Layout>
               <AddCreditNoteListLayout></AddCreditNoteListLayout>
@@ -1335,6 +1400,129 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <LogList></LogList>
+            </Layout>
+          }
+        />
+
+        {/* SETTINGS */}
+         <Route
+          path="/settings/party/shipper"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/consignee"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/agent"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+      
+         <Route
+          path="/settings/party/cnf-agent"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/carrier"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/3rd-party"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/cfs"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/customer"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/supplier"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/employee"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/supplier"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/management"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/others"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/party/department"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
+            </Layout>
+          }
+        />
+          <Route
+          path="/settings/party/designation"
+          element={
+            <Layout>
+              <ShipperParty></ShipperParty>
             </Layout>
           }
         />

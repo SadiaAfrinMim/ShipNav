@@ -66,89 +66,73 @@ const C = {
 const routeMap = {
   "/": "/",
 
-  // EXPORT SEA
-  "exp-sea:booking": "/export-sea/add-booking",
-  "exp-sea:shipping-order": "/export-sea/add-shipping-order",
-  "exp-sea:cargo-receive": "/export-sea/add-cargo-receive",
-  "exp-sea:stuffing-plan": "/export-sea/add-stuffing-plan",
-  "exp-sea:stuffing-package": "/export-sea/add-stuffing-package",
-  "exp-sea:shipment-advice": "/export-sea/add-shipment-advice",
-  "exp-sea:hbl": "/export-sea/add-hbl",
-  "exp-sea:mbl": "/export-sea/add-mbl",
-  "exp-sea:freight-invoice": "/export-sea/add-freight-invoice",
-  "exp-sea:debit-note": "/export-sea/add-debit-note",
-  "exp-sea:credit-note": "/export-sea/add-credit-note",
 
-  // ✅ EXPORT SEA REPORTS
+
+  // Export Sea
+  "exp-sea:booking": "/export-sea/booking",
+  "exp-sea:shipping-order": "/export-sea/shipping-order",
+  "exp-sea:cargo-receive": "/export-sea/cargo-receive",
+  "exp-sea:stuffing-plan": "/export-sea/stuffing-plan",
+  "exp-sea:stuffing-package": "/export-sea/stuffing-package",
+  "exp-sea:shipment-advice": "/export-sea/shipment-advice",
+  "exp-sea:hbl": "/export-sea/hbl",
+  "exp-sea:mbl": "/export-sea/mbl",
+  "exp-sea:freight-invoice": "/export-sea/freight-invoice",
+  "exp-sea:debit-note": "/export-sea/debit-note",
+  "exp-sea:credit-note": "/export-sea/credit-note",
   "exp-sea:report:pl": "/export-sea/report/profit-loss",
   "exp-sea:report:volume": "/export-sea/report/volume",
 
-  // EXPORT AIR
-  "exp-air:booking": "/export-air/add-booking",
-  "exp-air:shipping-order": "/export-air/add-shipping-order",
-  "exp-air:cargo-receive": "/export-air/add-cargo-receive",
-  "exp-air:mawb": "/export-air/add-mawb",
-  "exp-air:freight-invoice": "/export-air/add-freight-invoice",
-  "exp-air:debit-note": "/export-air/add-debit-note",
-  "exp-air:credit-note": "/export-air/add-credit-note",
-
-  // ✅ EXPORT AIR REPORTS
+  // Export Air
+  "exp-air:booking": "/export-air/booking",
+  "exp-air:shipping-order": "/export-air/shipping-order",
+  "exp-air:cargo-receive": "/export-air/cargo-receive",
+  "exp-air:mawb": "/export-air/mawb",
+  "exp-air:freight-invoice": "/export-air/freight-invoice",
+  "exp-air:debit-note": "/export-air/debit-note",
+  "exp-air:credit-note": "/export-air/credit-note",
   "exp-air:report:pl": "/export-air/report/profit-loss",
   "exp-air:report:volume": "/export-air/report/volume",
 
-  // IMPORT SEA
-  "imp-sea:booking": "/import-sea/add-booking",
-  "imp-sea:master-bl": "/import-sea/add-master-bl",
-  "imp-sea:arrival-notice": "/import-sea/add-arrival-notice",
-  "imp-sea:forward-letter": "/import-sea/add-forward-letter",
-  "imp-sea:freight-invoice": "/import-sea/add-freight-invoice",
-  "imp-sea:debit-note": "/import-sea/add-debit-note",
-  "imp-sea:credit-note": "/import-sea/add-credit-note",
-
-  // ✅ IMPORT SEA REPORTS
+  // Import Sea
+  "imp-sea:booking": "/import-sea/booking",
+  "imp-sea:master-bl": "/import-sea/master-bl",
+  "imp-sea:arrival-notice": "/import-sea/arrival-notice",
+  "imp-sea:forward-letter": "/import-sea/forward-letter",
+  "imp-sea:freight-invoice": "/import-sea/freight-invoice",
+  "imp-sea:debit-note": "/import-sea/debit-note",
+  "imp-sea:credit-note": "/import-sea/credit-note",
   "imp-sea:report:pl": "/import-sea/report/profit-loss",
   "imp-sea:report:volume": "/import-sea/report/volume",
 
-  // IMPORT AIR
-  "imp-air:booking": "/import-air/add-booking",
-  "imp-air:master-bl": "/import-air/add-master-bl",
-  "imp-air:request-letter": "/import-air/add-request-letter",
-  "imp-air:forward-letter": "/import-air/add-forward-letter",
-  "imp-air:freight-invoice": "/import-air/add-freight-invoice",
-  "imp-air:debit-note": "/import-air/add-debit-note",
-  "imp-air:credit-note": "/import-air/add-credit-note",
-
-  // ✅ IMPORT AIR REPORTS
+  // Import Air
+  "imp-air:booking": "/import-air/booking",
+  "imp-air:master-bl": "/import-air/master-bl",
+  "imp-air:request-letter": "/import-air/request-letter",
+  "imp-air:forward-letter": "/import-air/forward-letter",
+  "imp-air:freight-invoice": "/import-air/freight-invoice",
+  "imp-air:debit-note": "/import-air/debit-note",
+  "imp-air:credit-note": "/import-air/credit-note",
   "imp-air:report:pl": "/import-air/report/profit-loss",
   "imp-air:report:volume": "/import-air/report/volume",
 
-  // ACCOUNTS (🔁 here we removed /add-)
+  // ACCOUNTS / ORDERS / REPORTS / ESSENTIAL / SETTINGS (examples)
   "acc:receive-voucher": "/accounts/receive-voucher",
-  "acc:receive-journal": "/accounts/receive-journal",
-  "acc:payment-voucher": "/accounts/payment-voucher",
-  "acc:payment-journal": "/accounts/payment-journal",
-  "acc:journal-voucher": "/accounts/journal-voucher",
-  "acc:contra-voucher": "/accounts/contra-voucher",
-  "acc:customer-receipt": "/accounts/customer-receipt",
-  "acc:supplier-payment": "/accounts/supplier-payment",
-  "acc:setting-account-head": "/accounts/setting/account-head",
-  "acc:setting-voucher-type": "/accounts/setting/voucher-type",
-  "acc:setting-cost-center": "/accounts/setting/cost-center",
+"acc:receive-journal": "/accounts/receive-journal",
+"acc:payment-voucher": "/accounts/payment-voucher",
+"acc:payment-journal": "/accounts/payment-journal",
+"acc:journal-voucher": "/accounts/journal-voucher",
+"acc:contra-voucher": "/accounts/contra-voucher",
+"acc:customer-receipt": "/accounts/customer-receipt",
+"acc:supplier-payment": "/accounts/supplier-payment",
+"acc:setting-account-head": "/accounts/setting/account-head",
+"acc:setting-voucher-type": "/accounts/setting/voucher-type",
+"acc:setting-cost-center": "/accounts/setting/cost-center",
 
-  // ORDERS
-  "ord:sale-order": "/orders/sale-order",
-  "ord:sale-return": "/orders/sale-return",
-  "ord:purchase-order": "/orders/purchase-order",
-  "ord:purchase-return": "/orders/purchase-return",
-  "ord:adjustments": "/orders/adjustments",
-  "ord:setting-order-type": "/orders/setting/order-type",
-  "ord:setting-return-type": "/orders/setting/return-type",
-  "ord:setting-supplier": "/orders/setting/supplier",
-
-  // reports main
-  "rep:all": "/reports",
-
-  // essential
+  "ord:po": "/orders/purchase",
+  "ord:so": "/orders/sales",
+  "rep:kpi": "/reports/kpis",
+  "rep:ops": "/reports/operations",
   "ess:masters": "/essential/masters",
   "ess:utilities": "/essential/utilities",
 
@@ -170,6 +154,11 @@ const routeMap = {
   "set:port": "/settings/port",
   "set:currency": "/settings/currency",
   "set:country": "/settings/country",
+
+   // ✅ Inventory → sub category routes
+  "set:inventory:product": "/settings/inventory/product",
+  "set:inventory:product-category": "/settings/inventory/product-category",
+  "set:inventory:unit": "/settings/inventory/unit",
 
   // banking children (optional)
   "set:banking-lc": "/settings/banking/lc",
@@ -589,8 +578,18 @@ const rightMenus = [
           { key: "set:party-designation", label: "Designation", icon: <SafetyCertificateOutlined /> },
         ],
       },
+      {
+        key: "set:inventory",
+        label: "Inventory",
+        icon: <PlusOutlined />,
+        submenu: [
+          { key: "set:inventory:product", label: "Product" },
+          { key: "set:inventory:product-category", label: "Product Category" },
+          { key: "set:inventory:unit", label: "Unit" },
+        ],
+      },
 
-      { key: "set:inventory", label: "Inventory", icon: <PlusOutlined /> },
+  
       { key: "set:gh-agent", label: "G.H. Agent", icon: <PlusOutlined /> },
       { key: "set:container", label: "Container", icon: <PlusOutlined /> },
       { key: "set:fdr-vsl", label: "FDR VSL", icon: <PlusOutlined /> },
