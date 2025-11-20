@@ -85,6 +85,9 @@ import UserListLayout from "./components/Admin/UserListLayout.jsx";
 import GroupListLayout from "./components/Admin/GroupListLayout.jsx";
 import LogList from "./components/SharedAllListFrom/SharedList/LogList.jsx";
 import ShipperParty from "./components/settings/Party/ShipperParty.jsx";
+import ProductListLayout from "./components/settings/inventory/ProductListLayout.jsx";
+import GhAgentListLayout from "./components/settings/GhAgentListLayout.jsx";
+import ContainerListLayout from "./components/settings/ContainerListLayout.jsx";
 
 
 
@@ -1526,6 +1529,75 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+         <Route
+          path="/settings/inventory/product"
+          element={
+            <Layout>
+              <ProductListLayout></ProductListLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/settings/gh-agent"
+          element={
+            <Layout>
+              <GhAgentListLayout></GhAgentListLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/settings/container"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/settings/fdr-vsl"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+
+         <Route
+          path="/settings/mtr-vsl"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/settings/mode"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/settings/trade"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/tos"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+
+
 
 
 

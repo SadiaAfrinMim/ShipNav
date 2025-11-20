@@ -1,4 +1,4 @@
-// File: HeaderAddFromTitle.jsx
+// File: HeaderAddFromTitle.jsx 
 
 import React, { useState } from "react";
 import {
@@ -7,7 +7,11 @@ import {
 } from "@ant-design/icons";
 import { Button } from "antd";
 import { useLocation } from "react-router-dom";
+
 import AddShipperModal from "../Modal/party/AddShipperModal";
+import AddProductModal from "../Modal/AddProductModal";
+import AddGhAgentModal from "../Modal/AddGhAgentModal";
+import AddContainerModal from "../Modal/AddContainerModal";
 
 
 
@@ -36,7 +40,6 @@ export const masterMenuRoutes = [
   },
 ];
 
-// ---------------- TITLE MERGE ----------------
 const masterRouteTitleMap = masterMenuRoutes.reduce((acc, item) => {
   if (item.basePath && item.title) acc[item.basePath] = item.title;
 
@@ -51,24 +54,44 @@ const masterRouteTitleMap = masterMenuRoutes.reduce((acc, item) => {
 
 const allRouteTitles = { ...masterRouteTitleMap };
 
-// ---------------- FALLBACK TITLE ----------------
 const generateTitle = (path) => {
   if (!path) return "Add Page";
   const last = path.split("/").filter(Boolean).pop();
   return `Add ${last.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`;
 };
 
-// ---------------- COMPONENT ----------------
-const HeaderAddFromTitle = () => {
+const HeaderSettingsAddTitle = () => {
   const { pathname } = useLocation();
   const title = allRouteTitles[pathname] || generateTitle(pathname);
 
-  // ⬇ modal state
-  const [open, setOpen] = useState(false);
+  // ⬇ modal states
+  const [shipperOpen, setShipperOpen] = useState(false);
+  const [productOpen, setProductOpen] = useState(false);
+  const [ghAgentOpen, setGhAgentOpen] = useState(false);
+  const [containerOpen, setContainerOpen] = useState(false); // ✅ NEW STATE
+
+  const handleAddClick = () => {
+    // inventory/product → Add Product
+    if (pathname === "/settings/inventory/product") {
+      setProductOpen(true);
+    }
+    // GH Agent → Add GH Agent
+    else if (pathname === "/settings/gh-agent") {
+      setGhAgentOpen(true);
+    }
+    // Container → Add Container
+    else if (pathname === "/settings/container" ||pathname === "/settings/fdr-vsl"||pathname === "/settings/mtr-vsl"||pathname === "/settings/mode"||pathname === "/settings/trade"||pathname === "/settings/tos") {
+      setContainerOpen(true); // ✅ OPEN CONTAINER MODAL
+    }
+    // Others → Shipper Modal
+    else {
+      setShipperOpen(true);
+    }
+  };
 
   return (
     <>
-      {/* HEADER UI */}
+      {/* HEADER AREA */}
       <div
         style={{
           display: "flex",
@@ -96,7 +119,6 @@ const HeaderAddFromTitle = () => {
           <UnorderedListOutlined /> {title}
         </h2>
 
-        {/* Add Button */}
         <Button
           type="primary"
           icon={<PlusOutlined />}
@@ -105,23 +127,53 @@ const HeaderAddFromTitle = () => {
             border: "none",
             padding: "4px 14px",
           }}
-          onClick={() => setOpen(true)}
+          onClick={handleAddClick}
         >
           {title}
         </Button>
       </div>
 
-      {/* REAL MODAL */}
+      {/* DEFAULT SHIPPER MODAL */}
       <AddShipperModal
-        open={open}
-        onCancel={() => setOpen(false)}
+        open={shipperOpen}
+        onCancel={() => setShipperOpen(false)}
         onSubmit={(values) => {
-          console.log("Submitted:", values);
-          setOpen(false);
+          console.log("Submitted Shipper:", values);
+          setShipperOpen(false);
+        }}
+      />
+
+      {/* PRODUCT MODAL */}
+      <AddProductModal
+        open={productOpen}
+        onCancel={() => setProductOpen(false)}
+        onSubmit={(values) => {
+          console.log("Submitted Product:", values);
+          setProductOpen(false);
+        }}
+      />
+
+      {/* GH AGENT MODAL */}
+      <AddGhAgentModal
+        open={ghAgentOpen}
+        onCancel={() => setGhAgentOpen(false)}
+        onSubmit={(values) => {
+          console.log("Submitted GH Agent:", values);
+          setGhAgentOpen(false);
+        }}
+      />
+
+      {/* ✅ CONTAINER MODAL */}
+      <AddContainerModal
+        open={containerOpen}
+        onCancel={() => setContainerOpen(false)}
+        onSubmit={(values) => {
+          console.log("Submitted Container:", values);
+          setContainerOpen(false);
         }}
       />
     </>
   );
 };
 
-export default HeaderAddFromTitle;
+export default HeaderSettingsAddTitle;

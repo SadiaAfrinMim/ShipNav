@@ -21,16 +21,16 @@ const { Option } = Select;
 
 // 👉 চাইলে এখানে ডিফল্ট ডাটা দিতে পারো
 const initialData = [
-  // {
-  //   id: 1,
-  //   name: "Example Product",
-  //   unit: "Cartons",
-  //   category: "Freight",
-  //   standardCost: 100,
-  //   salesPrice: 120,
-  //   image: "",
-  //   status: "Active",
-  // },
+  {
+    id: 1,
+    name: "Example Product",
+    unit: "Cartons",
+    category: "Freight",
+    standardCost: 100,
+    salesPrice: 120,
+    image: "",
+    status: "Active",
+  },
 ];
 
 const ProductList = () => {
@@ -154,40 +154,7 @@ const ProductList = () => {
 
   return (
     <Layout className="min-h-screen bg-gray-100">
-      {/* 🔹 Teal header bar like screenshot */}
-      <Header className="!bg-[#00BCD4] !px-4 !py-2 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-white">
-          <UnorderedListOutlined />
-          <span className="font-semibold text-[15px]">
-            Product List
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button
-            icon={<ReloadOutlined />}
-            size="small"
-            className="!bg-[#4a5568] !text-white !border-none hover:!bg-[#2d3748]"
-            onClick={handleReset}
-          >
-            Reset
-          </Button>
-
-          {/* এখানে Add Product modal open করবে */}
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            size="small"
-            className="!bg-emerald-500 hover:!bg-emerald-600 !border-none"
-            onClick={() => {
-              // TODO: open AddProductModal()
-              console.log("Add Product clicked");
-            }}
-          >
-            Add Product
-          </Button>
-        </div>
-      </Header>
+     
 
       <Content className="m-4">
         <div className="bg-white rounded-md shadow-sm border border-gray-200">
