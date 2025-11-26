@@ -1,10 +1,7 @@
 // File: HeaderAddFromTitle.jsx 
 
 import React, { useState } from "react";
-import {
-  PlusOutlined,
-  UnorderedListOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useLocation } from "react-router-dom";
 
@@ -12,8 +9,9 @@ import AddShipperModal from "../Modal/party/AddShipperModal";
 import AddProductModal from "../Modal/AddProductModal";
 import AddGhAgentModal from "../Modal/AddGhAgentModal";
 import AddContainerModal from "../Modal/AddContainerModal";
-
-
+import AddPortModal from "../Modal/AddPortModal";
+import AddCurrencyModal from "../Modal/AddCurrencyModal";
+import AddCountryModal from "../Modal/AddCountryModal";
 
 // ---------------- MASTER MENU ROUTES ----------------
 export const masterMenuRoutes = [
@@ -57,7 +55,9 @@ const allRouteTitles = { ...masterRouteTitleMap };
 const generateTitle = (path) => {
   if (!path) return "Add Page";
   const last = path.split("/").filter(Boolean).pop();
-  return `Add ${last.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`;
+  return `Add ${last
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())}`;
 };
 
 const HeaderSettingsAddTitle = () => {
@@ -68,8 +68,10 @@ const HeaderSettingsAddTitle = () => {
   const [shipperOpen, setShipperOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
   const [ghAgentOpen, setGhAgentOpen] = useState(false);
-  const [containerOpen, setContainerOpen] = useState(false); // ✅ NEW STATE
-
+  const [containerOpen, setContainerOpen] = useState(false);
+  const [portOpen, setPortOpen] = useState(false); 
+  const [CurrencyModalOpen, setCurrencyModalOpen] = useState(false);  // ✅ correct state
+   const [AddCountryModalOpen, setAddCountryModalOpen] = useState(false);
   const handleAddClick = () => {
     // inventory/product → Add Product
     if (pathname === "/settings/inventory/product") {
@@ -79,9 +81,27 @@ const HeaderSettingsAddTitle = () => {
     else if (pathname === "/settings/gh-agent") {
       setGhAgentOpen(true);
     }
-    // Container → Add Container
-    else if (pathname === "/settings/container" ||pathname === "/settings/fdr-vsl"||pathname === "/settings/mtr-vsl"||pathname === "/settings/mode"||pathname === "/settings/trade"||pathname === "/settings/tos") {
-      setContainerOpen(true); // ✅ OPEN CONTAINER MODAL
+    // Port → Add Port
+    else if (pathname === "/settings/port") {
+      setPortOpen(true);
+    }
+     else if (pathname === "/settings/currency") {
+      setCurrencyModalOpen(true);
+    }
+     else if (pathname === "/settings/country") {
+      setAddCountryModalOpen(true);
+    }
+    // Container & related → Add Container
+    else if (
+      pathname === "/settings/container" ||
+      pathname === "/settings/fdr-vsl" ||
+      pathname === "/settings/mtr-vsl" ||
+      pathname === "/settings/mode" ||
+      pathname === "/settings/trade" ||
+      pathname === "/settings/tos" ||
+      pathname === "/settings/commodity"
+    ) {
+      setContainerOpen(true);
     }
     // Others → Shipper Modal
     else {
@@ -163,13 +183,41 @@ const HeaderSettingsAddTitle = () => {
         }}
       />
 
-      {/* ✅ CONTAINER MODAL */}
+      {/* CONTAINER MODAL */}
       <AddContainerModal
         open={containerOpen}
         onCancel={() => setContainerOpen(false)}
         onSubmit={(values) => {
           console.log("Submitted Container:", values);
           setContainerOpen(false);
+        }}
+      />
+
+      {/* PORT MODAL */}
+      <AddPortModal
+        open={portOpen}
+        onCancel={() => setPortOpen(false)}
+        onSubmit={(values) => {
+          console.log("Submitted Port:", values);
+          setPortOpen(false);
+        }}
+      />
+
+      <AddCurrencyModal
+        open={CurrencyModalOpen}
+        onCancel={() => setCurrencyModalOpen(false)}
+        onSubmit={(values) => {
+          console.log("Submitted Port:", values);
+          setCurrencyModalOpen(false);
+        }}
+      />
+
+       <AddCountryModal
+        open={AddCountryModalOpen}
+        onCancel={() => setAddCountryModalOpen(false)}
+        onSubmit={(values) => {
+          console.log("Submitted Port:", values);
+          setAddCountryModalOpen(false);
         }}
       />
     </>

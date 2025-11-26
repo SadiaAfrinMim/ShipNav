@@ -88,6 +88,10 @@ import ShipperParty from "./components/settings/Party/ShipperParty.jsx";
 import ProductListLayout from "./components/settings/inventory/ProductListLayout.jsx";
 import GhAgentListLayout from "./components/settings/GhAgentListLayout.jsx";
 import ContainerListLayout from "./components/settings/ContainerListLayout.jsx";
+import MAWBListLayout from "./components/settings/MAWBListLayout.jsx";
+import PortListLayout from "./components/settings/PortListLayout.jsx";
+import AddCurrencyListLayout from "./components/settings/AddCurrencyListLayout.jsx";
+import CountryListLayout from "./components/settings/CountryListLayout.jsx";
 
 
 
@@ -1593,6 +1597,47 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/settings/commodity"
+          element={
+            <Layout>
+              <ContainerListLayout></ContainerListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/settings/mawb"
+          element={
+            <Layout>
+              <MAWBListLayout></MAWBListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/port"
+          element={
+            <Layout>
+              <PortListLayout></PortListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/settings/currency"
+          element={
+            <Layout>
+              <AddCurrencyListLayout></AddCurrencyListLayout>
+            </Layout>
+          }
+        />
+
+          <Route
+          path="/settings/country"
+          element={
+            <Layout>
+              <CountryListLayout></CountryListLayout>
             </Layout>
           }
         />
