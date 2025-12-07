@@ -1,6 +1,7 @@
 
-import HeaderTittleFrom from '../../../HeaderTitle/HeaderTittleFrom';
+import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
 import AddStuffingPackage from '../AddStuffingPackage';
+
 
 
 
@@ -11,7 +12,7 @@ const AddStuffingPackageLayout = () => {
 
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
-        <HeaderTittleFrom></HeaderTittleFrom>
+       <HeaderAddFromTitle></HeaderAddFromTitle>
        <AddStuffingPackage></AddStuffingPackage>
 
 

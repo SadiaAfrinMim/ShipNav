@@ -25,7 +25,7 @@ import AddStuffingPlanFromLayout from "./components/ExportFolderDetails/Stuffing
 
 import AddStuffingPackageLayout from "./components/ExportFolderDetails/StuffingPackageList/Layout/StuffingPackageLayout.jsx";
 
-import StuffingPackageLayout from "./components/ExportFolderDetails/StuffingPackageList/Layout/StuffingPackageLayout.jsx";
+
 import ExportSeaShipmentAdviceLayout from "./components/ExportFolderDetails/ExportSeaShipmentAdvice/Layout/ExportSeaShipmentAdviceLayout.jsx";
 import ShipmentAdviceFormLayout from "./components/ExportFolderDetails/ExportSeaShipmentAdvice/Layout/ShipmentAdviceFormLayout .jsx";
 import BillOfLadingExportLayout from "./components/ExportFolderDetails/BillOfLadingExport/Layout/BillOfLadingExportLayout.jsx";
@@ -92,6 +92,8 @@ import MAWBListLayout from "./components/settings/MAWBListLayout.jsx";
 import PortListLayout from "./components/settings/PortListLayout.jsx";
 import AddCurrencyListLayout from "./components/settings/AddCurrencyListLayout.jsx";
 import CountryListLayout from "./components/settings/CountryListLayout.jsx";
+import StuffingPackageLayout from "./components/ExportFolderDetails/StuffingPackageList/Layout/StuffingPackageLayout.jsx";
+
 
 
 
@@ -185,6 +187,7 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+        {/*! aeta baki ache  */}
         <Route
           path="/export-sea/stuffing-package"
           element={
@@ -1641,29 +1644,6 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <Route
           path="/dashboard"

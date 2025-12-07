@@ -1,7 +1,8 @@
 
+import AddShippingPlan from '../AddShippingPlan';
 import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
 
-import AddStuffingPlanFrom from '../AddStuffingPlanFrom';
+
 
 
 
@@ -18,7 +19,7 @@ const AddStuffingPlanFromLayout = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderAddFromTitle></HeaderAddFromTitle>
-        <AddStuffingPlanFrom></AddStuffingPlanFrom>
+        <AddShippingPlan></AddShippingPlan>
 
 
       </div>
