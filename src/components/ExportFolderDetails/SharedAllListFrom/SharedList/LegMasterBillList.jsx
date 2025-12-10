@@ -9,13 +9,11 @@ import {
   Button,
   Typography,
   Space,
+  Dropdown,
 } from "antd";
-import {
-  PlusOutlined,
-  ReloadOutlined,
-  FilterOutlined,
-  AlignRightOutlined,
-} from "@ant-design/icons";
+import { FilterOutlined, AlignRightOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import DeleteModal from "../../../SharedAllListFrom/Modal/DeleteModal";
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -64,6 +62,43 @@ const LegMasterBillList = () => {
     },
   ]);
 
+  const navigate = useNavigate();
+
+  const handleActionClick = (key, record) => {
+    if (key === "view") {
+      navigate("/export-sea/view-mbl", {
+        state: { record },
+      });
+    }
+
+    if (key === "edit") {
+      navigate("/export-sea/edit-mbl", {
+        state: { record },
+      });
+    }
+
+    if (key === "copy") {
+      navigate("/export-sea/copy-mbl", {
+        state: { record },
+      });
+    }
+
+    
+  };
+
+  // Delete option ছাড়া সব action এখানে
+  const baseActionItems = [
+    { key: "view", label: "View" },
+    { key: "edit", label: "Edit" },
+    { key: "copy", label: "Copy" },
+    { type: "divider" },
+    // last item: DeleteModal component (nijer button + modal niye)
+    {
+      key: "delete-modal",
+      label: <DeleteModal />,
+    },
+  ];
+
   const columns = [
     {
       title: "S/L No.",
@@ -107,15 +142,31 @@ const LegMasterBillList = () => {
     },
     {
       title: "Action",
-      render: () => (
-        <Button icon={<AlignRightOutlined />} type="text" size="small" />
+      key: "action",
+      align: "center",
+      width: 90,
+      render: (_, record) => (
+        <Dropdown
+          trigger={["click"]}
+          placement="bottomRight"
+          menu={{
+            items: baseActionItems,
+            onClick: ({ key }) => {
+              // DeleteModal er nijer trigger button click hole handleActionClick call dorkar nai
+              if (key === "delete-modal") return;
+              handleActionClick(key, record);
+            },
+          }}
+        >
+          <Button icon={<AlignRightOutlined />} type="text" size="small" />
+        </Dropdown>
       ),
     },
   ];
 
   return (
     <div
-    className="m-4"
+      className="m-4"
       style={{
         background: "#fff",
         border: "1px solid #e6e6e6",
@@ -123,63 +174,67 @@ const LegMasterBillList = () => {
         overflow: "hidden",
       }}
     >
-     
       {/* Filter Section */}
       <div style={{ padding: 16, borderBottom: "1px solid #f0f0f0" }}>
-       <Row gutter={[16, 16]} align="middle">
-  {/* ──────────────── First Row: 3 Selects ──────────────── */}
-  <Col xs={24} sm={8}>
-    <label>Carrier</label>
-    <Select
-      placeholder="All"
-      style={{ width: "100%" }}
-      showSearch
-      defaultValue="All"
-    >
-      <Option value="All">All</Option>
-      <Option value="MSC">MSC</Option>
-      <Option value="ONE Line">ONE Line</Option>
-      <Option value="ETIHAD AIRWAYS">ETIHAD AIRWAYS</Option>
-      <Option value="CMA CGM">CMA CGM</Option>
-      <Option value="HMM">HMM</Option>
-      <Option value="COSCO">COSCO</Option>
-    </Select>
-  </Col>
+        <Row gutter={[16, 16]} align="middle">
+          <Col xs={24} sm={8}>
+            <label>Carrier</label>
+            <Select
+              placeholder="All"
+              style={{ width: "100%" }}
+              showSearch
+              defaultValue="All"
+            >
+              <Option value="All">All</Option>
+              <Option value="MSC">MSC</Option>
+              <Option value="ONE Line">ONE Line</Option>
+              <Option value="ETIHAD AIRWAYS">ETIHAD AIRWAYS</Option>
+              <Option value="CMA CGM">CMA CGM</Option>
+              <Option value="HMM">HMM</Option>
+              <Option value="COSCO">COSCO</Option>
+            </Select>
+          </Col>
 
-  <Col xs={24} sm={8}>
-    <label>Origin Agent</label>
-    <Select placeholder="All" style={{ width: "100%" }} defaultValue="All">
-      <Option value="All">All</Option>
-    </Select>
-  </Col>
+          <Col xs={24} sm={8}>
+            <label>Origin Agent</label>
+            <Select
+              placeholder="All"
+              style={{ width: "100%" }}
+              defaultValue="All"
+            >
+              <Option value="All">All</Option>
+            </Select>
+          </Col>
 
-  <Col xs={24} sm={8}>
-    <label>Destination Agent</label>
-    <Select placeholder="All" style={{ width: "100%" }} defaultValue="All">
-      <Option value="All">All</Option>
-    </Select>
-  </Col>
+          <Col xs={24} sm={8}>
+            <label>Destination Agent</label>
+            <Select
+              placeholder="All"
+              style={{ width: "100%" }}
+              defaultValue="All"
+            >
+              <Option value="All">All</Option>
+            </Select>
+          </Col>
 
-  {/* ──────────────── Second Row: Dates Centered ──────────────── */}
-  <Col xs={24} sm={6}></Col> {/* Empty space (left gap) */}
-  <Col xs={24} sm={6}>
-    <label>Start Date *</label>
-    <DatePicker
-      style={{ width: "100%" }}
-      placeholder="11 July, 2025"
-    />
-  </Col>
+          <Col xs={24} sm={6}></Col>
+          <Col xs={24} sm={6}>
+            <label>Start Date *</label>
+            <DatePicker
+              style={{ width: "100%" }}
+              placeholder="11 July, 2025"
+            />
+          </Col>
 
-  <Col xs={24} sm={6}>
-    <label>End Date *</label>
-    <DatePicker
-      style={{ width: "100%" }}
-      placeholder="11 October, 2025"
-    />
-  </Col>
-  <Col xs={24} sm={6}></Col> {/* Empty space (right gap) */}
-</Row>
-
+          <Col xs={24} sm={6}>
+            <label>End Date *</label>
+            <DatePicker
+              style={{ width: "100%" }}
+              placeholder="11 October, 2025"
+            />
+          </Col>
+          <Col xs={24} sm={6}></Col>
+        </Row>
       </div>
 
       {/* Filter Input */}

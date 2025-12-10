@@ -120,7 +120,12 @@ const DynamicItem = ({
       </Form.Item>
 
       <Form.Item name={[idx, "exRate"]} style={{ marginBottom: 0 }}>
-        <InputNumber min={0} style={cellNum} onChange={onChange} defaultValue={1} />
+        <InputNumber
+          min={0}
+          style={cellNum}
+          onChange={onChange}
+          defaultValue={1}
+        />
       </Form.Item>
 
       <Form.Item name={[idx, "exAmount"]} style={{ marginBottom: 0 }}>
@@ -224,12 +229,9 @@ export default function AddDebitNote() {
       }}
     >
       {/* Top Teal Bar */}
-   
 
       {/* Outer bordered card to match screenshot */}
-      <Card
-        
-      >
+      <Card>
         <Form
           form={form}
           layout="vertical"
@@ -248,7 +250,7 @@ export default function AddDebitNote() {
             deductionItems: [],
             status: "Draft",
           }}
-          onValuesChange={(chg, all) => {
+          onValuesChange={(chg) => {
             if ("revenueItems" in chg) calcList("revenueItems");
             if ("deductionItems" in chg) calcList("deductionItems");
           }}
@@ -271,8 +273,15 @@ export default function AddDebitNote() {
               }}
             >
               <Text style={{ color: C.label }}>Date</Text>
-              <Form.Item name="date" style={{ margin: 0 }} rules={[{ required: true }]}>
-                <DatePicker style={{ width: "100%" }} format="D MMM, YYYY" />
+              <Form.Item
+                name="date"
+                style={{ margin: 0 }}
+                rules={[{ required: true }]}
+              >
+                <DatePicker
+                  style={{ width: "100%" }}
+                  format="D MMM, YYYY"
+                />
               </Form.Item>
             </div>
 
@@ -282,7 +291,14 @@ export default function AddDebitNote() {
           </div>
 
           {/* HBL / MBL row */}
-          <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10, marginTop: 10 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "120px 1fr",
+              gap: 10,
+              marginTop: 10,
+            }}
+          >
             <Text style={{ color: C.label }}>HBL / MBL</Text>
             <Form.Item name="hblMbl" style={{ margin: 0 }}>
               <Radio.Group>
@@ -296,7 +312,13 @@ export default function AddDebitNote() {
             </Form.Item>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "120px 460px", gap: 10 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "120px 460px",
+              gap: 10,
+            }}
+          >
             <div />
             <Form.Item name="hbl" style={{ marginTop: -4 }}>
               <Select
@@ -311,7 +333,13 @@ export default function AddDebitNote() {
           </div>
 
           {/* Bill to Party */}
-          <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "120px 1fr",
+              gap: 10,
+            }}
+          >
             <Text style={{ color: C.label }}>Bill to Party</Text>
             <Form.Item name="billTo" style={{ marginTop: -6 }}>
               <Radio.Group>
@@ -326,7 +354,13 @@ export default function AddDebitNote() {
           </div>
 
           {/* Party Select */}
-          <div style={{ display: "grid", gridTemplateColumns: "120px 520px", gap: 10 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "120px 520px",
+              gap: 10,
+            }}
+          >
             <Text style={{ color: C.label }}>Consignee</Text>
             <Form.Item name="billPartyName" style={{ marginTop: -6 }}>
               <Select options={parties} />
@@ -353,14 +387,22 @@ export default function AddDebitNote() {
                 ]}
               />
             </Form.Item>
-            <Text style={{ textAlign: "right", color: C.label }}>Pct. (%)</Text>
+            <Text style={{ textAlign: "right", color: C.label }}>
+              Pct. (%)
+            </Text>
             <Form.Item name="pct" style={{ marginTop: -6 }}>
               <InputNumber min={0} max={100} style={{ width: "100%" }} />
             </Form.Item>
           </div>
 
           {/* Bank */}
-          <div style={{ display: "grid", gridTemplateColumns: "120px 520px", gap: 10 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "120px 520px",
+              gap: 10,
+            }}
+          >
             <Text style={{ color: C.label }}>Bank</Text>
             <Form.Item name="bank" style={{ marginTop: -6 }}>
               <Select options={banks} />
@@ -383,7 +425,13 @@ export default function AddDebitNote() {
             REVENUE ITEMS
           </div>
 
-          <div style={{ border: `1px solid ${C.border}`, borderTop: "none", paddingBottom: 8 }}>
+          <div
+            style={{
+              border: `1px solid ${C.border}`,
+              borderTop: "none",
+              paddingBottom: 8,
+            }}
+          >
             <div style={headerRowStyle}>
               <Text>Account Head</Text>
               <Text style={{ textAlign: "right" }}>Unit</Text>
@@ -432,12 +480,12 @@ export default function AddDebitNote() {
                         borderColor: C.addGreen,
                         borderRadius: 3,
                       }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.background = C.addGreenHover)
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.background = C.addGreen)
-                      }
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = C.addGreenHover;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = C.addGreen;
+                      }}
                     >
                       Add Item
                     </Button>
@@ -462,7 +510,13 @@ export default function AddDebitNote() {
             DEDUCTION ITEMS
           </div>
 
-          <div style={{ border: `1px solid ${C.border}`, borderTop: "none", paddingBottom: 8 }}>
+          <div
+            style={{
+              border: `1px solid ${C.border}`,
+              borderTop: "none",
+              paddingBottom: 8,
+            }}
+          >
             <div style={headerRowStyle}>
               <Text>Account Head</Text>
               <Text style={{ textAlign: "right" }}>Unit</Text>
@@ -511,12 +565,12 @@ export default function AddDebitNote() {
                         borderColor: C.addGreen,
                         borderRadius: 3,
                       }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.background = C.addGreenHover)
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.background = C.addGreen)
-                      }
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = C.addGreenHover;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = C.addGreen;
+                      }}
                     >
                       Add Item
                     </Button>
@@ -527,7 +581,14 @@ export default function AddDebitNote() {
           </div>
 
           {/* ---------- Footer ---------- */}
-          <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "120px 1fr", gap: 10 }}>
+          <div
+            style={{
+              marginTop: 14,
+              display: "grid",
+              gridTemplateColumns: "120px 1fr",
+              gap: 10,
+            }}
+          >
             <Text style={{ color: C.label }}>Remark</Text>
             <Form.Item name="remark" style={{ marginTop: -6 }}>
               <TextArea rows={3} />
@@ -546,16 +607,24 @@ export default function AddDebitNote() {
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <Checkbox />
               <Text style={{ fontSize: 12, color: "#333" }}>
-                ATTACHMENT (NOTE: IF YOU REMOVE THIS, IT WILL BE PERMANENTLY DELETED)
+                ATTACHMENT (NOTE: IF YOU REMOVE THIS, IT WILL BE PERMANENTLY
+                DELETED)
               </Text>
-              <Form.Item name="attachment" valuePropName="fileList" getValueFromEvent={(e) => e?.fileList} style={{ margin: 0 }}>
+              <Form.Item
+                name="attachment"
+                valuePropName="fileList"
+                getValueFromEvent={(e) => e?.fileList}
+                style={{ margin: 0 }}
+              >
                 <Upload beforeUpload={() => false} multiple>
                   <Button icon={<UploadOutlined />}>Browse</Button>
                 </Upload>
               </Form.Item>
             </div>
 
-            <Text style={{ color: C.label, textAlign: "right" }}>Prepared By</Text>
+            <Text style={{ color: C.label, textAlign: "right" }}>
+              Prepared By
+            </Text>
             <Form.Item name="preparedBy" style={{ marginTop: -6 }}>
               <Select options={staff} />
             </Form.Item>
@@ -563,7 +632,9 @@ export default function AddDebitNote() {
             <div />
             <div />
 
-            <Text style={{ color: C.label, textAlign: "right" }}>Checked By</Text>
+            <Text style={{ color: C.label, textAlign: "right" }}>
+              Checked By
+            </Text>
             <Form.Item name="checkedBy" style={{ marginTop: -6 }}>
               <Select options={staff} />
             </Form.Item>
@@ -590,7 +661,9 @@ export default function AddDebitNote() {
               marginTop: 10,
             }}
           >
-            <Text style={{ color: C.requiredNote, fontSize: 12 }}>* Required Fields</Text>
+            <Text style={{ color: C.requiredNote, fontSize: 12 }}>
+              * Required Fields
+            </Text>
 
             <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
               <Button
@@ -602,12 +675,12 @@ export default function AddDebitNote() {
                   borderRadius: 3,
                   padding: "0 18px",
                 }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.background = C.submitBlueHover)
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.background = C.submitBlue)
-                }
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = C.submitBlueHover;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = C.submitBlue;
+                }}
               >
                 Submit
               </Button>

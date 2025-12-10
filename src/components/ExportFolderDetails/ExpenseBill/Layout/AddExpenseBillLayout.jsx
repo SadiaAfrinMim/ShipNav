@@ -1,10 +1,8 @@
-import React from 'react';
-import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 
-import BillOfLadingForm from '../BillOfLadingForm';
 import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
+import AddExpenseBill from '../AddExpenseBill';
 
-const BillOfLadingExportFrom = () => {
+const AddExpenseBillLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -12,11 +10,12 @@ const BillOfLadingExportFrom = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderAddFromTitle></HeaderAddFromTitle>
-        <BillOfLadingForm></BillOfLadingForm>
+        <AddExpenseBill></AddExpenseBill>
+
 
       </div>
     </div>
   );
 };
 
-export default BillOfLadingExportFrom;
+export default AddExpenseBillLayout;

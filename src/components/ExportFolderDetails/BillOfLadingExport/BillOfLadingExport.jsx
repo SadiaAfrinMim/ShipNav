@@ -7,15 +7,16 @@ import {
   Space,
   Button,
   Select,
-  Tag,
   Dropdown,
   Menu,
   Pagination,
   Typography,
 } from "antd";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+import DeleteModal from "../../SharedAllListFrom/Modal/DeleteModal";
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { RangePicker } = DatePicker;
 const { Text, Link } = Typography;
 
@@ -62,71 +63,94 @@ const mockData = [
   },
 ];
 
-const Toolbar = ({ range, setRange, onReset, filter, setFilter, pageSize, setPageSize }) => {
-  const teal = "#06b6d4"; // teal header
-  const headerStyle = {
-    background: teal,
-    color: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "10px 16px",
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-  };
-
+const Toolbar = ({
+  range,
+  setRange,
+  onReset,
+  filter,
+  setFilter,
+  pageSize,
+  setPageSize,
+}) => {
   return (
     <div style={{ padding: 12, borderBottom: "1px solid #f0f0f0" }}>
-        <Space wrap>
-          <div>
-            <Text strong style={{ marginRight: 8 }}>Start Date *</Text>
-            <RangePicker value={range} onChange={setRange} allowClear={false} style={{ width: 320 }} />
-          </div>
-          <Input
-            placeholder="Type to filter..."
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            style={{ width: 220 }}
+      <Space wrap>
+        <div>
+          <Text strong style={{ marginRight: 8 }}>
+            Start Date *
+          </Text>
+          <RangePicker
+            value={range}
+            onChange={setRange}
+            allowClear={false}
+            style={{ width: 320 }}
+          />
+        </div>
+        <Input
+          placeholder="Type to filter..."
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          style={{ width: 220 }}
+        />
+      </Space>
+      <div style={{ float: "right" }}>
+        <Space>
+          <Text>Show:</Text>
+          <Select
+            value={pageSize}
+            onChange={setPageSize}
+            style={{ width: 80 }}
+            options={[10, 25, 50, 100].map((v) => ({
+              value: v,
+              label: String(v),
+            }))}
           />
         </Space>
-        <div style={{ float: "right" }}>
-          <Space>
-            <Text>Show:</Text>
-            <Select
-              value={pageSize}
-              onChange={setPageSize}
-              style={{ width: 80 }}
-              options={[10, 25, 50, 100].map((v) => ({ value: v, label: String(v) }))}
-            />
-          </Space>
-        </div>
       </div>
+    </div>
   );
 };
 
-const ActionMenu = (
-  <Menu
-    items={[
-      { key: "view", label: "View" },
-      { key: "edit", label: "Edit" },
-      { type: "divider" },
-      { key: "delete", label: <span style={{ color: "#ef4444" }}>Delete</span> },
-      { key: "export", label: "Export" },
-    ]}
-  />
-);
-
 export default function BillOfLadingExport() {
-  const [range, setRange] = useState([dayjs("2025-07-10"), dayjs("2025-10-10")]);
+  const [range, setRange] = useState([
+    dayjs("2025-07-10"),
+    dayjs("2025-10-10"),
+  ]);
   const [filter, setFilter] = useState("");
   const [pageSize, setPageSize] = useState(10);
   const [current, setCurrent] = useState(1);
 
+  const navigate = useNavigate();
+
   const data = useMemo(() => {
     if (!filter) return mockData;
     const f = filter.toLowerCase();
-    return mockData.filter((r) => Object.values(r).some((v) => String(v).toLowerCase().includes(f)));
+    return mockData.filter((r) =>
+      Object.values(r).some((v) => String(v).toLowerCase().includes(f))
+    );
   }, [filter]);
+
+  const handleMenuClick = (key, record) => {
+    if (key === "edit") {
+      navigate("/export-sea/edit-hbl", {
+        state: { record },
+      });
+    }
+
+    if (key === "view") {
+      console.log("VIEW", record);
+      // future: view page / modal
+    }
+
+    if (key === "copy") {
+      navigate("/export-sea/copy-hbl", {
+        state: { record },
+      });
+    }
+
+  
+    // delete-modal ke ekhane handle korchi na, DeleteModal nijer ভিতরেই কাজ করবে
+  };
 
   const columns = [
     {
@@ -144,7 +168,9 @@ export default function BillOfLadingExport() {
     {
       title: "Date *",
       dataIndex: "date",
-      sorter: (a, b) => dayjs(a.date, "DD/MM/YYYY").unix() - dayjs(b.date, "DD/MM/YYYY").unix(),
+      sorter: (a, b) =>
+        dayjs(a.date, "DD/MM/YYYY").unix() -
+        dayjs(b.date, "DD/MM/YYYY").unix(),
     },
     {
       title: "Shipping Line",
@@ -156,11 +182,37 @@ export default function BillOfLadingExport() {
       key: "actions",
       align: "center",
       width: 90,
-      render: () => (
-        <Dropdown overlay={ActionMenu} trigger={["click"]} placement="bottomRight">
-          <Button type="text">Actions</Button>
-        </Dropdown>
-      ),
+      render: (_, record) => {
+        const menu = (
+          <Menu
+            onClick={({ key }) => {
+              if (key !== "delete-modal") {
+                handleMenuClick(key, record);
+              }
+            }}
+            items={[
+              { key: "view", label: "View" },
+              { key: "edit", label: "Edit" },
+              { key: "copy", label: "Copy" },
+             
+              { type: "divider" },
+              {
+                key: "delete-modal",
+                label: <DeleteModal />,
+              },
+            ]}
+          />
+        );
+        return (
+          <Dropdown
+            overlay={menu}
+            trigger={["click"]}
+            placement="bottomRight"
+          >
+            <Button type="text">Actions</Button>
+          </Dropdown>
+        );
+      },
     },
   ];
 
@@ -183,7 +235,12 @@ export default function BillOfLadingExport() {
           />
 
           <Table
-            style={{ border: "1px solid #e5e7eb", borderTop: 0, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}
+            style={{
+              border: "1px solid #e5e7eb",
+              borderTop: 0,
+              borderBottomLeftRadius: 8,
+              borderBottomRightRadius: 8,
+            }}
             columns={columns}
             dataSource={data}
             pagination={false}
@@ -191,8 +248,24 @@ export default function BillOfLadingExport() {
             rowKey="key"
           />
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", border: "1px solid #e5e7eb", borderTop: 0, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
-            <Text type="secondary">Showing {Math.min((current - 1) * pageSize + 1, data.length)} to {Math.min(current * pageSize, data.length)} of {data.length} entries</Text>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "8px 12px",
+              border: "1px solid #e5e7eb",
+              borderTop: 0,
+              borderBottomLeftRadius: 8,
+              borderBottomRightRadius: 8,
+            }}
+          >
+            <Text type="secondary">
+              Showing{" "}
+              {Math.min((current - 1) * pageSize + 1, data.length)} to{" "}
+              {Math.min(current * pageSize, data.length)} of{" "}
+              {data.length} entries
+            </Text>
             <Pagination
               current={current}
               pageSize={pageSize}

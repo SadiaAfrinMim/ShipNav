@@ -10,7 +10,6 @@ import {
   Space,
   Table,
   Typography,
-  Input,
 } from "antd";
 import {
   ReloadOutlined,
@@ -33,7 +32,6 @@ export default function VolumeStatementExpSea() {
   const headBg = "#f5f9fb";
 
   // ---- filter options (mock) ----
-  const all = useMemo(() => [{ label: "ALL", value: "ALL" }], []);
   const parties = useMemo(
     () => [
       { label: "ALL", value: "ALL" },
@@ -51,11 +49,19 @@ export default function VolumeStatementExpSea() {
     []
   );
   const commodities = useMemo(
-    () => [{ label: "ALL", value: "ALL" }, { label: "Knitwear", value: "Knitwear" }, { label: "Garments", value: "Garments" }],
+    () => [
+      { label: "ALL", value: "ALL" },
+      { label: "Knitwear", value: "Knitwear" },
+      { label: "Garments", value: "Garments" },
+    ],
     []
   );
   const pols = useMemo(
-    () => [{ label: "ALL", value: "ALL" }, { label: "Chattogram", value: "Chattogram" }, { label: "Dhaka ICD", value: "Dhaka ICD" }],
+    () => [
+      { label: "ALL", value: "ALL" },
+      { label: "Chattogram", value: "Chattogram" },
+      { label: "Dhaka ICD", value: "Dhaka ICD" },
+    ],
     []
   );
 
@@ -77,17 +83,44 @@ export default function VolumeStatementExpSea() {
     { title: "POL", dataIndex: "pol", width: 120 },
     { title: "POD", dataIndex: "pod", width: 120 },
     { title: "TOS", dataIndex: "tos", width: 100 },
-    { title: "Total Carton", dataIndex: "totalCarton", width: 130, align: "right" },
-    { title: "Total CBM", dataIndex: "totalCbm", width: 120, align: "right" },
-    { title: "Total GWT", dataIndex: "totalGwt", width: 120, align: "right" },
+    {
+      title: "Total Carton",
+      dataIndex: "totalCarton",
+      width: 130,
+      align: "right",
+    },
+    {
+      title: "Total CBM",
+      dataIndex: "totalCbm",
+      width: 120,
+      align: "right",
+    },
+    {
+      title: "Total GWT",
+      dataIndex: "totalGwt",
+      width: 120,
+      align: "right",
+    },
 
     // Group: Freight Invoice
     {
       title: "Freight Invoice",
       children: [
         { title: "Inv. No.", dataIndex: ["freight", "inv"], width: 140 },
-        { title: "USD", dataIndex: ["freight", "usd"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
-        { title: "BDT", dataIndex: ["freight", "bdt"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
+        {
+          title: "USD",
+          dataIndex: ["freight", "usd"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
+        {
+          title: "BDT",
+          dataIndex: ["freight", "bdt"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
       ],
     },
 
@@ -96,8 +129,20 @@ export default function VolumeStatementExpSea() {
       title: "Debit Note",
       children: [
         { title: "DN. No.", dataIndex: ["debit", "dn"], width: 140 },
-        { title: "USD", dataIndex: ["debit", "usd"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
-        { title: "BDT", dataIndex: ["debit", "bdt"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
+        {
+          title: "USD",
+          dataIndex: ["debit", "usd"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
+        {
+          title: "BDT",
+          dataIndex: ["debit", "bdt"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
       ],
     },
 
@@ -105,8 +150,20 @@ export default function VolumeStatementExpSea() {
     {
       title: "Total Income",
       children: [
-        { title: "USD", dataIndex: ["income", "usd"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
-        { title: "BDT", dataIndex: ["income", "bdt"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
+        {
+          title: "USD",
+          dataIndex: ["income", "usd"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
+        {
+          title: "BDT",
+          dataIndex: ["income", "bdt"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
       ],
     },
 
@@ -115,8 +172,20 @@ export default function VolumeStatementExpSea() {
       title: "Expense Bill",
       children: [
         { title: "EB. No.", dataIndex: ["expense", "eb"], width: 140 },
-        { title: "USD", dataIndex: ["expense", "usd"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
-        { title: "BDT", dataIndex: ["expense", "bdt"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
+        {
+          title: "USD",
+          dataIndex: ["expense", "usd"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
+        {
+          title: "BDT",
+          dataIndex: ["expense", "bdt"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
       ],
     },
 
@@ -125,8 +194,20 @@ export default function VolumeStatementExpSea() {
       title: "Credit Note",
       children: [
         { title: "CN. No.", dataIndex: ["credit", "cn"], width: 140 },
-        { title: "USD", dataIndex: ["credit", "usd"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
-        { title: "BDT", dataIndex: ["credit", "bdt"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
+        {
+          title: "USD",
+          dataIndex: ["credit", "usd"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
+        {
+          title: "BDT",
+          dataIndex: ["credit", "bdt"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
       ],
     },
 
@@ -134,8 +215,20 @@ export default function VolumeStatementExpSea() {
     {
       title: "Net Profit",
       children: [
-        { title: "USD", dataIndex: ["net", "usd"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
-        { title: "BDT", dataIndex: ["net", "bdt"], width: 110, align: "right", render: v => (v ? Number(v).toFixed(2) : "0.00") },
+        {
+          title: "USD",
+          dataIndex: ["net", "usd"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
+        {
+          title: "BDT",
+          dataIndex: ["net", "bdt"],
+          width: 110,
+          align: "right",
+          render: (v) => (v ? Number(v).toFixed(2) : "0.00"),
+        },
       ],
     },
 
@@ -201,31 +294,40 @@ export default function VolumeStatementExpSea() {
 
   return (
     <div style={{ background: "#f3f6f7", minHeight: "100vh", padding: 12 }}>
-      {/* Title bar */}
+      {/* Title bar (kept same layout, polished) */}
       <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: 10,
-        marginBottom: 24,
-        padding: "16px 20px",
-        background: "#f0f5ff",
-        borderRadius: "12px 12px 0 0",
-        boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-      }}
-        
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 10,
+          marginBottom: 20,
+          padding: "12px 18px",
+          background: "#f5fbff",
+          borderRadius: 8,
+          border: "1px solid #dde8f4",
+        }}
       >
         <Space size={8}>
-          <span style={{ display: "inline-block", width: 10, height: 10, border: "2px solid #fff", transform: "rotate(45deg)" }} />
-          <span>Volume Statement / Exp. Sea Filter</span>
+          <span
+            style={{
+              display: "inline-block",
+              width: 10,
+              height: 10,
+              border: "2px solid #1890ff",
+              transform: "rotate(45deg)",
+            }}
+          />
+          <span style={{ fontWeight: 600, color: "#1f2933" }}>
+            Volume Statement / Exp. Sea Filter
+          </span>
         </Space>
         <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           <Button icon={<ReloadOutlined />} onClick={handleReset}>
             Reset
           </Button>
-          <Button icon={<PrinterOutlined />} onClick={printToPdf}>
+          <Button icon={<PrinterOutlined />} onClick={printToPdf} type="primary">
             Print
           </Button>
         </div>
@@ -233,8 +335,12 @@ export default function VolumeStatementExpSea() {
 
       {/* Filters */}
       <Card
-        style={{ marginTop: 8, border: `2px solid ${cyanLine}`, borderRadius: 3 }}
-        bodyStyle={{ padding: 12 }}
+        style={{
+          marginTop: 8,
+          border: `1px solid ${cyanLine}`,
+          borderRadius: 6,
+        }}
+        bodyStyle={{ padding: 14 }}
       >
         <Form
           form={form}
@@ -271,23 +377,37 @@ export default function VolumeStatementExpSea() {
 
             <Col xs={24} md={12} lg={12}>
               <Form.Item label="ETD Date From" name="etdFrom">
-                <DatePicker style={{ width: "100%" }} suffixIcon={<CalendarOutlined />} />
+                <DatePicker
+                  style={{ width: "100%" }}
+                  suffixIcon={<CalendarOutlined />}
+                />
               </Form.Item>
             </Col>
             <Col xs={24} md={12} lg={12}>
               <Form.Item label="ETD Date To" name="etdTo">
-                <DatePicker style={{ width: "100%" }} suffixIcon={<CalendarOutlined />} />
+                <DatePicker
+                  style={{ width: "100%" }}
+                  suffixIcon={<CalendarOutlined />}
+                />
               </Form.Item>
             </Col>
           </Row>
 
-          <Text style={{ color: "#6b7b7e", fontSize: 12 }}>* Required Fields</Text>
+          <Text style={{ color: "#6b7b7e", fontSize: 12 }}>
+            * Required Fields
+          </Text>
 
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 8 }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: 8,
+            }}
+          >
             <Button
               type="primary"
               icon={<SearchOutlined />}
-              style={{ background: "#1b8fff", borderColor: "#1b8fff" }}
+              style={{ background: teal, borderColor: teal }}
               loading={loading}
               onClick={handleSearch}
             >
@@ -299,18 +419,28 @@ export default function VolumeStatementExpSea() {
 
       {/* Printable block */}
       <Card
-        style={{ marginTop: 12, border: `1px solid ${border}`, borderRadius: 3 }}
+        style={{
+          marginTop: 12,
+          border: `1px solid ${border}`,
+          borderRadius: 6,
+        }}
         bodyStyle={{ padding: 12 }}
         ref={printRef}
       >
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: 6,
+          }}
+        >
           <div style={{ lineHeight: 1.7 }}>
             <div>
-              <Text>Generated By:</Text>{" "}
+              <Text type="secondary">Generated By:</Text>{" "}
               <Text>nahidridwanul@gmail.com</Text>
             </div>
           </div>
-          <div style={{ lineHeight: 1.7 }}>
+          <div style={{ lineHeight: 1.7, textAlign: "right" }}>
             <div>
               <Text strong>Print Date:</Text> {printDateStr()}
             </div>
@@ -324,7 +454,10 @@ export default function VolumeStatementExpSea() {
           <Text style={{ display: "block", marginBottom: 4 }}>
             House# 7 (4th Floor), Road# 2/1, Banani, Dhaka, Bangladesh
           </Text>
-          <Text strong style={{ display: "block", textDecoration: "underline" }}>
+          <Text
+            strong
+            style={{ display: "block", textDecoration: "underline" }}
+          >
             VOLUME STATEMENT / EXP. SEA
           </Text>
         </div>
@@ -337,7 +470,8 @@ export default function VolumeStatementExpSea() {
           columns={columns}
           rowKey={(r, i) => i}
           scroll={{ x: 2800 }} // wide grid, horizontal scroll enabled
-          locale={{ emptyText: "" }}
+          sticky
+          locale={{ emptyText: "No data available" }}
         />
       </Card>
     </div>

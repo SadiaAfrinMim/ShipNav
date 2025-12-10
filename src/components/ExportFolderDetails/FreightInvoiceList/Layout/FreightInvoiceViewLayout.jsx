@@ -1,14 +1,12 @@
 
 import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
-import BillOfLadingExport from '../BillOfLadingExport';
+
+
+import FreightInvoiceView from '../FreightInvoiceView';
 
 
 
-
-
-
-
-const BillOfLadingExportLayout = () => {
+const FreightInvoiceViewLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -16,13 +14,7 @@ const BillOfLadingExportLayout = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderTittleFrom></HeaderTittleFrom>
-        <BillOfLadingExport
-  mode="add"
-  onSubmit={(data) => {
-    // API: create
-    console.log("CREATE payload", data);
-  }}
-/>
+        <FreightInvoiceView></FreightInvoiceView>
 
 
       </div>
@@ -30,4 +22,4 @@ const BillOfLadingExportLayout = () => {
   );
 };
 
-export default BillOfLadingExportLayout;
+export default FreightInvoiceViewLayout;

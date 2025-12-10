@@ -1,4 +1,4 @@
-import  { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Button,
   Card,
@@ -11,7 +11,6 @@ import {
   Table,
   Tag,
   Typography,
-  message,
 } from "antd";
 import {
   ReloadOutlined,
@@ -20,8 +19,13 @@ import {
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
+  CopyOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import DeleteModal from "../../SharedAllListFrom/Modal/DeleteModal";
+
+
 
 const { RangePicker } = DatePicker;
 const { Text } = Typography;
@@ -40,7 +44,12 @@ const THIRD_PARTY_OPTIONS = simpleOptions(["ThirdCo"]);
 const BANK_OPTIONS = simpleOptions(["Eastern Bank PLC", "City Bank"]);
 
 const fmt = (n) =>
-  n == null ? "" : n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  n == null
+    ? ""
+    : n.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
 
 /* -----------------------------
    Mock Data
@@ -68,6 +77,7 @@ export default function DebitNoteList() {
   const [form] = Form.useForm();
   const [q, setQ] = useState("");
   const [pageSize, setPageSize] = useState(10);
+  const navigate = useNavigate();
 
   const defaultDates = [dayjs("2025-07-16"), dayjs("2025-10-16")];
 
@@ -81,6 +91,7 @@ export default function DebitNoteList() {
     dateRange: defaultDates,
   };
 
+  // 🔹 Action menu: View, Edit, Copy, DeleteModal
   const actionMenu = (row) => ({
     items: [
       {
@@ -91,7 +102,7 @@ export default function DebitNoteList() {
             View
           </Space>
         ),
-        onClick: () => message.info(`Viewing ${row.reference}`),
+        onClick: () => navigate("/export-sea/view-debit-note"),
       },
       {
         key: "edit",
@@ -101,19 +112,24 @@ export default function DebitNoteList() {
             Edit
           </Space>
         ),
-        onClick: () => message.info(`Editing ${row.reference}`),
+        onClick: () => navigate("/export-sea/edit-debit-note"),
+      },
+      {
+        key: "copy",
+        label: (
+          <Space>
+            <CopyOutlined />
+            Copy
+          </Space>
+        ),
+        onClick: () => navigate("/export-sea/copy-debit-note"),
       },
       { type: "divider" },
       {
-        key: "delete",
+        key: "delete-modal",
         danger: true,
-        label: (
-          <Space>
-            <DeleteOutlined />
-            Delete
-          </Space>
-        ),
-        onClick: () => message.warning(`Deleted ${row.reference} (demo)`),
+        // ⬇️ এখানে সরাসরি DeleteModal component বসানো হয়েছে
+        label: <DeleteModal />,
       },
     ],
   });
@@ -178,17 +194,23 @@ export default function DebitNoteList() {
           .toLowerCase();
         if (!hay.includes(text)) return false;
       }
+
       if (range && range.length === 2) {
         const d = dayjs(row.date);
         if (d.isBefore(range[0], "day") || d.isAfter(range[1], "day")) return false;
       }
+
       if (values.hbl && !row.hbl.includes(values.hbl)) return false;
       if (values.bank && row.bank !== values.bank) return false;
       if (values.shipper && row.billToParty !== values.shipper) return false;
-      if (values.agent && !row.preparedBy.toLowerCase().includes(String(values.agent).toLowerCase()))
+      if (
+        values.agent &&
+        !row.preparedBy.toLowerCase().includes(String(values.agent).toLowerCase())
+      )
         return false;
       if (values.thirdParty && !row.preparedBy.includes(values.thirdParty)) return false;
-      if (values.consignee) return false; // placeholder – no consignee field in demo row
+      if (values.consignee) return false; // demo data te consulgee nai
+
       return true;
     });
   }, [form, q]);
@@ -202,8 +224,6 @@ export default function DebitNoteList() {
   return (
     <div className="px-4">
       <Card className="shadow-sm rounded-2xl">
-      
-
         {/* Filters */}
         <Form
           form={form}
@@ -253,7 +273,8 @@ export default function DebitNoteList() {
               pageSize,
               showSizeChanger: true,
               onChange: (_, ps) => setPageSize(ps),
-              showTotal: (total) => `Showing 1 to ${Math.min(total, pageSize)} of ${total} entries`,
+              showTotal: (total) =>
+                `Showing 1 to ${Math.min(total, pageSize)} of ${total} entries`,
             }}
           />
         </div>

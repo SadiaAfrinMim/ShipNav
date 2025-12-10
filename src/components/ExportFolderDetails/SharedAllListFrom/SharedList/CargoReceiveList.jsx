@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import {
-  Layout,
   Typography,
   Row,
   Col,
@@ -12,36 +11,80 @@ import {
   Space,
   Dropdown,
   Select,
-  Tooltip,
 } from "antd";
 import {
-  ReloadOutlined,
-  PlusOutlined,
   MoreOutlined,
   LinkOutlined,
   SearchOutlined,
   CalendarOutlined,
-  UnorderedListOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useNavigate } from "react-router-dom";
+import DeleteModal from "../../../SharedAllListFrom/Modal/DeleteModal";
 
 dayjs.extend(customParseFormat);
 
-const { Header, Content } = Layout;
-const { Title, Text } = Typography;
+const { Text } = Typography;
+
+
 
 // Mock data for design preview
 const initialRows = [
-  { key: 1, sl: 1, bookingNo: "ES#2500005", date: "10/08/2025", cargoReceive: "10/08/2025", totalCbm: 0, totalGwt: 1950, status: "Opened" },
-  { key: 2, sl: 2, bookingNo: "ES#2500004", date: "08/08/2025", cargoReceive: "08/08/2025", totalCbm: 3.402, totalGwt: 360, status: "Opened" },
-  { key: 3, sl: 3, bookingNo: "ES#2500003", date: "07/08/2025", cargoReceive: "07/08/2025", totalCbm: 0, totalGwt: 22323, status: "Opened" },
-  { key: 4, sl: 4, bookingNo: "ES#2500001", date: "06/08/2025", cargoReceive: "06/08/2025", totalCbm: 0, totalGwt: 172.24, status: "Opened" },
-  { key: 5, sl: 5, bookingNo: "ES#2500002", date: "06/08/2025", cargoReceive: "06/08/2025", totalCbm: 0, totalGwt: 155.9, status: "Opened" },
+  {
+    key: 1,
+    sl: 1,
+    bookingNo: "ES#2500005",
+    date: "10/08/2025",
+    cargoReceive: "10/08/2025",
+    totalCbm: 0,
+    totalGwt: 1950,
+    status: "Opened",
+  },
+  {
+    key: 2,
+    sl: 2,
+    bookingNo: "ES#2500004",
+    date: "08/08/2025",
+    cargoReceive: "08/08/2025",
+    totalCbm: 3.402,
+    totalGwt: 360,
+    status: "Opened",
+  },
+  {
+    key: 3,
+    sl: 3,
+    bookingNo: "ES#2500003",
+    date: "07/08/2025",
+    cargoReceive: "07/08/2025",
+    totalCbm: 0,
+    totalGwt: 22323,
+    status: "Opened",
+  },
+  {
+    key: 4,
+    sl: 4,
+    bookingNo: "ES#2500001",
+    date: "06/08/2025",
+    cargoReceive: "06/08/2025",
+    totalCbm: 0,
+    totalGwt: 172.24,
+    status: "Opened",
+  },
+  {
+    key: 5,
+    sl: 5,
+    bookingNo: "ES#2500002",
+    date: "06/08/2025",
+    cargoReceive: "06/08/2025",
+    totalCbm: 0,
+    totalGwt: 155.9,
+    status: "Opened",
+  },
 ];
 
 export default function CargoReceiveList() {
-  const [rows, setRows] = useState(initialRows);
+  const [rows] = useState(initialRows);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [search, setSearch] = useState("");
   const [pageSize, setPageSize] = useState(10);
@@ -50,18 +93,48 @@ export default function CargoReceiveList() {
     end: dayjs("2025-10-10"),
   });
 
+  const navigate = useNavigate();
+
   const data = useMemo(() => {
     const q = search.trim().toLowerCase();
     return rows.filter((r) =>
-      [r.bookingNo, r.status, r.date, r.cargoReceive].join(" ").toLowerCase().includes(q)
+      [r.bookingNo, r.status, r.date, r.cargoReceive]
+        .join(" ")
+        .toLowerCase()
+        .includes(q)
     );
   }, [rows, search]);
 
-  const menuItems = [
-    { key: "open", label: "Open details" },
+  // ➜ view / edit / copy menu items (delete আলাদা নিচে)
+  const baseMenuItems = [
+    { key: "view", label: "View" },
     { key: "edit", label: "Edit" },
-    { key: "issue", label: "Issue" },
+    { key: "copy", label: "Copy" },
+    { type: "divider" },
   ];
+
+  const handleActionClick = (key, record) => {
+    if (key === "view") {
+      navigate("/export-sea/view-cargo-receive", {
+        state: { record },
+      });
+    }
+
+    if (key === "edit") {
+      navigate("/export-sea/edit-cargo-receive", {
+        state: { record },
+      });
+    }
+
+    if (key === "copy") {
+      navigate("/export-sea/copy-cargo-receive", {
+        state: { record },
+      });
+    }
+
+    // 🔸 delete আর এখানে handle করছি না,
+    // DeleteModal নিজে নিজেই modal+delete action handle করবে
+  };
 
   const columns = [
     {
@@ -90,7 +163,8 @@ export default function CargoReceiveList() {
       dataIndex: "date",
       width: 130,
       sorter: (a, b) =>
-        dayjs(a.date, "DD/MM/YYYY", true).unix() - dayjs(b.date, "DD/MM/YYYY", true).unix(),
+        dayjs(a.date, "DD/MM/YYYY", true).unix() -
+        dayjs(b.date, "DD/MM/YYYY", true).unix(),
     },
     {
       title: "Cargo Receive",
@@ -126,83 +200,110 @@ export default function CargoReceiveList() {
     {
       title: "Action",
       key: "action",
-      width: 90,
+      width: 110,
       align: "center",
-      render: () => (
-        <Dropdown menu={{ items: menuItems }} trigger={["click"]}>
-          <Button type="text" icon={<MoreOutlined />} />
-        </Dropdown>
-      ),
+      render: (_, record) => {
+        const items = [
+          ...baseMenuItems,
+          {
+            key: "delete-modal",
+   
+            label: <DeleteModal />,
+          },
+        ];
+
+        return (
+          <Dropdown
+            trigger={["click"]}
+            menu={{
+              items,
+              onClick: ({ key }) => {
+                if (key !== "delete-modal") {
+                  handleActionClick(key, record);
+                }
+              },
+            }}
+          >
+            <Button type="text" icon={<MoreOutlined />} />
+          </Dropdown>
+        );
+      },
     },
   ];
 
   return (
-   <div>
+    <div>
       <div className="p-4 border-b border-gray-100">
-            <Row gutter={[12, 12]} align="middle">
-              <Col xs={24} md={12} lg={8}>
-                <div className="flex items-center gap-2 mb-1">
-                  <Text strong>Filter:</Text>
-                </div>
-                <Space.Compact className="w-full">
-                  <Input
-                    allowClear
-                    prefix={<SearchOutlined />}
-                    placeholder="Type to filter..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </Space.Compact>
-              </Col>
+        <Row gutter={[12, 12]} align="middle">
+          <Col xs={24} md={12} lg={8}>
+            <div className="flex items-center gap-2 mb-1">
+              <Text strong>Filter:</Text>
+            </div>
+            <Space.Compact className="w-full">
+              <Input
+                allowClear
+                prefix={<SearchOutlined />}
+                placeholder="Type to filter..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </Space.Compact>
+          </Col>
 
-              <Col xs={24} lg={6}>
-                <div className="flex items-center gap-2">
-                  <CalendarOutlined className="text-gray-400" />
-                  <Text strong>Start Date *</Text>
-                </div>
-                <DatePicker
-                  className="w-full mt-1"
-                  value={dateRange.start}
-                  onChange={(d) => setDateRange((r) => ({ ...r, start: d }))}
-                />
-              </Col>
+          <Col xs={24} lg={6}>
+            <div className="flex items-center gap-2">
+              <CalendarOutlined className="text-gray-400" />
+              <Text strong>Start Date *</Text>
+            </div>
+            <DatePicker
+              className="w-full mt-1"
+              value={dateRange.start}
+              onChange={(d) =>
+                setDateRange((r) => ({ ...r, start: d }))
+              }
+            />
+          </Col>
 
-              <Col xs={24} lg={6}>
-                <div className="flex items-center gap-2">
-                  <CalendarOutlined className="text-gray-400" />
-                  <Text strong>End Date *</Text>
-                </div>
-                <DatePicker
-                  className="w-full mt-1"
-                  value={dateRange.end}
-                  onChange={(d) => setDateRange((r) => ({ ...r, end: d }))}
-                />
-              </Col>
+          <Col xs={24} lg={6}>
+            <div className="flex items-center gap-2">
+              <CalendarOutlined className="text-gray-400" />
+              <Text strong>End Date *</Text>
+            </div>
+            <DatePicker
+              className="w-full mt-1"
+              value={dateRange.end}
+              onChange={(d) =>
+                setDateRange((r) => ({ ...r, end: d }))
+              }
+            />
+          </Col>
 
-              <Col xs={24} lg={4} className="text-right">
-                <Space>
-                  <Text>Show:</Text>
-                  <Select
-                    value={pageSize}
-                    className="w-[90px]"
-                    onChange={(v) => setPageSize(v)}
-                    options={[10, 25, 50, 100].map((n) => ({ value: n, label: n }))}
-                  />
-                </Space>
-              </Col>
-            </Row>
-          </div>
+          <Col xs={24} lg={4} className="text-right">
+            <Space>
+              <Text>Show:</Text>
+              <Select
+                value={pageSize}
+                className="w-[90px]"
+                onChange={(v) => setPageSize(v)}
+                options={[10, 25, 50, 100].map((n) => ({
+                  value: n,
+                  label: n,
+                }))}
+              />
+            </Space>
+          </Col>
+        </Row>
+      </div>
 
-          {/* Table */}
-          <Table
-            rowSelection={{ selectedRowKeys, onChange: setSelectedRowKeys }}
-            columns={columns}
-            dataSource={data}
-            pagination={{ pageSize }}
-            size="middle"
-            scroll={{ x: 900 }}
-          />
-        </div>
-  
+      {/* Table */}
+      <Table
+        rowSelection={{ selectedRowKeys, onChange: setSelectedRowKeys }}
+        columns={columns}
+        dataSource={data}
+        pagination={{ pageSize }}
+        size="middle"
+        scroll={{ x: 900 }}
+      />
+    </div>
   );
 }

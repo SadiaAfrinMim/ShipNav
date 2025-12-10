@@ -1,9 +1,9 @@
+// File: FreightInvoiceList.jsx
 import React, { useMemo, useState } from "react";
 import {
   Button,
   Card,
   DatePicker,
-  Dropdown,
   Form,
   Input,
   Select,
@@ -11,67 +11,44 @@ import {
   Table,
   Tag,
   Typography,
-  message,
+  Dropdown,
 } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import type { MenuProps } from "antd";
 import {
   ReloadOutlined,
   PlusOutlined,
-  MoreOutlined,
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
+  CopyOutlined,
+  MoreOutlined,
 } from "@ant-design/icons";
-import dayjs, { Dayjs } from "dayjs";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import DeleteModal from "../../SharedAllListFrom/Modal/DeleteModal";
+
+// 🆕 DELETE MODAL IMPORT
+
 
 const { RangePicker } = DatePicker;
 const { Text } = Typography;
-
-// -----------------------------
-// Types
-// -----------------------------
-
-type InvoiceRow = {
-  key: string;
-  sl: number;
-  reference: string;
-  date: string; // ISO date string
-  hbl: string;
-  attention: string;
-  billTo: string;
-  mbl: string;
-  bank?: string;
-  totalAmount: number; // BDT shown as 0,000.00
-  excAmount?: number; // e.g., 20.49
-  preparedBy: string;
-};
-
-// -----------------------------
-// Mock options
-// -----------------------------
 
 const HBL_OPTIONS = ["All", "ES#25000005", "ES#25000001"].map((v) => ({
   label: v,
   value: v === "All" ? undefined : v,
 }));
 
-const simpleOptions = (arr: string[]) => [
+const simpleOptions = (arr) => [
   { label: "All", value: undefined },
   ...arr.map((v) => ({ label: v, value: v })),
 ];
 
-const SHIPPER_OPTIONS = simpleOptions(["TEX ZONE KNITWEAR LTD."]); // demo
+const SHIPPER_OPTIONS = simpleOptions(["TEX ZONE KNITWEAR LTD."]);
 const CONSIGNEE_OPTIONS = simpleOptions(["Consignee A", "Consignee B"]);
 const AGENT_OPTIONS = simpleOptions(["NZN Logistics", "Agent X"]);
 const THIRD_PARTY_OPTIONS = simpleOptions(["ThirdCo", "Delta Forwarders"]);
 const BANK_OPTIONS = simpleOptions(["Eastern Bank PLC", "City Bank"]);
 
-// -----------------------------
-// Mock data
-// -----------------------------
-
-const MOCK_DATA: InvoiceRow[] = [
+const MOCK_DATA = [
   {
     key: "1",
     sl: 1,
@@ -102,29 +79,19 @@ const MOCK_DATA: InvoiceRow[] = [
   },
 ];
 
-// -----------------------------
-// Utilities
-// -----------------------------
-
-const fmtBDT = (n?: number) =>
-  n === undefined ? "" : n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-// -----------------------------
-// Component
-// -----------------------------
+const fmtBDT = (n) =>
+  n?.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
 export default function FreightInvoiceList() {
   const [form] = Form.useForm();
   const [query, setQuery] = useState("");
-
-  // default filter dates (match screenshot: 16 Jul 2025 - 16 Oct 2025)
-  const defaultDates: [Dayjs, Dayjs] = [
-    dayjs("2025-07-16"),
-    dayjs("2025-10-16"),
-  ];
-
-  // Keep local state for pagination as AntD Table manages it well
   const [pageSize, setPageSize] = useState(10);
+  const navigate = useNavigate();
+
+  const defaultDates = [dayjs("2025-07-16"), dayjs("2025-10-16")];
 
   const initialValues = {
     hbl: undefined,
@@ -134,9 +101,10 @@ export default function FreightInvoiceList() {
     thirdParty: undefined,
     bank: undefined,
     dateRange: defaultDates,
-  } as const;
+  };
 
-  const actionMenu = (row: InvoiceRow): MenuProps => ({
+  // 🔥 UPDATED DROPDOWN ACTIONS WITH DeleteModal
+  const actionMenu = (row) => ({
     items: [
       {
         key: "view",
@@ -145,7 +113,8 @@ export default function FreightInvoiceList() {
             <EyeOutlined /> View
           </Space>
         ),
-        onClick: () => message.info(`Viewing ${row.reference}`),
+        onClick: () =>
+          navigate("/export-sea/view-freight-invoice", { state: { record: row } }),
       },
       {
         key: "edit",
@@ -154,25 +123,31 @@ export default function FreightInvoiceList() {
             <EditOutlined /> Edit
           </Space>
         ),
-        onClick: () => message.info(`Editing ${row.reference}`),
+        onClick: () =>
+          navigate("/export-sea/edit-freight-invoice", { state: { record: row } }),
       },
       {
-        type: "divider",
+        key: "copy",
+        label: (
+          <Space>
+            <CopyOutlined /> Copy
+          </Space>
+        ),
+        onClick: () =>
+          navigate("/export-sea/copy-freight-invoice", { state: { record: row } }),
       },
+      { type: "divider" },
+
+      // 🆕 DeleteModal Attached Here
       {
         key: "delete",
         danger: true,
-        label: (
-          <Space>
-            <DeleteOutlined /> Delete
-          </Space>
-        ),
-        onClick: () => message.warning(`Deleted ${row.reference} (demo)`),
+        label: <DeleteModal />,
       },
     ],
   });
 
-  const columns: ColumnsType<InvoiceRow> = [
+  const columns = [
     {
       title: "S/L No.",
       dataIndex: "sl",
@@ -182,7 +157,7 @@ export default function FreightInvoiceList() {
     {
       title: "Reference",
       dataIndex: "reference",
-      render: (v: string) => <Tag color="blue">{v}</Tag>,
+      render: (v) => <Tag color="blue">{v}</Tag>,
       width: 160,
     },
     {
@@ -190,7 +165,7 @@ export default function FreightInvoiceList() {
       dataIndex: "date",
       width: 140,
       sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
-      render: (v: string) => dayjs(v).format("DD/MM/YYYY"),
+      render: (v) => dayjs(v).format("DD/MM/YYYY"),
     },
     { title: "HBL", dataIndex: "hbl", width: 140 },
     { title: "Attention", dataIndex: "attention", width: 260 },
@@ -202,16 +177,14 @@ export default function FreightInvoiceList() {
       dataIndex: "totalAmount",
       align: "right",
       width: 140,
-      render: (n: number) => fmtBDT(n),
+      render: (n) => fmtBDT(n),
     },
     {
-      title: (
-        <div className="text-right">Total Amount (EXC)</div>
-      ),
+      title: <div className="text-right">Total Amount (EXC)</div>,
       dataIndex: "excAmount",
       align: "right",
       width: 170,
-      render: (n?: number) => (n !== undefined ? fmtBDT(n) : "-"),
+      render: (n) => (n !== undefined ? fmtBDT(n) : "-"),
     },
     { title: "Prepared By", dataIndex: "preparedBy", width: 280 },
     {
@@ -228,43 +201,34 @@ export default function FreightInvoiceList() {
 
   const filteredData = useMemo(() => {
     const values = form.getFieldsValue();
-    const range: [Dayjs, Dayjs] | undefined = values.dateRange;
+    const range = values.dateRange;
 
     return MOCK_DATA.filter((row) => {
-      // Quick text filter on most columns
       const text = query.trim().toLowerCase();
       if (text) {
-        const hay = [
-          row.reference,
-          row.hbl,
-          row.attention,
-          row.billTo,
-          row.mbl,
-          row.bank,
-          row.preparedBy,
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-        if (!hay.includes(text)) return false;
+        const haystack =
+          [
+            row.reference,
+            row.hbl,
+            row.attention,
+            row.billTo,
+            row.mbl,
+            row.bank,
+            row.preparedBy,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+        if (!haystack.includes(text)) return false;
       }
 
-      // Date range filter
       if (range && range.length === 2) {
         const d = dayjs(row.date);
-        if (d.isBefore(range[0], "day") || d.isAfter(range[1], "day")) {
+        if (d.isBefore(range[0], "day") || d.isAfter(range[1], "day"))
           return false;
-        }
       }
 
-      // Select filters (only check when value is set)
       if (values.hbl && row.hbl !== values.hbl) return false;
-      if (values.agent && !row.preparedBy.toLowerCase().includes(String(values.agent).toLowerCase())) return false;
-      if (values.bank && row.bank !== values.bank) return false;
-      // shipper/consignee/thirdParty demo – assuming they relate to attention/billTo
-      if (values.shipper && row.attention !== values.shipper) return false;
-      if (values.consignee && row.billTo !== values.consignee) return false;
-      if (values.thirdParty && !row.preparedBy.includes(values.thirdParty)) return false;
 
       return true;
     });
@@ -279,9 +243,6 @@ export default function FreightInvoiceList() {
   return (
     <div className="p-4">
       <Card className="shadow-sm rounded-2xl">
-        
-
-        {/* Filters */}
         <Form
           form={form}
           layout="vertical"
@@ -307,7 +268,7 @@ export default function FreightInvoiceList() {
             <Select options={BANK_OPTIONS} allowClear placeholder="All" />
           </Form.Item>
           <Form.Item label="Start Date – End Date" name="dateRange">
-            <RangePicker className="w-full" format="D MMM, YYYY" allowEmpty={[false, false]} />
+            <RangePicker className="w-full" />
           </Form.Item>
           <Form.Item label="Filter">
             <Input.Search
@@ -318,22 +279,18 @@ export default function FreightInvoiceList() {
           </Form.Item>
         </Form>
 
-        {/* Table */}
-        <div className="mt-2">
-          <Table
-            size="middle"
-            rowKey="key"
-            columns={columns}
-            dataSource={filteredData}
-            scroll={{ x: 1400 }}
-            pagination={{
-              pageSize,
-              showSizeChanger: true,
-              onChange: (_, ps) => setPageSize(ps),
-              showTotal: (total) => `Showing 1 to ${Math.min(total, pageSize)} of ${total} entries`,
-            }}
-          />
-        </div>
+        <Table
+          size="middle"
+          rowKey="key"
+          columns={columns}
+          dataSource={filteredData}
+          scroll={{ x: 1400 }}
+          pagination={{
+            pageSize,
+            showSizeChanger: true,
+            onChange: (_, ps) => setPageSize(ps),
+          }}
+        />
       </Card>
     </div>
   );

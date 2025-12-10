@@ -87,6 +87,8 @@ const CATEGORIES = [
           { icon: <FileAddOutlined />, label: "Shipping Order", link: "/export-air/shipping-order" },
           { icon: <FileTextOutlined />, label: "Cargo Receive", link: "/export-air/cargo-receive" },
           { icon: <FilePdfOutlined />, label: "MAWB", link: "/export-air/mawb" },
+         { icon: <FileSearchOutlined />, label: "Shipment Advice", link: "/export-air/shipment-advice" }
+          
         ],
       },
       {

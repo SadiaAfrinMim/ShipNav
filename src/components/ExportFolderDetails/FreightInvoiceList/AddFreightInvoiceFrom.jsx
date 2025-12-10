@@ -65,10 +65,7 @@ export default function AddFreightInvoice() {
       <Card
         bordered
         bodyStyle={{ padding: 16 }}
-        style={{
-          borderRadius: 6,
-          border: "1px solid #00b8c6",
-        }}
+        
       >
        
 

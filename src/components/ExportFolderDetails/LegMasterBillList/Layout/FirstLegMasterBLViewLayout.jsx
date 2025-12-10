@@ -1,15 +1,14 @@
 
-
 import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
-
-
-import AddShippingOrder from '../../SharedAllListFrom/SharedFrom/AddShippingOrder';
-
-
+import AddFirstLegMasterBill from '../../SharedAllListFrom/SharedFrom/AddFirstLegMasterBill';
+import FirstLegMasterBLView from '../FirstLegMasterBLView';
 
 
 
-const ShippingEXportAddShippingOrder = () => {
+
+
+
+const FirstLegMasterBLViewLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -17,7 +16,7 @@ const ShippingEXportAddShippingOrder = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderAddFromTitle></HeaderAddFromTitle>
-        <AddShippingOrder></AddShippingOrder>
+        <FirstLegMasterBLView></FirstLegMasterBLView>
 
 
       </div>
@@ -25,4 +24,4 @@ const ShippingEXportAddShippingOrder = () => {
   );
 };
 
-export default ShippingEXportAddShippingOrder;
+export default FirstLegMasterBLViewLayout;

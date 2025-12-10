@@ -93,6 +93,15 @@ import PortListLayout from "./components/settings/PortListLayout.jsx";
 import AddCurrencyListLayout from "./components/settings/AddCurrencyListLayout.jsx";
 import CountryListLayout from "./components/settings/CountryListLayout.jsx";
 import StuffingPackageLayout from "./components/ExportFolderDetails/StuffingPackageList/Layout/StuffingPackageLayout.jsx";
+import ShippingOrderPrintLayout from "./components/ExportFolderDetails/ShippingOrderList/Layout/ShippingOrderPrintLayout.jsx";
+import CargoReceivePrintLayout from "./components/ExportFolderDetails/CargoReceiveList/Layout/CargoReceivePrintLayout.jsx";
+import BillOfLadingViewLayout from "./components/ExportFolderDetails/BillOfLadingExport/Layout/BillOfLadingViewLayout.jsx";
+import FirstLegMasterBLViewLayout from "./components/ExportFolderDetails/LegMasterBillList/Layout/FirstLegMasterBLViewLayout.jsx";
+import FreightInvoiceViewLayout from "./components/ExportFolderDetails/FreightInvoiceList/Layout/FreightInvoiceViewLayout.jsx";
+import ExpenseBillListLayout from "./components/ExportFolderDetails/ExpenseBill/Layout/ExpenseBillListLayout.jsx";
+import AddExpenseBillLayout from "./components/ExportFolderDetails/ExpenseBill/Layout/AddExpenseBillLayout.jsx";
+import MasterBLListLayout from "./components/ExportFolderDetails/MasterBill/Layout/MasterBLListLayout.jsx";
+import AddMasterBLLayout from "./components/ExportFolderDetails/MasterBill/Layout/AddMasterBLLayout.jsx";
 
 
 
@@ -153,6 +162,31 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+         <Route
+          path="/export-sea/edit-shipping-order"
+          element={
+            <Layout>
+              <ShippingEXportAddShippingOrder></ShippingEXportAddShippingOrder>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/view-shipping-order"
+          element={
+            <Layout>
+              <ShippingOrderPrintLayout></ShippingOrderPrintLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/copy-shipping-order"
+          element={
+            <Layout>
+              <ShippingEXportAddShippingOrder></ShippingEXportAddShippingOrder>
+            </Layout>
+          }
+        />
+        
         <Route
           path="/export-sea/cargo-receive"
           element={
@@ -168,6 +202,30 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <CargoEXportAddCargo></CargoEXportAddCargo>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/edit-cargo-receive"
+          element={
+            <Layout>
+              <CargoEXportAddCargo></CargoEXportAddCargo>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/copy-cargo-receive"
+          element={
+            <Layout>
+              <CargoEXportAddCargo></CargoEXportAddCargo>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/view-cargo-receive"
+          element={
+            <Layout>
+              <CargoReceivePrintLayout></CargoReceivePrintLayout>
             </Layout>
           }
         />
@@ -187,7 +245,8 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
-        {/*! aeta baki ache  */}
+       
+       
         <Route
           path="/export-sea/stuffing-package"
           element={
@@ -230,11 +289,36 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+
         <Route
           path="/export-sea/add-hbl"
           element={
             <Layout>
               <BillOfLadingExportFrom></BillOfLadingExportFrom>
+            </Layout>
+          }
+        />
+          <Route
+          path="/export-sea/copy-hbl"
+          element={
+            <Layout>
+              <BillOfLadingExportFrom></BillOfLadingExportFrom>
+            </Layout>
+          }
+        />
+             <Route
+          path="/export-sea/edit-hbl"
+          element={
+            <Layout>
+              <BillOfLadingExportFrom></BillOfLadingExportFrom>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/view-hbl"
+          element={
+            <Layout>
+              <BillOfLadingViewLayout></BillOfLadingViewLayout>
             </Layout>
           }
         />
@@ -254,6 +338,30 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+         <Route
+          path="/export-sea/edit-mbl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/copy-mbl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+           <Route
+          path="/export-sea/view-mbl"
+          element={
+            <Layout>
+              <FirstLegMasterBLViewLayout></FirstLegMasterBLViewLayout>
+            </Layout>
+          }
+        />
         <Route
           path="/export-sea/freight-invoice"
           element={
@@ -267,6 +375,30 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <AddFreightInvoiceLayout></AddFreightInvoiceLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/edit-freight-invoice"
+          element={
+            <Layout>
+              <AddFreightInvoiceLayout></AddFreightInvoiceLayout>
+            </Layout>
+          }
+        />
+              <Route
+          path="/export-sea/copy-freight-invoice"
+          element={
+            <Layout>
+              <AddFreightInvoiceLayout></AddFreightInvoiceLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-sea/view-freight-invoice"
+          element={
+            <Layout>
+              <FreightInvoiceViewLayout></FreightInvoiceViewLayout>
             </Layout>
           }
         />
@@ -294,6 +426,31 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+
+         <Route
+          path="/export-sea/edit-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/copy-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/view-debit-note"
+          element={
+            <Layout>
+              <AddDebitNoteLayout></AddDebitNoteLayout>
+            </Layout>
+          }
+        />
         <Route
           path="/export-sea/credit-note"
           element={
@@ -310,11 +467,38 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+         <Route
+          path="/export-sea/edit-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        
+        <Route
+          path="/export-sea/view-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/copy-credit-note"
+          element={
+            <Layout>
+              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+            </Layout>
+          }
+        />
+        
+
         <Route
           path="/export-sea/expense-bill"
           element={
             <Layout>
-              <CreditNoteListLayout></CreditNoteListLayout>
+              <ExpenseBillListLayout></ExpenseBillListLayout>
             </Layout>
           }
         />
@@ -322,7 +506,31 @@ createRoot(document.getElementById("root")).render(
           path="/export-sea/add-expense-bill"
           element={
             <Layout>
-              <AddCreditNoteListLayout></AddCreditNoteListLayout>
+              <AddExpenseBillLayout></AddExpenseBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/edit-expense-bill"
+          element={
+            <Layout>
+              <AddExpenseBillLayout></AddExpenseBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/copy-expense-bill"
+          element={
+            <Layout>
+              <AddExpenseBillLayout></AddExpenseBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/view-expense-bill"
+          element={
+            <Layout>
+              <AddExpenseBillLayout></AddExpenseBillLayout>
             </Layout>
           }
         />
@@ -406,6 +614,31 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <ExportAirMasterAddBillLayout></ExportAirMasterAddBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/edit-add-mawb"
+          element={
+            <Layout>
+              <ExportAirMasterAddBillLayout></ExportAirMasterAddBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/shipment-advice"
+          element={
+            <Layout>
+              <ExportSeaShipmentAdviceLayout></ExportSeaShipmentAdviceLayout>
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/export-air/add-shipment-advice"
+          element={
+            <Layout>
+              <ShipmentAdviceFormLayout></ShipmentAdviceFormLayout>
             </Layout>
           }
         />
@@ -518,7 +751,7 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/master-bl"
           element={
             <Layout>
-              <LegMasterBillListLayout></LegMasterBillListLayout>
+              <MasterBLListLayout></MasterBLListLayout>
             </Layout>
           }
         />
@@ -526,7 +759,31 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/add-master-bl"
           element={
             <Layout>
-              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+              <AddMasterBLLayout></AddMasterBLLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/edit-master-bl"
+          element={
+            <Layout>
+              <AddMasterBLLayout></AddMasterBLLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/view-master-bl"
+          element={
+            <Layout>
+              <AddMasterBLLayout></AddMasterBLLayout>
+            </Layout>
+          }
+        />
+          <Route
+          path="/import-sea/copy-master-bl"
+          element={
+            <Layout>
+              <AddMasterBLLayout></AddMasterBLLayout>
             </Layout>
           }
         />
@@ -540,6 +797,30 @@ createRoot(document.getElementById("root")).render(
         />
         <Route
           path="/import-sea/add-arrival-notice"
+          element={
+            <Layout>
+              <AddArrivalNoticeLayout></AddArrivalNoticeLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/edit-arrival-notice"
+          element={
+            <Layout>
+              <AddArrivalNoticeLayout></AddArrivalNoticeLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/view-arrival-notice"
+          element={
+            <Layout>
+              <AddArrivalNoticeLayout></AddArrivalNoticeLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-sea/copy-arrival-notice"
           element={
             <Layout>
               <AddArrivalNoticeLayout></AddArrivalNoticeLayout>
@@ -562,6 +843,30 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+        <Route
+          path="/import-sea/edit-forward-letter"
+          element={
+            <Layout>
+              <ForwardLetterListLayout></ForwardLetterListLayout>
+            </Layout>
+          }
+         />
+           <Route
+          path="/import-sea/copy-forward-letter"
+          element={
+            <Layout>
+              <ForwardLetterListLayout></ForwardLetterListLayout>
+            </Layout>
+          }
+         />
+           <Route
+          path="/import-sea/view-forward-letter"
+          element={
+            <Layout>
+              <ForwardLetterListLayout></ForwardLetterListLayout>
+            </Layout>
+          }
+         />
 
 
 
@@ -687,12 +992,36 @@ createRoot(document.getElementById("root")).render(
           path="/import-air/master-bl"
           element={
             <Layout>
-              <LegMasterBillListLayout></LegMasterBillListLayout>
+              <MasterBLListLayout></MasterBLListLayout>
             </Layout>
           }
         />
         <Route
           path="/import-air/add-master-bl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/edit-master-bl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/copy-master-bl"
+          element={
+            <Layout>
+              <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/import-air/view-master-bl"
           element={
             <Layout>
               <AddFirstLegMasterBillLayout></AddFirstLegMasterBillLayout>

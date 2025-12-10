@@ -1,10 +1,16 @@
-import React from 'react';
-import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
 
-import BillOfLadingForm from '../BillOfLadingForm';
 import HeaderAddFromTitle from '../../SharedAllListFrom/HeaderTitle/HeaderAddFromTitle';
 
-const BillOfLadingExportFrom = () => {
+
+import BillOfLadingView from '../BillOfLadingView';
+
+
+
+
+
+
+
+const BillOfLadingViewLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -12,11 +18,11 @@ const BillOfLadingExportFrom = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderAddFromTitle></HeaderAddFromTitle>
-        <BillOfLadingForm></BillOfLadingForm>
+      |<BillOfLadingView></BillOfLadingView>
 
       </div>
     </div>
   );
 };
 
-export default BillOfLadingExportFrom;
+export default BillOfLadingViewLayout;

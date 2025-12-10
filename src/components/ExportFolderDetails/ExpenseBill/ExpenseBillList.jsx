@@ -27,6 +27,7 @@ import DeleteModal from "../../SharedAllListFrom/Modal/DeleteModal";
 
 
 
+
 const { RangePicker } = DatePicker;
 const { Text } = Typography;
 
@@ -73,7 +74,7 @@ const DATA = [
 /* -----------------------------
    Component
 ------------------------------*/
-export default function CreditNoteList() {
+export default function ExpenseBillList() {
   const [form] = Form.useForm();
   const [q, setQ] = useState("");
   const [pageSize, setPageSize] = useState(10);
@@ -102,7 +103,7 @@ export default function CreditNoteList() {
             View
           </Space>
         ),
-        onClick: () => navigate("/export-sea/view-credit-note"),
+        onClick: () => navigate("/export-sea/view-expense-bill"),
       },
       {
         key: "edit",
@@ -112,7 +113,7 @@ export default function CreditNoteList() {
             Edit
           </Space>
         ),
-        onClick: () => navigate("/export-sea/edit-credit-note"),
+        onClick: () => navigate("/export-sea/edit-expense-bill"),
       },
       {
         key: "copy",
@@ -122,13 +123,13 @@ export default function CreditNoteList() {
             Copy
           </Space>
         ),
-        onClick: () => navigate("/export-sea/copy-credit-note"),
+        onClick: () => navigate("/export-sea/copy-expense-bill"),
       },
       { type: "divider" },
       {
         key: "delete-modal",
         danger: true,
-        // ⬇️ এখানে সরাসরি DeleteModal component বসানো হয়েছে
+        
         label: <DeleteModal />,
       },
     ],

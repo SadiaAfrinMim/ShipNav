@@ -1,14 +1,15 @@
 
+
 import HeaderTittleFrom from '../../SharedAllListFrom/HeaderTitle/HeaderTittleFrom';
-import BillOfLadingExport from '../BillOfLadingExport';
+
+import MasterBLList from '../MasterBLList';
 
 
 
 
 
 
-
-const BillOfLadingExportLayout = () => {
+const MasterBLListLayout = () => {
   return (
     <div className='p-4 '>
 
@@ -16,13 +17,7 @@ const BillOfLadingExportLayout = () => {
 
       <div className="bg-white  rounded-t-xl shadow-md overflow-hidden">
         <HeaderTittleFrom></HeaderTittleFrom>
-        <BillOfLadingExport
-  mode="add"
-  onSubmit={(data) => {
-    // API: create
-    console.log("CREATE payload", data);
-  }}
-/>
+        <MasterBLList></MasterBLList>
 
 
       </div>
@@ -30,4 +25,4 @@ const BillOfLadingExportLayout = () => {
   );
 };
 
-export default BillOfLadingExportLayout;
+export default MasterBLListLayout;
