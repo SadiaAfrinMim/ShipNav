@@ -102,6 +102,10 @@ import ExpenseBillListLayout from "./components/ExportFolderDetails/ExpenseBill/
 import AddExpenseBillLayout from "./components/ExportFolderDetails/ExpenseBill/Layout/AddExpenseBillLayout.jsx";
 import MasterBLListLayout from "./components/ExportFolderDetails/MasterBill/Layout/MasterBLListLayout.jsx";
 import AddMasterBLLayout from "./components/ExportFolderDetails/MasterBill/Layout/AddMasterBLLayout.jsx";
+import DeliveryOrderLayout from "./components/ExportSeaFolderDetails/DeliveryOrder/Layout/DeliveryOrderLayout.jsx";
+import AddDeliveryOrderLayout from "./components/ExportSeaFolderDetails/DeliveryOrder/Layout/AddDeliveryOrderLayout.jsx";
+import RequestLetterListLayout from "./components/ExportFolderDetails/RequestLetter/Layout/RequestLetterListLayout.jsx";
+import AddRequestLetterLayout from "./components/ExportFolderDetails/RequestLetter/Layout/AddRequestLetterLayout.jsx";
 
 
 
@@ -847,7 +851,7 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/edit-forward-letter"
           element={
             <Layout>
-              <ForwardLetterListLayout></ForwardLetterListLayout>
+              <AddForwardLetterLayout></AddForwardLetterLayout>
             </Layout>
           }
          />
@@ -855,7 +859,7 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/copy-forward-letter"
           element={
             <Layout>
-              <ForwardLetterListLayout></ForwardLetterListLayout>
+              <AddForwardLetterLayout></AddForwardLetterLayout>
             </Layout>
           }
          />
@@ -863,7 +867,87 @@ createRoot(document.getElementById("root")).render(
           path="/import-sea/view-forward-letter"
           element={
             <Layout>
-              <ForwardLetterListLayout></ForwardLetterListLayout>
+              <AddForwardLetterLayout></AddForwardLetterLayout>
+            </Layout>
+          }
+         />
+         <Route
+          path="/import-sea/delivery-order"
+          element={
+            <Layout>
+              <DeliveryOrderLayout></DeliveryOrderLayout>
+            </Layout>
+          }
+         />
+          <Route
+          path="/import-sea/add-delivery-order"
+          element={
+            <Layout>
+              <AddDeliveryOrderLayout></AddDeliveryOrderLayout>
+            </Layout>
+          }
+         />
+          <Route
+          path="/import-sea/view-delivery-order"
+          element={
+            <Layout>
+              <AddDeliveryOrderLayout></AddDeliveryOrderLayout>
+            </Layout>
+          }
+         />
+          <Route
+          path="/import-sea/edit-delivery-order"
+          element={
+            <Layout>
+              <AddDeliveryOrderLayout></AddDeliveryOrderLayout>
+            </Layout>
+          }
+         />
+          <Route
+          path="/import-sea/copy-delivery-order"
+          element={
+            <Layout>
+              <AddDeliveryOrderLayout></AddDeliveryOrderLayout>
+            </Layout>
+          }
+         />
+          <Route
+          path="/import-sea/request-letter"
+          element={
+            <Layout>
+              <RequestLetterListLayout></RequestLetterListLayout>
+            </Layout>
+          }
+         />
+             <Route
+          path="/import-sea/add-request-letter"
+          element={
+            <Layout>
+              <AddRequestLetterLayout></AddRequestLetterLayout>
+            </Layout>
+          }
+         />
+             <Route
+          path="/import-sea/edit-request-letter"
+          element={
+            <Layout>
+              <AddRequestLetterLayout></AddRequestLetterLayout>
+            </Layout>
+          }
+         />
+             <Route
+          path="/import-sea/copy-request-letter"
+          element={
+            <Layout>
+              <AddRequestLetterLayout></AddRequestLetterLayout>
+            </Layout>
+          }
+         />
+             <Route
+          path="/import-sea/view-request-letter"
+          element={
+            <Layout>
+              <AddRequestLetterLayout></AddRequestLetterLayout>
             </Layout>
           }
          />

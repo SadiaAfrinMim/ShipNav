@@ -120,6 +120,7 @@ const CATEGORIES = [
           { icon: <FilePdfOutlined />, label: "Master B/L", link: "/import-sea/master-bl" },
           { icon: <FileTextOutlined />, label: "Arrival Notice", link: "/import-sea/arrival-notice" },
           { icon: <FileSearchOutlined />, label: "Forward Letter", link: "/import-sea/forward-letter" },
+          { icon: <FileSearchOutlined />, label: "Delivery Order", link: "/import-sea/Delivery-order" },
           
         ],
       },
@@ -153,8 +154,8 @@ const CATEGORIES = [
           
           { icon: <FileOutlined />, label: "Booking", link: "/import-air/booking" },
           { icon: <FilePdfOutlined />, label: "Master B/L", link: "/import-air/master-bl" },
-          { icon: <FileTextOutlined />, label: "Request Letter", link: "/import-air/request-letter" },
-          { icon: <FileTextOutlined />, label: "Forward Letter", link: "/import-air/forward-letter" },
+          { icon: <FileTextOutlined />, label: "Arrival Notice", link: "/import-sea/arrival-notice" },
+          { icon: <FileTextOutlined />, label: "request Letter", link: "/import-sea/request-letter" },
         ],
       },
       {

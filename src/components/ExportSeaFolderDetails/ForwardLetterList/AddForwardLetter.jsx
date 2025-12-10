@@ -59,7 +59,7 @@ export default function AddForwardLetter() {
 
   return (
     <div style={{ background: "#f3f6f7", minHeight: "100vh", padding: 10 }}>
-      {/* Top teal header */}
+      
     
 
       {/* Outer card */}
