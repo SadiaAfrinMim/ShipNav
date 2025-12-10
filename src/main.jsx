@@ -267,6 +267,30 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+         <Route
+          path="/export-sea/edit-stuffing-package"  
+          element={
+            <Layout>
+              <AddStuffingPackageLayout></AddStuffingPackageLayout>
+            </Layout>
+          }
+        />
+          <Route
+          path="/export-sea/copy-stuffing-package"  
+          element={
+            <Layout>
+              <AddStuffingPackageLayout></AddStuffingPackageLayout>
+            </Layout>
+          }
+        />
+          <Route
+          path="/export-sea/view-stuffing-package"  
+          element={
+            <Layout>
+              <AddStuffingPackageLayout></AddStuffingPackageLayout>
+            </Layout>
+          }
+        />
         <Route
           path="/export-sea/shipment-advice"
           element={
