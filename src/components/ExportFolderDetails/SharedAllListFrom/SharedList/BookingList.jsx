@@ -1,3 +1,4 @@
+// File: BookingList.jsx
 import { useState } from "react";
 import {
   Table,
@@ -12,13 +13,16 @@ import {
   Dropdown,
 } from "antd";
 import {
-
   ReloadOutlined,
   PlusOutlined,
   MenuOutlined,
   UnorderedListOutlined,
+  EyeOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import DeleteModal from "../../../SharedAllListFrom/Modal/DeleteModal";
+
 
 const { RangePicker } = DatePicker;
 
@@ -135,6 +139,50 @@ const data = [
 
 const BookingList = () => {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  // ---- route handlers (view / edit) ----
+  const handleView = (record) => {
+    navigate("/export-sea/view-booking", {
+      state: record,
+    });
+  };
+
+  const handleEdit = (record) => {
+    navigate("/export-sea/edit-booking", {
+      state: record,
+    });
+  };
+
+  const handleActionClick = (key, record) => {
+    if (key === "view") handleView(record);
+    if (key === "edit") handleEdit(record);
+    // key === "delete-modal" হলে DeleteModal নিজেই handle করবে
+  };
+
+  const actionItems = [
+    {
+      key: "view",
+      label: (
+        <Space>
+          <EyeOutlined /> View
+        </Space>
+      ),
+    },
+    {
+      key: "edit",
+      label: (
+        <Space>
+          <EditOutlined /> Edit
+        </Space>
+      ),
+    },
+    { type: "divider" },
+    {
+      key: "delete-modal",
+      label: <DeleteModal />, // button + modal (আগের মতোই)
+    },
+  ];
 
   const columns = [
     { title: "S/L No.", dataIndex: "sl", key: "sl" },
@@ -162,14 +210,12 @@ const BookingList = () => {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      render: (_, record) => (
         <Dropdown
+          trigger={["click"]}
           menu={{
-            items: [
-              { key: "1", label: "View" },
-              { key: "2", label: "Edit" },
-              { key: "3", label: "Delete" },
-            ],
+            items: actionItems,
+            onClick: ({ key }) => handleActionClick(key, record),
           }}
         >
           <MenuOutlined style={{ cursor: "pointer", fontSize: 18 }} />
@@ -179,33 +225,32 @@ const BookingList = () => {
   ];
 
   return (
-   <div className="p-4">
+    <div className="p-4">
+      {/* Filter row (top) */}
       <Row
-  gutter={[16, 16]}
-  style={{
-    marginBottom: 20,
-    display: "flex",
-    flexWrap: "wrap", // allows wrapping on small screens
-  }}
->
-  <Col xs={24} sm={12} md={4} lg={4}>
-    <Select placeholder="Commodity" style={{ width: "100%" }} />
-  </Col>
-  <Col xs={24} sm={12} md={4} lg={4}>
-    <Select placeholder="Freight Term" style={{ width: "100%" }} />
-  </Col>
-  <Col xs={24} sm={12} md={4} lg={4}>
-    <Select placeholder="Consignee" style={{ width: "100%" }} />
-  </Col>
-  <Col xs={24} sm={12} md={4} lg={4}>
-    <Select placeholder="Shipper" style={{ width: "100%" }} />
-  </Col>
-  <Col xs={24} sm={24} md={8} lg={8}>
-    <RangePicker style={{ width: "100%" }} />
-  </Col>
-</Row>
-
-
+        gutter={[16, 16]}
+        style={{
+          marginBottom: 20,
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        <Col xs={24} sm={12} md={4} lg={4}>
+          <Select placeholder="Commodity" style={{ width: "100%" }} />
+        </Col>
+        <Col xs={24} sm={12} md={4} lg={4}>
+          <Select placeholder="Freight Term" style={{ width: "100%" }} />
+        </Col>
+        <Col xs={24} sm={12} md={4} lg={4}>
+          <Select placeholder="Consignee" style={{ width: "100%" }} />
+        </Col>
+        <Col xs={24} sm={12} md={4} lg={4}>
+          <Select placeholder="Shipper" style={{ width: "100%" }} />
+        </Col>
+        <Col xs={24} sm={24} md={8} lg={8}>
+          <RangePicker style={{ width: "100%" }} />
+        </Col>
+      </Row>
 
       {/* Search */}
       <Space style={{ marginBottom: 20, width: "100%" }} direction="vertical">
@@ -234,7 +279,7 @@ const BookingList = () => {
         rowClassName={() => "booking-row"}
         rowKey="key"
       />
-   </div>
+    </div>
   );
 };
 

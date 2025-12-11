@@ -106,6 +106,7 @@ import DeliveryOrderLayout from "./components/ExportSeaFolderDetails/DeliveryOrd
 import AddDeliveryOrderLayout from "./components/ExportSeaFolderDetails/DeliveryOrder/Layout/AddDeliveryOrderLayout.jsx";
 import RequestLetterListLayout from "./components/ExportFolderDetails/RequestLetter/Layout/RequestLetterListLayout.jsx";
 import AddRequestLetterLayout from "./components/ExportFolderDetails/RequestLetter/Layout/AddRequestLetterLayout.jsx";
+import AddBlBooking from "./components/ExportFolderDetails/SharedAllListFrom/SharedFrom/AddBlBooking.jsx";
 
 
 
@@ -135,6 +136,24 @@ createRoot(document.getElementById("root")).render(
         />
         <Route
           path="/export-sea/add-booking"
+          element={
+            <Layout>
+              <BookingImportGlassForm />
+              {/* <BookingForm /> */}
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/edit-booking"
+          element={
+            <Layout>
+              <BookingImportGlassForm />
+              {/* <BookingForm /> */}
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-sea/view-booking"
           element={
             <Layout>
               <BookingImportGlassForm />
@@ -596,6 +615,22 @@ createRoot(document.getElementById("root")).render(
             </Layout>
           }
         />
+          <Route
+          path="/export-air/edit-booking"
+          element={
+            <Layout>
+              <ExportSeaAddBooking></ExportSeaAddBooking>
+            </Layout>
+          }
+        />
+          <Route
+          path="/export-air/view-booking"
+          element={
+            <Layout>
+              <ExportSeaAddBooking></ExportSeaAddBooking>
+            </Layout>
+          }
+        />
         <Route
           path="/export-air/shipping-order"
           element={
@@ -646,7 +681,31 @@ createRoot(document.getElementById("root")).render(
           }
         />
          <Route
-          path="/export-air/edit-add-mawb"
+          path="/export-air/edit-mawb"
+          element={
+            <Layout>
+              <ExportAirMasterAddBillLayout></ExportAirMasterAddBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/cargo-manifest"
+          element={
+            <Layout>
+              <ExportAirMasterListLayout></ExportAirMasterListLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/export-air/add-cargo-manifest"
+          element={
+            <Layout>
+              <ExportAirMasterAddBillLayout></ExportAirMasterAddBillLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/edit-cargo-manifest"
           element={
             <Layout>
               <ExportAirMasterAddBillLayout></ExportAirMasterAddBillLayout>
@@ -667,6 +726,38 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <ShipmentAdviceFormLayout></ShipmentAdviceFormLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/final-hawb"
+          element={
+            <Layout>
+              <ExportSeaShipmentAdviceLayout></ExportSeaShipmentAdviceLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/add-final-hawb"
+          element={
+            <Layout>
+              <AddBlBooking></AddBlBooking>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/edit-final-hawb"
+          element={
+            <Layout>
+              <AddBlBooking></AddBlBooking>
+            </Layout>
+          }
+        />
+         <Route
+          path="/export-air/view-final-hawb"
+          element={
+            <Layout>
+              <AddBlBooking></AddBlBooking>
             </Layout>
           }
         />
@@ -1282,6 +1373,14 @@ createRoot(document.getElementById("root")).render(
           element={
             <Layout>
               <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+            </Layout>
+          }
+        />
+         <Route
+          path="/accounts/add-receive-voucher"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
             </Layout>
           }
         />
