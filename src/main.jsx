@@ -1368,16 +1368,33 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-        <Route
-          path="/accounts/receive-voucher"
+        
+         <Route
+          path="/accounts/add-receive-voucher"
           element={
             <Layout>
-              <ReceiveVoucherListLayout></ReceiveVoucherListLayout>
+              <AccountLayout></AccountLayout>
             </Layout>
           }
         />
-         <Route
-          path="/accounts/add-receive-voucher"
+        <Route
+          path="/accounts/edit-receive-voucher"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/accounts/view-receive-voucher"
+          element={
+            <Layout>
+              <AccountLayout></AccountLayout>
+            </Layout>
+          }
+        />
+        <Route
+          path="/accounts/copy-receive-voucher"
           element={
             <Layout>
               <AccountLayout></AccountLayout>
