@@ -1,4 +1,4 @@
-// src/pages/business/BusinessList.jsx 
+// src/pages/business/BusinessList.jsx
 import React, { useMemo, useState } from "react";
 import {
   Table,
@@ -6,10 +6,8 @@ import {
   Button,
   Tag,
   Dropdown,
-  Menu,
   Space,
   Select,
-  message,
   Card,
 } from "antd";
 import {
@@ -19,21 +17,22 @@ import {
   InfoCircleOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import BusinessListHeader from "../HeaderTitle/AdminHeaderWithModal";
-
 
 const { Search } = Input;
 const { Option } = Select;
 
+// 🔹 তোমার নিজের path অনুযায়ী ঠিক রাখো
+import DeleteModal from "../../SharedAllListFrom/Modal/DeleteModal";
+import AddBusinessModal from "../Modal/AddBusinessModal";
+
 const BusinessList = () => {
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       id: 1,
       name: "N2N Supply Chain Solutions Ltd.",
       phone: "+88 01989-151353",
       email: "info@n2nscs.com",
-      address:
-        "House# 7 (4th Floor), Road# 2/1, Banani, Dhaka, Bangladesh",
+      address: "House# 7 (4th Floor), Road# 2/1, Banani, Dhaka, Bangladesh",
       logo: "N2N",
       status: "ACTIVE",
     },
@@ -41,6 +40,13 @@ const BusinessList = () => {
 
   const [searchText, setSearchText] = useState("");
   const [pageSize, setPageSize] = useState(10);
+
+  // 🔹 AddBusinessModal এর জন্য minimal state (চাইলে এটাও বাদ দিতে পারো)
+  const [modalState, setModalState] = useState({
+    open: false,
+    mode: "view",
+    record: null,
+  });
 
   const filteredData = useMemo(() => {
     if (!searchText) return data;
@@ -54,49 +60,59 @@ const BusinessList = () => {
     );
   }, [data, searchText]);
 
-  const handleEdit = (record) => {
-    message.info(`Edit business: ${record.name}`);
+  // ---------- ACTION HANDLERS ----------
+  const openBusinessModal = (mode, record) => {
+    setModalState({
+      open: true,
+      mode,
+      record,
+    });
   };
 
-  const handleDetails = (record) => {
-    message.info(`View details: ${record.name}`);
+  const closeBusinessModal = () => {
+    setModalState({
+      open: false,
+      mode: "view",
+      record: null,
+    });
   };
 
-  const handleDelete = (record) => {
-    message.warn(`Delete clicked for: ${record.name}`);
-  };
+  // ---------- ACTION MENU ----------
+  const actionMenu = (record) => ({
+    onClick: ({ key }) => {
+      if (key === "view") openBusinessModal("view", record);
+      if (key === "edit") openBusinessModal("edit", record);
+      if (key === "details") openBusinessModal("details", record);
+      // ❌ delete এখানে handle করছি না, delete-modal item এ DeleteModal নিজেই কাজ করবে
+    },
+    items: [
+      {
+        key: "view",
+        icon: <InfoCircleOutlined />,
+        label: "View",
+      },
+      {
+        key: "edit",
+        icon: <EditOutlined />,
+        label: "Edit",
+      },
+      {
+        key: "details",
+        icon: <InfoCircleOutlined />,
+        label: "Details",
+      },
+      { type: "divider" },
+      {
+        key: "delete-modal",
+        icon: <DeleteOutlined />,
+        danger: true,
+        // 🔹 এখানে শুধু DeleteModal component call করা হচ্ছে – কোন props নাই
+        label: <DeleteModal />,
+      },
+    ],
+  });
 
-  const actionMenu = (record) => (
-    <Menu
-      onClick={({ key }) => {
-        if (key === "edit") handleEdit(record);
-        if (key === "details") handleDetails(record);
-        if (key === "delete") handleDelete(record);
-      }}
-      items={[
-        {
-          key: "edit",
-          icon: <EditOutlined />,
-          label: "Edit",
-        },
-        {
-          key: "details",
-          icon: <InfoCircleOutlined />,
-          label: "Details",
-        },
-        {
-          type: "divider",
-        },
-        {
-          key: "delete",
-          icon: <DeleteOutlined />,
-          danger: true,
-          label: "Delete",
-        },
-      ]}
-    />
-  );
-
+  // ---------- COLUMNS ----------
   const columns = [
     {
       title: "S/L No.",
@@ -166,34 +182,16 @@ const BusinessList = () => {
       width: 80,
       align: "center",
       render: (_, record) => (
-        <Dropdown overlay={actionMenu(record)} trigger={["click"]}>
+        <Dropdown trigger={["click"]} menu={actionMenu(record)}>
           <Button type="text" icon={<MoreOutlined />} />
         </Dropdown>
       ),
     },
   ];
 
-
-  const handleCreateBusiness = async (values) => {
-
-
-    const newItem = {
-      id: data.length + 1,
-      name: values.fullName,
-      phone: values.phone || "",
-      email: values.email || "",
-      address: values.address || "",
-      logo: values.code || "LOGO",
-      status: "ACTIVE",
-    };
-
-    setData((prev) => [...prev, newItem]);
-    message.success("Business created successfully");
-  };
-
   return (
     <Card style={{ margin: 16 }} bodyStyle={{ padding: 16 }}>
-
+      {/* Filter Row */}
       <div
         style={{
           display: "flex",
@@ -242,6 +240,15 @@ const BusinessList = () => {
             `Showing ${range[0]} to ${range[1]} of ${total} entries`,
         }}
         size="small"
+      />
+
+      {/* Add / View / Edit / Details Modal 
+          👉 চাইলে একটুও props না দিয়ে শুধু <AddBusinessModal /> রেখে দিতে পারো */}
+      <AddBusinessModal
+        open={modalState.open}
+        mode={modalState.mode}
+        record={modalState.record}
+        onClose={closeBusinessModal}
       />
     </Card>
   );

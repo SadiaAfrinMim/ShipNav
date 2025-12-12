@@ -96,8 +96,8 @@ const HeaderList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 md:p-6">
-      <div className="mx-auto max-w-6xl rounded-lg bg-white shadow-sm overflow-hidden">
+    <div className="min-h-screen ">
+      <div className="mx-auto  rounded-lg bg-white shadow-sm overflow-hidden">
         {/* Filter + Show row */}
         <div className="flex flex-col gap-3 border-b border-slate-200 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">

@@ -27,7 +27,7 @@ const SystemPrefixList = () => {
   }, [search]);
 
   return (
-    <div className="min-h-screen bg-slate-50 md:p-6">
+    <div className="min-h-screen ">
       <div className="mx-auto max-w-7xl rounded-lg bg-white shadow-sm overflow-hidden">
 
        
